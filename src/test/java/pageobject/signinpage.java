@@ -85,6 +85,13 @@ public class signinpage  extends Basicpage  {
 					JavascriptExecutor js = (JavascriptExecutor)driver;
 					js.executeScript("arguments[0].click();", siginbtn );
 			
+			Thread.sleep(3000);
+			waitforElement(clickonprofile);
+			javascriptclick(clickonprofile);
+			
+			waitforElement(clickonlogoutbtn);
+			clickonlogoutbtn.click();
+			
 	}
 	
 	public void signinwithotp(String email1)

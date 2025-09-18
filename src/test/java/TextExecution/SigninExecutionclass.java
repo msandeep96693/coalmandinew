@@ -9,14 +9,14 @@ public class SigninExecutionclass extends Baseclass {
 	
 	
 	
-	//@Test(priority = 1)
+	@Test(priority = 1, enabled = true)
 	public void signinpage() throws InterruptedException
 	{
 		sign = new signinpage(driver);
 	 sign.signinpage(prop.getProperty("username"), prop.getProperty("password"));
 	}
 	
-	//@Test(priority = 0)
+	@Test(priority = 0, enabled = false)
 	public void signinloginwithotp()
 	{
 		sign = new signinpage(driver);
@@ -24,7 +24,7 @@ public class SigninExecutionclass extends Baseclass {
 		sign.signinwithotp(prop.getProperty("username1"));
 	}
 	
-	@Test(priority = 2)
+	@Test(priority = 2, enabled = false)
 	public void signinwithinvalidpassword()
 	{
 		sign = new signinpage(driver);

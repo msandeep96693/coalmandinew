@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-09-18T22:48:10 IST" name="Default suite" finished-at="2025-09-18T22:48:18 IST" duration-ms="7717">
+  <suite started-at="2025-09-18T23:00:09 IST" name="Default suite" finished-at="2025-09-18T23:00:20 IST" duration-ms="11088">
     <groups>
     </groups>
-    <test started-at="2025-09-18T22:48:10 IST" name="Default test" finished-at="2025-09-18T22:48:18 IST" duration-ms="7717">
+    <test started-at="2025-09-18T23:00:09 IST" name="Default test" finished-at="2025-09-18T23:00:20 IST" duration-ms="11088">
       <class name="TextExecution.SigninExecutionclass">
-        <test-method is-config="true" signature="setup()[pri:0, instance:TextExecution.SigninExecutionclass@6ad82709]" started-at="2025-09-18T22:48:10 IST" name="setup" finished-at="2025-09-18T22:48:16 IST" duration-ms="6226" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:TextExecution.SigninExecutionclass@510f3d34]" started-at="2025-09-18T23:00:09 IST" name="setup" finished-at="2025-09-18T23:00:15 IST" duration-ms="6133" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="signinwithinvalidpassword()[pri:2, instance:TextExecution.SigninExecutionclass@6ad82709]" started-at="2025-09-18T22:48:16 IST" name="signinwithinvalidpassword" finished-at="2025-09-18T22:48:18 IST" duration-ms="1127" status="PASS">
+        <test-method signature="signinpage()[pri:1, instance:TextExecution.SigninExecutionclass@510f3d34]" started-at="2025-09-18T23:00:15 IST" name="signinpage" finished-at="2025-09-18T23:00:20 IST" duration-ms="4583" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- signinwithinvalidpassword -->
-        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:TextExecution.SigninExecutionclass@6ad82709]" started-at="2025-09-18T22:48:18 IST" name="tear" finished-at="2025-09-18T22:48:18 IST" duration-ms="293" status="PASS">
+        </test-method> <!-- signinpage -->
+        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:TextExecution.SigninExecutionclass@510f3d34]" started-at="2025-09-18T23:00:20 IST" name="tear" finished-at="2025-09-18T23:00:20 IST" duration-ms="297" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=signinwithinvalidpassword status=SUCCESS method=SigninExecutionclass.signinwithinvalidpassword()[pri:2, instance:TextExecution.SigninExecutionclass@6ad82709] output={null}]]]>
+                <![CDATA[[TestResult name=signinpage status=SUCCESS method=SigninExecutionclass.signinpage()[pri:1, instance:TextExecution.SigninExecutionclass@510f3d34] output={null}]]]>
               </value>
             </param>
           </params>

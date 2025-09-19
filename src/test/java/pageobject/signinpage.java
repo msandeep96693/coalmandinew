@@ -129,6 +129,14 @@ public class signinpage  extends Basicpage  {
 		
 		// click on sign in button
 		javascriptclick(siginbtn);
+		
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void signinwithinvalidemailID(String invalidemail, String password)
@@ -145,7 +153,7 @@ public class signinpage  extends Basicpage  {
 		javascriptclick(siginbtn);
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-09-18T23:00:09 IST" name="Default suite" finished-at="2025-09-18T23:00:20 IST" duration-ms="11088">
+  <suite started-at="2025-09-19T18:07:56 IST" name="Suite" finished-at="2025-09-19T18:08:06 IST" duration-ms="10210">
     <groups>
     </groups>
-    <test started-at="2025-09-18T23:00:09 IST" name="Default test" finished-at="2025-09-18T23:00:20 IST" duration-ms="11088">
+    <test started-at="2025-09-19T18:07:56 IST" name="Test" finished-at="2025-09-19T18:08:06 IST" duration-ms="10210">
       <class name="TextExecution.SigninExecutionclass">
-        <test-method is-config="true" signature="setup()[pri:0, instance:TextExecution.SigninExecutionclass@510f3d34]" started-at="2025-09-18T23:00:09 IST" name="setup" finished-at="2025-09-18T23:00:15 IST" duration-ms="6133" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:TextExecution.SigninExecutionclass@3bb9a3ff]" started-at="2025-09-19T18:07:56 IST" name="setup" finished-at="2025-09-19T18:08:03 IST" duration-ms="6507" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="signinpage()[pri:1, instance:TextExecution.SigninExecutionclass@510f3d34]" started-at="2025-09-18T23:00:15 IST" name="signinpage" finished-at="2025-09-18T23:00:20 IST" duration-ms="4583" status="PASS">
+        <test-method signature="signinwithinvalidemailID()[pri:3, instance:TextExecution.SigninExecutionclass@3bb9a3ff]" started-at="2025-09-19T18:08:03 IST" name="signinwithinvalidemailID" finished-at="2025-09-19T18:08:06 IST" duration-ms="3551" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- signinpage -->
-        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:TextExecution.SigninExecutionclass@510f3d34]" started-at="2025-09-18T23:00:20 IST" name="tear" finished-at="2025-09-18T23:00:20 IST" duration-ms="297" status="PASS">
+        </test-method> <!-- signinwithinvalidemailID -->
+        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:TextExecution.SigninExecutionclass@3bb9a3ff]" started-at="2025-09-19T18:08:06 IST" name="tear" finished-at="2025-09-19T18:08:06 IST" duration-ms="101" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=signinpage status=SUCCESS method=SigninExecutionclass.signinpage()[pri:1, instance:TextExecution.SigninExecutionclass@510f3d34] output={null}]]]>
+                <![CDATA[[TestResult name=signinwithinvalidemailID status=SUCCESS method=SigninExecutionclass.signinwithinvalidemailID()[pri:3, instance:TextExecution.SigninExecutionclass@3bb9a3ff] output={null}]]]>
               </value>
             </param>
           </params>
@@ -27,6 +27,6 @@
           </reporter-output>
         </test-method> <!-- tear -->
       </class> <!-- TextExecution.SigninExecutionclass -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>

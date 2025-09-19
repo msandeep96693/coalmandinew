@@ -3,14 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TextExecution.SigninExecutionclass">
+      <class name="TextExecution.createlistingExecutionclass">
         <methods>
-          <include name="signinloginwithotp"/>
           <include name="tear"/>
-          <include name="signinpage"/>
+          <include name="createlistingpage"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- TextExecution.SigninExecutionclass -->
+      </class> <!-- TextExecution.createlistingExecutionclass -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

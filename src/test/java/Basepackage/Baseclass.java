@@ -23,6 +23,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import pageobject.createaccountpage;
+import pageobject.createlistingpage;
 import pageobject.signinpage;
 
 
@@ -32,6 +33,7 @@ public class Baseclass {
 	public WebDriver driver;
 	public signinpage sign;
 	public createaccountpage account;
+	public createlistingpage createlist;
 	
 	
 	public Baseclass() { 

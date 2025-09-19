@@ -161,6 +161,20 @@ public class signinpage  extends Basicpage  {
 		System.out.println(driver.getCurrentUrl()); 
 	}
 	
+	
+	public void loginpage(String email, String pwd)
+	{
+		// enter a email 
+					waitforElement(emailfield);
+					emailfield.sendKeys(email);	
+					// enter a password
+					waitforElement(passwordfield);
+					passwordfield.sendKeys(pwd);
+							// click on signin button
+							waitforElement(siginbtn);
+							JavascriptExecutor js = (JavascriptExecutor)driver;
+							js.executeScript("arguments[0].click();", siginbtn );
+	}
  }
 	
 	

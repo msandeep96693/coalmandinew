@@ -11,7 +11,7 @@ public class BusinessaccountExecutionclass extends Baseclass {
 	public void createbusinessaccountpage() throws InterruptedException
 	{
 		createaccountpage account = new createaccountpage(driver);
-		account.createbusinessaccount(prop.getProperty("Fullname"), prop.getProperty(""), prop.getProperty(""), prop.getProperty(""), prop.getProperty(""));
+		account.createbusinessaccount(prop.getProperty("Fullname"), prop.getProperty("whatsappnumber"), prop.getProperty("emailid"), prop.getProperty("createpwd"), prop.getProperty("confirmpwd"));
 				
 	}
 	

@@ -123,6 +123,13 @@ public class createaccountpage extends Basicpage {
 		javascriptclick(createaccountbtn);
 		
 		
+		// click on logout button
+		Thread.sleep(3000);
+		waitforElement(logoutbutton);
+		javascriptclick(logoutbutton);
+		
+		// check navigate to the loginpage
+		System.out.println(driver.getCurrentUrl()); 
 	}
 
 }

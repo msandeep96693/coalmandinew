@@ -22,6 +22,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import pageobject.Businesscreationpage;
 import pageobject.createaccountpage;
 import pageobject.createlistingpage;
 import pageobject.signinpage;
@@ -34,6 +35,7 @@ public class Baseclass {
 	public signinpage sign;
 	public createaccountpage account;
 	public createlistingpage createlist;
+	public Businesscreationpage businessprofile;
 	
 	
 	public Baseclass() { 

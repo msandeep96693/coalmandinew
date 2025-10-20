@@ -18,11 +18,20 @@ public class createaccountpage extends Basicpage {
 	@FindBy(xpath = "(//button[@type='button'])[2]")
 	private WebElement createanaccountbutton;
 	
-//	@FindBy(xpath = "//div[@class='text-center mb-6']/following-sibling::div[2]/div/div[2]/div/span") 
-	// //div[contains(@class,'role-card')]//span[text()='Importer']
-	@FindBy(xpath = "/html/body/div/div[1]/div[2]/div/div[2]/div[1]/div[2]/div/span")
-//	private List<WebElement> listofsubroles;
-	private WebElement listofsubroles;
+	@FindBy(xpath = "//p[.='Consumer']")
+	private WebElement consumerrole;
+	
+	@FindBy(xpath = "//p[.='Importer']")
+	private WebElement importerrole;
+	
+	@FindBy(xpath = "//p[.='Importer']")
+	private WebElement traderrole;
+	
+	@FindBy(xpath = "//p[.='Importer']")
+	private WebElement domesticrole;
+	
+	@FindBy(xpath = "//p[.='Importer']")
+	private WebElement internationalrole;
 	
 //	@FindBy(xpath = "((//h2[.='Choose User Role'])[2]/../following-sibling::div)[2]/button/span")
 	@FindBy(xpath = "//span[.='Continue']")
@@ -82,9 +91,9 @@ public class createaccountpage extends Basicpage {
 		createanaccountbutton.click();
 		
 		// select subrole :- consumer 
-		waitforElement(listofsubroles);
-		System.out.println("Role name :-"+ listofsubroles.getText());
-		listofsubroles.click();
+		waitforElement(consumerrole);
+		System.out.println("Role name :-"+ consumerrole.getText());
+		consumerrole.click();
 		
 		// click on continue button
 		waitforElement(continuebutton);
@@ -92,15 +101,15 @@ public class createaccountpage extends Basicpage {
 		
 		// enter a fullname into field
 		waitforElement(fullnametextfield);
-		fullnametextfield.sendKeys(profilename);
+		fullnametextfield.sendKeys(setRandomName());
 		
 		// enter a whatsapp number 
 		waitforElement(whatsappnumbertextfield);
-		whatsappnumbertextfield.sendKeys(whatsappnumber);
+		whatsappnumbertextfield.sendKeys(setRandomMobileNumber());
 		
 		// enter a emailID
 		waitforElement(emailIDtextfield);
-		emailIDtextfield.sendKeys(emailID);
+		emailIDtextfield.sendKeys(setRandomEmail());
 		
 		// click on send otp button
 		Thread.sleep(2000);

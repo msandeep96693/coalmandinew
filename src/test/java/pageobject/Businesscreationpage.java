@@ -143,15 +143,68 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//input[@name='gstCertificateFile']")
 		private WebElement gstCertificateFile;
 		
-		@FindBy(xpath = "//input[@type='file']/..")
-		private List<WebElement> alldocuploadfile;
+		@FindBy(xpath = "//input[@type='file']")
+		private List<WebElement> uploadFiles;
 		
-		@FindBy(xpath = "//p[@class='mb-2 text-base text-gray-500']")
-		private List<WebElement> doclabelname;
+		@FindBy(xpath = "//span[@class='font-medium text-base']")
+		private List<WebElement> labelList;
+		
+		@FindBy(xpath = "//span[.='Submit']/..")
+		private List<WebElement> submitButtons;
+		
+		@FindBy(xpath = "(//input[@type='text'])[3]")
+		private WebElement TANnumbertextfield;
+		
+		@FindBy(xpath = "(//input[@type='text'])[4]")
+		private WebElement LUTnumbertextfield;
+		
+		@FindBy(xpath = "(//input[@type='text'])[5]")
+		private WebElement banknametextfield;
+		
+		@FindBy(xpath = "//input[@type='password']")
+		private WebElement accountnotextfield;
+		
+		@FindBy(xpath = "(//input[@type='number'])[1]")
+		private WebElement confirmaccountnotextfield;
+		
+		@FindBy(xpath = "(//input[@type='text'])[6]")
+		private WebElement ifsccodetextfield;
+		
+		@FindBy(xpath = "(//input[@type='text'])[7]")
+		private WebElement branchnametextfield;
+		
+		@FindBy(xpath = "(//input[@type='text'])[8]")
+		private WebElement udyamnotextfield;
+		
+		@FindBy(xpath = "(//span[@aria-label='calendar']/../..)[1]")
+		private WebElement clickonudyamdatefield;
+		
+		@FindBy(xpath = "(//button[@type='button'])[4]")
+		private WebElement previousbutton;
+		
+		@FindBy(xpath = "//div[@class='react-calendar__month-view__days']/button/abbr")
+		private List<WebElement> listofdates;
+		
+		@FindBy(xpath = "(//input[@value='yes'])[3]")
+		private WebElement iecyesradiobutton;
+		
+		@FindBy(xpath = "(//input[@type='text'])[9]")
+		private WebElement iecnotextfield;
+		
+		@FindBy(xpath = "(//span[@aria-label='calendar']/../..)[2]")
+		private WebElement clickoniecdatefield;
+		
+		@FindBy(xpath = "(//input[@type='number'])[2]")
+		private WebElement DnBnotextfield;
+		
+		
+		
+		
 		
 		public void createbbusinessprofile(
 				String email, String pwd,  String gstnumber,  
-				 String designation
+				 String designation,String accountno, String confirmaccountno, String udyamno, String udyamdateno,
+				String iecdateno, String DnBno
 				) throws InterruptedException, AWTException  
 		{ 
 			signinpage signin = new signinpage(driver);
@@ -348,20 +401,132 @@ import org.testng.annotations.Test;
 			// -----------------------------------------------------
 			
 			// KYC document
-			// authorization doc upload
-			Thread.sleep(2000);
-			JavascriptExecutor js2 = (JavascriptExecutor) driver;
-			js2.executeScript("arguments[0].style.display='block';", authorizationletter);
-			authorizationletter.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-2.jpg");
+			// authorization 
 			
-			Thread.sleep(2000);
-			JavascriptExecutor js3 = (JavascriptExecutor) driver;
-			js3.executeScript("arguments[0].style.display='block';", gstCertificateFile);
-			gstCertificateFile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-2.jpg");
+			kycdocuploadandsubmit("Authorization Letter", uploadFiles, submitButtons);
+			
+			// PAN Card
+			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
+			
+			// GST Certificate 
+			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
+			
+			// TAN certificate
+			waitforElement(TANnumbertextfield);
+			TANnumbertextfield.sendKeys(setRandomMobileNumber());
+			
+			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
+			
+			// LUT Certificate
+			waitforElement(LUTnumbertextfield);
+			LUTnumbertextfield.sendKeys(setRandomMobileNumber());
+			
+			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
+			
+			// Bank Details
+			waitforElement(banknametextfield);
+			banknametextfield.clear();
+			banknametextfield.sendKeys(setRandomBusinessName());
+			
+			waitforElement(accountnotextfield);
+			accountnotextfield.clear();
+			accountnotextfield.sendKeys(accountno);
+			
+			waitforElement(confirmaccountnotextfield);
+			confirmaccountnotextfield.clear();
+			confirmaccountnotextfield.sendKeys(confirmaccountno);
+			
+			waitforElement(ifsccodetextfield);
+			ifsccodetextfield.sendKeys(setRandomBusinessName());
+			
+			waitforElement(branchnametextfield);
+			branchnametextfield.sendKeys(setRandomBusinessName());
+			
+			kycdocuploadandsubmit("Bank Details", uploadFiles, submitButtons);
+			
+			// udyam certificate 
+			waitforElement(udyamnotextfield);
+			udyamnotextfield.sendKeys(udyamno);
+			
+			// date picker pending
+			waitforElement(clickonudyamdatefield);
+			javascriptclick(clickonudyamdatefield);
+			
+			datepicker(udyamdateno);
 			
 			
-			Thread.sleep(3000);
+			kycdocuploadandsubmit("Udyam Certificate (MSME)", uploadFiles, submitButtons);
+			
+			
+			// IEC certificate
+			
+			waitforElement(iecyesradiobutton);
+			javascriptclick(iecyesradiobutton);
+			
+			waitforElement(iecnotextfield);
+			iecnotextfield.sendKeys(setRandomMobileNumber());
+			
+			// date picker iec 
+			waitforElement(clickoniecdatefield);
+			javascriptclick(clickoniecdatefield);
+			
+			datepicker(iecdateno);
+			
+			kycdocuploadandsubmit("IEC Certificate", uploadFiles, submitButtons);
+			
+			// D & B 
+			
+			waitforElement(DnBnotextfield);
+			DnBnotextfield.sendKeys(DnBno);
+			
+			kycdocuploadandsubmit("D&B", uploadFiles, submitButtons);
+			
 			
 	}
+		
+		public void kycdocuploadandsubmit(String labelnames, List<WebElement> uploadFiles, List<WebElement> submitButtons) 
+		{
+			 for (int i = 0; i < labelList.size(); i++) {
+		        String labelText = labelList.get(i).getText().trim();
+		        System.out.println("Found label: " + labelText);
+
+		        if (labelText.contains(labelnames)) {
+		            WebElement uploadInput = uploadFiles.get(i);
+		            WebElement submitButton = submitButtons.get(i);
+
+		            // Make upload input visible (if hidden)
+		            JavascriptExecutor js = (JavascriptExecutor) driver;
+		            js.executeScript("arguments[0].style.display='block';", uploadInput);
+
+		            // Upload the file
+		            uploadInput.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-3.jpg");
+		            System.out.println("✅ File uploaded for label: " + labelnames);
+
+		            // Click the corresponding submit button
+		            js.executeScript("arguments[0].click();", submitButton);
+		            System.out.println("✅ Submit button clicked for label: " + labelnames);
+
+		            break;
+		        }
+		    }
+		}
+		
+		public void datepicker(String dateno) throws InterruptedException
+		{
+			javascriptclick(previousbutton);
+			Thread.sleep(500);
+			javascriptclick(previousbutton);
+			Thread.sleep(500);
+			
+			
+			for (WebElement date : listofdates) {
+		        String dateText = date.getText().trim(); // or date.getAttribute("aria-label") if text is empty
+		        if (dateText.equals(dateno)) {
+		            date.click();
+		            System.out.println("✅ Date selected: " + dateno);
+		            break;
+		        }
+		    }
+		}
 	
 }

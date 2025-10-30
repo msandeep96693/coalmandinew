@@ -6,14 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class listinghomepage extends Basicpage {
+public class Negotiationhomepage extends Basicpage {
 
-	public listinghomepage(WebDriver driver) {
+	public Negotiationhomepage(WebDriver driver) {
 		super(driver);
-		
 	}
 	
-	// my listing xpath element address and Participated section 
+	@FindBy(xpath = "//button[.='Negotiations']")
+	private WebElement leftnavnegotiationbtn;
 	
 	@FindBy(xpath = "//input[@type='text']")
 	private WebElement searchtextfield;
@@ -24,24 +24,26 @@ public class listinghomepage extends Basicpage {
 	@FindBy(xpath = "//div[@class='ant-select-item-option-content']") 
 	private List<WebElement> statusdropdownoptions;
 		
-	@FindBy(xpath = "//div[@class='ant-card-extra']")
+	@FindBy(xpath = "//div[@class='flex justify-between items-start']")
 	private List<WebElement> listofdatabasedonstatusselection;
  	
 	@FindBy(xpath = "//div[.='Participated']")
 	private WebElement participatedtab;
 	
-	@FindBy(xpath = "//button[.='Listing']")
-	private WebElement navlistingbutton;
+	@FindBy(xpath = "//button[@type='button']")  // View Details
+	private List<WebElement> allnegotiationviewbuttons;
+
 	
-	public void Mylistingsearchscenario(String email, String pwd, String searchbycoalname) throws InterruptedException
+	public void Mylistingsearchscenario(String email, String pwd, String searchbycoalname, String statusname) throws InterruptedException
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
 		
 		// left navigation listing button
-		waitforElement(navlistingbutton);
-		javascriptclick(navlistingbutton);
+		waitforElement(leftnavnegotiationbtn);
+		javascriptclick(leftnavnegotiationbtn);
 		
+		Thread.sleep(2000);
 		// search textfield
 		searchtextfield.sendKeys(searchbycoalname);
 		
@@ -49,22 +51,28 @@ public class listinghomepage extends Basicpage {
 		for (int i = 0; i < listofdatabasedonstatusselection.size(); i++) 
 		{
 			String searchtext = listofdatabasedonstatusselection.get(i).getText().trim();
-	        System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
-	        System.out.println("Search text : - "+searchtext);
+			if(searchtext.contains(statusname))
+			{
+				 System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
+			     System.out.println("Search text : - "+searchtext);
+			     break;
+			}
+			
+	       
 		}
 		
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 	
 	
-	public void Mylistingfetchstatus(String email, String pwd, String optionname ) throws InterruptedException
+	public void Mylistingfetchstatus(String email, String pwd, String optionname, String statusname ) throws InterruptedException
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
 		
 		// click on nav listing  button
-		waitforElement(navlistingbutton);
-		javascriptclick(navlistingbutton);
+		waitforElement(leftnavnegotiationbtn);
+		javascriptclick(leftnavnegotiationbtn);
 		
 		Thread.sleep(6000);
 		
@@ -80,50 +88,62 @@ public class listinghomepage extends Basicpage {
 		for (int i = 0; i < listofdatabasedonstatusselection.size(); i++) 
 		{
 			String searchtext = listofdatabasedonstatusselection.get(i).getText().trim();
-	        System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
-	        System.out.println("Search text : - "+searchtext);
+			if(searchtext.contains(statusname))
+			{
+				 System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
+			     System.out.println("Search text : - "+searchtext);
+			     break;
+			}
 		}
+			
 		
 		//Thread.sleep(1000);
 		
 	}
 	
-	public void Participdatedsectionsearchfunctionality(String email, String pwd, String searchbycoalname) throws InterruptedException
+	public void Participdatedsectionsearchfunctionality(String email, String pwd, String searchbycoalname, String statusname) throws InterruptedException
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
 		
 		// click on nav listing  button
-		waitforElement(navlistingbutton);
-		javascriptclick(navlistingbutton);
+		waitforElement(leftnavnegotiationbtn);
+		javascriptclick(leftnavnegotiationbtn);
 		
 		// click on participated section
 		waitforElement(participatedtab);
 		javascriptclick(participatedtab);
 		
+		Thread.sleep(2000);
+		
 		// search textfield
 		searchtextfield.sendKeys(searchbycoalname);
 		
 		// participated list the data based on a search name
-		for (int i = 0; i < listofdatabasedonstatusselection.size(); i++) 
+		for(int i = 0; i < listofdatabasedonstatusselection.size(); i++) 
 		{
 			String searchtext = listofdatabasedonstatusselection.get(i).getText().trim();
-	        System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
-	        System.out.println("Search text : - "+searchtext);
+			if(searchtext.contains(statusname))
+			{
+				 System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
+			     System.out.println("Search text : - "+searchtext);
+			     break;
+			}
+			 
 		}
 		
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 	
 	
-	public void Participatedsectionfetchstatus(String email, String pwd, String optionname ) throws InterruptedException
+	public void Participatedsectionfetchstatus(String email, String pwd, String optionname, String statusname ) throws InterruptedException
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
 		
 		// click on nav listing  button
-		waitforElement(navlistingbutton);
-		javascriptclick(navlistingbutton);
+		waitforElement(leftnavnegotiationbtn);
+		javascriptclick(leftnavnegotiationbtn);
 		
 		// click on participated section
 		waitforElement(participatedtab);
@@ -142,17 +162,14 @@ public class listinghomepage extends Basicpage {
 		for (int i = 0; i < listofdatabasedonstatusselection.size(); i++) 
 		{
 			String searchtext = listofdatabasedonstatusselection.get(i).getText().trim();
-	        System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
-	        System.out.println("Search text : - "+searchtext);
+			if(searchtext.contains(statusname))
+			{
+				 System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
+			     System.out.println("Search text : - "+searchtext);
+			     break;
+			} 
 		}
-		
-		Thread.sleep(2000);
-	}
+		Thread.sleep(1000);
 
-
-	
-
-	
-	
-
+}
 }

@@ -29,19 +29,22 @@ public class createlistingExecutionclass extends Baseclass {
 				prop.getProperty("volatilepercentage"), prop.getProperty("volatileinputdata"),
 				prop.getProperty("totalmoisturepercentage"), prop.getProperty("moistureinputdata"),
 				
-				prop.getProperty("carbonmaxminlabel"), prop.getProperty("carbonmaxminoption"),
-				prop.getProperty("ashcontentlabel"), prop.getProperty("ashcontentoption"),
+			
+				
+//				prop.getProperty("carbonmaxminlabel"), prop.getProperty("carbonmaxminoption"),
+//				prop.getProperty("ashcontentlabel"), prop.getProperty("ashcontentoption"),
 //				prop.getProperty("volatilelabel"),prop.getProperty("volatileoption"),
 //				prop.getProperty("moisturelabel"), prop.getProperty("moistureoption"),
 				
 //				
 				
-//				prop.getProperty("Deliverymode"), prop.getProperty("deliverymodeoption"),
-//				prop.getProperty("railwaysidingcode"), prop.getProperty("sidingcodeinputdata"),
+//				prop.getProperty("Deliverymode"), 
+				prop.getProperty("deliverymodeoption"),
+				prop.getProperty("railwaysidingcode"), prop.getProperty("sidingcodeinputdata"),
 				prop.getProperty("QuantityMT"), prop.getProperty("QuantityMTinputdata"),
 				prop.getProperty("RateperMT"), prop.getProperty("rateperMTinputdata"),
 				prop.getProperty("emdlabel"), prop.getProperty("emdinputdata"),
-				prop.getProperty("freepaymentperiodlabel"), prop.getProperty("freepaymentperiodinputdata")
+				prop.getProperty("freepaymentperiodlabel") 
 
 				);
 				

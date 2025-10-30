@@ -3,11 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="pageobject.updatebusinessprofile">
+      <class name="TextExecution.createbusinessprofileExecutionclass">
         <methods>
-          <include name="updatebusinessprofilesettingpage"/>
+          <include name="tear"/>
+          <include name="createbusinessprofileExecutionclass"/>
+          <include name="setup"/>
         </methods>
-      </class> <!-- pageobject.updatebusinessprofile -->
+      </class> <!-- TextExecution.createbusinessprofileExecutionclass -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

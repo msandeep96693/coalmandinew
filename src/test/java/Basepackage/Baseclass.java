@@ -23,8 +23,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import pageobject.Businesscreationpage;
+import pageobject.Negotiationhomepage;
 import pageobject.createaccountpage;
 import pageobject.createlistingpage;
+import pageobject.listinghomepage;
+import pageobject.orderhomepage;
 import pageobject.signinpage;
 
 
@@ -36,6 +39,9 @@ public class Baseclass {
 	public createaccountpage account;
 	public createlistingpage createlist;
 	public Businesscreationpage businessprofile;
+	public listinghomepage listhome;
+	public Negotiationhomepage negotiation;
+	public orderhomepage order;
 	
 	
 	public Baseclass() { 

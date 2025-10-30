@@ -84,7 +84,7 @@ public class createaccountpage extends Basicpage {
 	
 	
 	
-	public void createbusinessaccount(String profilename, String whatsappnumber, String emailID, String createpassword, String confirmpassword) throws InterruptedException
+	public void createbusinessaccount(String mobilenumber, String createpassword, String confirmpassword) throws InterruptedException
 	{
 		// click on new to coalmandi button
 		waitforElement(createanaccountbutton);
@@ -105,7 +105,7 @@ public class createaccountpage extends Basicpage {
 		
 		// enter a whatsapp number 
 		waitforElement(whatsappnumbertextfield);
-		whatsappnumbertextfield.sendKeys(setRandomMobileNumber());
+		whatsappnumbertextfield.sendKeys(mobilenumber);
 		
 		// enter a emailID
 		waitforElement(emailIDtextfield);
@@ -116,7 +116,7 @@ public class createaccountpage extends Basicpage {
 		javascriptclick(sendotpbutton);
 		
 		// enter otp into textfields and click enter button on keyboard
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
 		wait.until(d -> whatsappotpinputfield.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
 		
 		// enter password
@@ -132,13 +132,13 @@ public class createaccountpage extends Basicpage {
 		javascriptclick(createaccountbtn);
 		
 		
-		// click on logout button
-		Thread.sleep(3000);
-		waitforElement(logoutbutton);
-		javascriptclick(logoutbutton);
-		
-		// check navigate to the loginpage
-		System.out.println(driver.getCurrentUrl()); 
+//		// click on logout button
+//		Thread.sleep(3000);
+//		waitforElement(logoutbutton);
+//		javascriptclick(logoutbutton);
+//		
+//		// check navigate to the loginpage
+//		System.out.println(driver.getCurrentUrl()); 
 	}
 
 }

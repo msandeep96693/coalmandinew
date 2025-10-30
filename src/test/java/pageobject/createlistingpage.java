@@ -79,18 +79,28 @@ public class createlistingpage extends Basicpage {
 	@FindBy(xpath = "//div[@class='relative w-full']")
 	private List<WebElement> validitystartandendfield;
 	
+	// For private mines 
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[12]")
+	private WebElement clickondeliverydropdown1;
+	// For CIL 
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[8]")
+	private WebElement clickondeliverydropdown2;
+	
+	
+	
+	
 	//  //div[@class='ant-form-item-control-input-content']/input       ::-->Text field
 	//  //div[@class='ant-col ant-form-item-label css-1tbu3z4']/label   ::-->Labels
 	
 	public void createlistingbyprivatemines(
 			String email, String pwd, 
-			String labelName, String optionName,
-			String labelName1, String optionName1,
-			String labelName2, String optionName2, 
-			String labelName3, String optionName3, 
-			String labelName4, String optionName4, 
-			String labelName5, String optionName5, 
-			String labelName6, String optionName6,
+			String businessprofile, String optionName,
+			String coaltype, String optionName1,
+			String originalcoaltype, String optionName2, 
+			String sourceofcoal, String optionName3, 
+			String gradeofcoal, String optionName4, 
+			String cilsubsidairy, String optionName5, 
+			String mine, String optionName6,
 			
 			// coal specification 
 			String carbonpercentagelabel, String inputdata1,
@@ -98,8 +108,13 @@ public class createlistingpage extends Basicpage {
 			String volatilelabel, String inputdata3,
 			String moisturelabel, String inputdata4,
 			
-			String labelName7,String optionName7,
-			String labelName8, String optionName8,
+			// delivery railway siding code
+			
+			String railwaysidingcode, String inputdata10,
+			
+			
+//			String labelName7,String optionName7,
+//			String labelName8, String optionName8,
 //			String labelName9, String optionName9,
 //			String labelName10, String optionName10,
 			
@@ -109,6 +124,7 @@ public class createlistingpage extends Basicpage {
 			String ratepricelabel, String inputdata7,
 			String emdlabel, String inputdata8,
 			String freepaymentperiodlabel, String inputdata9
+			
 			) throws InterruptedException, AWTException
 	{
 		signinpage signin = new signinpage(driver);
@@ -123,25 +139,25 @@ public class createlistingpage extends Basicpage {
 		javascriptclick(createlistingitembutton);
 		
 		// business profile
-		selectDropdownOption(labelName, optionName);
+		selectDropdownOption(businessprofile, optionName);
 		
 		// coal type
-		selectDropdownOption(labelName1, optionName1);
+		selectDropdownOption(coaltype, optionName1);
 		
 		// origin of coal
-		selectDropdownOption(labelName2, optionName2);
+		selectDropdownOption(originalcoaltype, optionName2);
 		
 		// source of coal
-		selectDropdownOption(labelName3, optionName3);
+		selectDropdownOption(sourceofcoal, optionName3);
 		
 		// grade of coal
-		selectDropdownOption(labelName4, optionName4);
+		selectDropdownOption(gradeofcoal, optionName4);
 		
 		// cil subsidairy
-		selectDropdownOption(labelName5, optionName5);
+		selectDropdownOption(cilsubsidairy, optionName5);
 		
 		// mine
-		selectDropdownOption(labelName6, optionName6);
+		selectDropdownOption(mine, optionName6);
 		
 		// enter a fixed carbon percentage
 		enterdataintoinputfield(carbonpercentagelabel, inputdata1);
@@ -151,25 +167,33 @@ public class createlistingpage extends Basicpage {
 		// enter a volatile 
 		enterdataintoinputfield(volatilelabel, inputdata3);
 		// enter a moisture 
+		
+		Thread.sleep(1000);
 		enterdataintoinputfield(moisturelabel, inputdata4);
 		
-		Thread.sleep(2000);
-		WebElement dropdownclick = driver.findElement(By.xpath("(//span[@class='ant-select-selection-search'])[8]"));
-		javascriptclick(dropdownclick);
+		// Deliery mode
+		javascriptclick(clickondeliverydropdown1);
 		
-		Robot rt = new Robot();
-		rt.keyPress(KeyEvent.VK_ENTER);
-		rt.keyRelease(KeyEvent.VK_ENTER);
+		// Enter the railway siding code
+		enterdataintoinputfield(railwaysidingcode, inputdata10);
 		
-		WebElement optionselect = driver.findElement(By.xpath("//div[.='MAX']"));
-		javascriptclick(optionselect);
+//		Thread.sleep(2000);
+//		WebElement dropdownclick = driver.findElement(By.xpath("(//span[@class='ant-select-selection-search'])[8]"));
+//		javascriptclick(dropdownclick);
+		
+//		Robot rt = new Robot();
+//		rt.keyPress(KeyEvent.VK_ENTER);
+//		rt.keyRelease(KeyEvent.VK_ENTER);
+		
+//		WebElement optionselect = driver.findElement(By.xpath("//div[.='MAX']"));
+//		javascriptclick(optionselect);
 		
 		
 		// carbon max/min dropdown
 //		selectDropdownOption(labelName7, optionName7);
 		
 //		// ash max/min dropdown
-		selectDropdownOption(labelName8, optionName8);
+//		selectDropdownOption(labelName8, optionName8);
 		
 //		// volatile max/min dropdown
 //		selectDropdownOption(labelName9, optionName9);
@@ -206,7 +230,10 @@ public class createlistingpage extends Basicpage {
 		// enter a emd 
 		enterdataintoinputfield(emdlabel, inputdata8);
 		
+		scrollUntilElementVisible(driver.findElement(By.xpath("//label[.='Free Payment Period (Days)']")));
+		
 		// enter a free payment period 
+		Thread.sleep(2000);
 		enterdataintoinputfield(freepaymentperiodlabel, inputdata9);
 		
 		
@@ -255,7 +282,7 @@ public class createlistingpage extends Basicpage {
 	        if (currentLabel.equalsIgnoreCase(labelName)) {
 	            // Click corresponding dropdown
 	            System.out.println("verify label name 1 :- " + currentLabel);
-	            Thread.sleep(3000);
+	            Thread.sleep(1500);
 	            clickonalldropdown.get(i).click();
 	            Thread.sleep(1000);
 	            System.out.println("click dropdown total size :- "+clickonalldropdown.size());

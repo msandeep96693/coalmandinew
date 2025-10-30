@@ -158,6 +158,9 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='text'])[4]")
 		private WebElement LUTnumbertextfield;
 		
+		@FindBy(xpath = "(//input[@value='yes'])[1]")
+		private WebElement LUTradioyesbutton;
+		
 		@FindBy(xpath = "(//input[@type='text'])[5]")
 		private WebElement banknametextfield;
 		
@@ -172,6 +175,9 @@ import org.testng.annotations.Test;
 		
 		@FindBy(xpath = "(//input[@type='text'])[7]")
 		private WebElement branchnametextfield;
+		
+		@FindBy(xpath = "(//input[@value='yes'])[2]")
+		private WebElement udyamyesradiobutton;
 		
 		@FindBy(xpath = "(//input[@type='text'])[8]")
 		private WebElement udyamnotextfield;
@@ -202,13 +208,17 @@ import org.testng.annotations.Test;
 		
 		
 		public void createbbusinessprofile(
-				String email, String pwd,  String gstnumber,  
+				 String mobilenumber, String createpassword, 
+				 String confirmpassword, String gstnumber,  
 				 String designation,String accountno, String confirmaccountno, String udyamno, String udyamdateno,
 				String iecdateno, String DnBno
 				) throws InterruptedException, AWTException  
 		{ 
 			signinpage signin = new signinpage(driver);
-			signin.loginpage(email, pwd);
+			signin.loginpage("sandeep+qalfk@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+			
+//			createaccountpage account = new createaccountpage(driver);
+//			account.createbusinessaccount(mobilenumber, createpassword, confirmpassword);
 			
 			// click on the create business profile button
 			waitforElement(btnCreateBusinessProfile);
@@ -219,15 +229,15 @@ import org.testng.annotations.Test;
 				Thread.sleep(5000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
-				uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-2.jpg");
+				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
 				} catch (ElementNotInteractableException e) {
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("arguments[0].style.display='block';", uploadProfile);
-					uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-2.jpg");
-				}
+					uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
+				}  // /home/active34/Downloads/photos /QA club photos/business logo.jpeg
 			
 			// remember me as textfield
-			waitforElement(rememberastextField);
+			waitforElement(rememberastextField);      
 			rememberastextField.sendKeys(setRandomBusinessName());
 			
 			// Enter GST number 
@@ -242,7 +252,7 @@ import org.testng.annotations.Test;
 			
 //			scrollUntilElementVisible(statedropdown);
 //			
-//			Thread.sleep(5000);
+			Thread.sleep(6000);
 //			
 //			// select the state dropdown
 //			
@@ -339,16 +349,18 @@ import org.testng.annotations.Test;
 			System.out.println(cokingcoaloption.getText());
 			cokingcoaloption.click();
 			
+			Thread.sleep(1000);
 			waitforElement(metallurgicalcoaloption);
 			System.out.println(metallurgicalcoaloption.getText());
 			metallurgicalcoaloption.click();
 			
+			Thread.sleep(1000);
 			Robot rob=new Robot();
 			rob.keyPress(KeyEvent.VK_ESCAPE);
 			rob.keyRelease(KeyEvent.VK_ESCAPE);
 			
-			scrollUntilElementVisible(producttotradedropdown);
-			Thread.sleep(1000);
+			//scrollUntilElementVisible(producttotradedropdown);
+			//Thread.sleep(1000);
 			
 			Hiddenelement(originofcoaldropdown);
 			
@@ -418,6 +430,10 @@ import org.testng.annotations.Test;
 			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
 			
 			// LUT Certificate
+			
+			waitforElement(LUTradioyesbutton);
+			javascriptclick(LUTradioyesbutton);
+			
 			waitforElement(LUTnumbertextfield);
 			LUTnumbertextfield.sendKeys(setRandomMobileNumber());
 			
@@ -437,18 +453,22 @@ import org.testng.annotations.Test;
 			confirmaccountnotextfield.sendKeys(confirmaccountno);
 			
 			waitforElement(ifsccodetextfield);
-			ifsccodetextfield.sendKeys(setRandomBusinessName());
+			ifsccodetextfield.sendKeys("ifsccode");
 			
 			waitforElement(branchnametextfield);
 			branchnametextfield.sendKeys(setRandomBusinessName());
 			
 			kycdocuploadandsubmit("Bank Details", uploadFiles, submitButtons);
 			
-			// udyam certificate 
+			// udyam certificate
+			
+			waitforElement(udyamyesradiobutton);
+			javascriptclick(udyamyesradiobutton);
+			
 			waitforElement(udyamnotextfield);
 			udyamnotextfield.sendKeys(udyamno);
 			
-			// date picker pending
+			// udyam date picker pending
 			waitforElement(clickonudyamdatefield);
 			javascriptclick(clickonudyamdatefield);
 			
@@ -499,7 +519,7 @@ import org.testng.annotations.Test;
 		            js.executeScript("arguments[0].style.display='block';", uploadInput);
 
 		            // Upload the file
-		            uploadInput.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-3.jpg");
+		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 8.png");
 		            System.out.println("✅ File uploaded for label: " + labelnames);
 
 		            // Click the corresponding submit button
@@ -520,7 +540,7 @@ import org.testng.annotations.Test;
 			
 			
 			for (WebElement date : listofdates) {
-		        String dateText = date.getText().trim(); // or date.getAttribute("aria-label") if text is empty
+		        String dateText = date.getText().trim(); 
 		        if (dateText.equals(dateno)) {
 		            date.click();
 		            System.out.println("✅ Date selected: " + dateno);

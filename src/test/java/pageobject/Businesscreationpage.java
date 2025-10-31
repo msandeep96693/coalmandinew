@@ -5,8 +5,11 @@ import java.awt.Desktop.Action;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.beans.DesignMode;
+import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,6 +18,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 	public class Businesscreationpage extends Basicpage {
@@ -45,15 +50,21 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']")
 		private List<WebElement> listofstate;
 		
-		@FindBy(xpath = "(//input[@type='search'])[2]")
+		@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']")
+		private List<WebElement> listofdistrict;
+		
+//	    @FindBy(xpath = "(//input[@type='search'])[2]")
+//		@FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/div/div[3]/div/form/div[6]/div[2]/div/div[2]/div/div/div/span[1]")
+		@FindBy(xpath = "(//span[@class='ant-select-selection-search'])[2]")
 		private WebElement districtdropdown;
 		
 		@FindBy(xpath = "//div[.='Anantapur']")  // //div[.='Anjaw']   state - Arunachal Pradesh
 		private WebElement anantapuroption;
 		
 //		@FindBy(xpath = "(//input[@type='search'])[1]")
-		@FindBy(xpath = "(//span[@class='ant-select-selection-search'])[1]")
-		private WebElement statedropdown;
+ 		@FindBy(xpath = "(//span[@class='ant-select-selection-search'])[1]")
+//		@FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/div/div[3]/div/form/div[6]/div[1]/div/div[2]/div/div/div/span[1]")
+		private WebElement statedropdown;   
 		
 		@FindBy(xpath = "//div[.='Andhra Pradesh']")  // //div[.='Arunachal Pradesh']
 		private WebElement andhrapradeshoption;
@@ -149,7 +160,7 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//span[@class='font-medium text-base']")
 		private List<WebElement> labelList;
 		
-		@FindBy(xpath = "//span[.='Submit']/..")
+		@FindBy(xpath = "//button[.='Submit']")    // //span[.='Submit']/..
 		private List<WebElement> submitButtons;
 		
 		@FindBy(xpath = "(//input[@type='text'])[3]")
@@ -203,7 +214,20 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='number'])[2]")
 		private WebElement DnBnotextfield;
 		
+		@FindBy(xpath = "//button[.='Save & Proceed']")
+		private WebElement saveproceedbuton;
 		
+		@FindBy(xpath = "//span[.='Confirm info correctness']")
+		private WebElement confirminfocorrectnesscheckbox;
+		
+		@FindBy(xpath = "//span[.='Accept terms']")
+		private WebElement accepttermscheckbox;
+		
+		@FindBy(xpath = "//button[.='Submit for Verification']")
+		private WebElement submitforverification;
+
+		@FindBy(xpath = "//span[.='Is Same as Business Owner ?']")
+		private WebElement Issameasbusinessownercheckbox;
 		
 		
 		
@@ -215,7 +239,7 @@ import org.testng.annotations.Test;
 				) throws InterruptedException, AWTException  
 		{ 
 			signinpage signin = new signinpage(driver);
-			signin.loginpage("sandeep+qalfk@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+			signin.loginpage("sandeep+qagqu@rokkun.io", "Sandeep@123");   // String email, String pwd, 
 			
 //			createaccountpage account = new createaccountpage(driver);
 //			account.createbusinessaccount(mobilenumber, createpassword, confirmpassword);
@@ -244,88 +268,49 @@ import org.testng.annotations.Test;
 			waitforElement(gstnumberfield);
 			gstnumberfield.sendKeys(gstnumber);
 			String GSTnumber = gstnumberfield.getText();
-			System.out.println("GST number :-"+ GSTnumber);
+//			System.out.println("GST number :-"+ GSTnumber);
 			
 			// enter gst verify button
 			waitforElement(verifygstbutton);
 			verifygstbutton.click();
 			
 //			scrollUntilElementVisible(statedropdown);
-//			
-			Thread.sleep(6000);
-//			
-//			// select the state dropdown
-//			
-//			Actions act = new Actions(driver);
-////			act.doubleClick(statedropdown).perform();
-//			act.moveToElement(statedropdown).click().perform();
-//			
-//			Thread.sleep(2000);
-//			
-//			
-//			
-//			for (WebElement option : listofstate) {
-//			    String stateName = option.getText().trim();
-//			    Thread.sleep(1000);
-//			    System.out.println("State name :-" + stateName);
-//			    if (stateName.equalsIgnoreCase("Gujarat")) {
-//			        option.click();
-//			        break; // stop after selecting
-//			    }
-//			}
-//			
-//			// district selection
-//			Actions act1 = new Actions(driver);
-////			act.doubleClick(statedropdown).perform();
-//			act1.moveToElement(districtdropdown).click().perform();
-//			
-//			Thread.sleep(2000);
-//			
-//			
-//			
-//			for (WebElement option : listofstate) {
-//			    String stateName = option.getText().trim();
-//			    Thread.sleep(1000);
-//			    System.out.println("District name :-" + stateName);
-//			    if (stateName.equalsIgnoreCase("Dang")) {
-//			        option.click();
-//			        break; // stop after selecting
-//			    }
-//			}
+	
+			Thread.sleep(3000);
+			
+			Actions act = new Actions(driver);
+		    act.doubleClick(statedropdown).perform();
+		    act.moveToElement(statedropdown).click().perform();
 			
 			
-//			try {
-//				Thread.sleep(1000);
-//				waitforElement(statedropdown);
-//				javascriptclick(statedropdown);
-//			} catch (ElementClickInterceptedException e) {
-//				Thread.sleep(1000);
-//				
-//				waitforElement(statedropdown);
-//				javascriptclick(statedropdown);
-//			}
-//			
-//			
-//			
-//			try {
-//				Thread.sleep(1000);
-//			
-//				waitforElement(andhrapradeshoption);
-//				javascriptclick(andhrapradeshoption);
-//			} catch (ElementClickInterceptedException e) {
-//				Thread.sleep(1000);
-//		
-//				waitforElement(andhrapradeshoption);
-//				javascriptclick(andhrapradeshoption);
-//			}
-//			
-//			
-//			// select the district dropdown
-//			waitforElement(districtdropdown);
-//			districtdropdown.click();
-//			
-//			waitforElement(anantapuroption);
-//			anantapuroption.click();
+			
+			for (WebElement option : listofstate) {
+			    String stateName = option.getText().trim();
+			    Thread.sleep(1000);
+			    System.out.println("State name :-" + stateName);
+			    if (stateName.equalsIgnoreCase("Haryana")) {
+//			        option.click();
+			    	javascriptclick(option);
+			        break; // stop after selecting
+			    }
+			}
+			
+			Thread.sleep(2000);
+			
+			Actions act1 = new Actions(driver);
+		    act1.doubleClick(districtdropdown).perform();
+		    act1.moveToElement(districtdropdown).click().perform();
+			
+			for (WebElement districtoption : listofdistrict) {
+			    String districtName = districtoption.getText().trim();
+			    Thread.sleep(1000);
+			    System.out.println("District name :-" + districtName);
+			    if (districtName.equalsIgnoreCase("Bhiwani")) {
+//			    	districtoption.click();
+			    	javascriptclick(districtoption);
+			        break; // stop after selecting
+			    }
+			}
 			
 			// ownership 
 			waitforElement(onwershipdropdown);
@@ -380,23 +365,27 @@ import org.testng.annotations.Test;
 			rob1.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
 			
+			// Is same as business owner
+			waitforElement(Issameasbusinessownercheckbox);
+			javascriptclick(Issameasbusinessownercheckbox);
+			
 			// contact info data
 			// -----------------------------------
 			// enter contact name 
-			waitforElement(contactnamefield);
-			contactnamefield.sendKeys(setRandomName());
-			
-			// enter designation 
-			waitforElement(desginationfield);
-			desginationfield.sendKeys(designation);
-			
-			// enter email 
-			waitforElement(emailfield);
-			emailfield.sendKeys(setRandomEmail());
-			
-			// enter contact number
-			waitforElement(mobilenumberfield);
-			mobilenumberfield.sendKeys(setRandomMobileNumber());
+//			waitforElement(contactnamefield);
+//			contactnamefield.sendKeys(setRandomName());
+//			
+//			// enter designation 
+//			waitforElement(desginationfield);
+//			desginationfield.sendKeys(designation);
+//			
+//			// enter email 
+//			waitforElement(emailfield);
+//			emailfield.sendKeys(setRandomEmail());
+//			
+//			// enter contact number
+//			waitforElement(mobilenumberfield);
+//			mobilenumberfield.sendKeys(setRandomMobileNumber());
 			
 			// click on save & proceed button
 			waitforElement(saveandproceedbutton);
@@ -414,22 +403,39 @@ import org.testng.annotations.Test;
 			
 			// KYC document
 			// authorization 
-			
+			Thread.sleep(5000);
 			kycdocuploadandsubmit("Authorization Letter", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+			
+//			WebElement gsttext = driver.findElement(By.xpath("(//button[.='Submit'])[2]"));
+//			scrollUntilElementVisible(gsttext);
 			
 			// PAN Card
+//			Thread.sleep(3000);
 			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
+			Thread.sleep(1000);
 			
-			// GST Certificate 
-			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-			
+//			WebElement TANtext = driver.findElement(By.xpath("//span[.='TAN Certificate']"));
+//			scrollUntilElementVisible(TANtext);
+//			
+//			// GST Certificate 
+//			Thread.sleep(3000);
+//			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+		/*	
 			// TAN certificate
 			waitforElement(TANnumbertextfield);
 			TANnumbertextfield.sendKeys(setRandomMobileNumber());
 			
+			Thread.sleep(3000);
 			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
+			Thread.sleep(1000);
 			
 			// LUT Certificate
+			
+			WebElement LUTtext = driver.findElement(By.xpath("//span[.='LUT Certificate']"));
+			
+			scrollUntilElementVisible(LUTtext);
 			
 			waitforElement(LUTradioyesbutton);
 			javascriptclick(LUTradioyesbutton);
@@ -438,6 +444,7 @@ import org.testng.annotations.Test;
 			LUTnumbertextfield.sendKeys(setRandomMobileNumber());
 			
 			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
+			Thread.sleep(1000);
 			
 			// Bank Details
 			waitforElement(banknametextfield);
@@ -459,6 +466,7 @@ import org.testng.annotations.Test;
 			branchnametextfield.sendKeys(setRandomBusinessName());
 			
 			kycdocuploadandsubmit("Bank Details", uploadFiles, submitButtons);
+			Thread.sleep(1000);
 			
 			// udyam certificate
 			
@@ -474,8 +482,8 @@ import org.testng.annotations.Test;
 			
 			datepicker(udyamdateno);
 			
-			
 			kycdocuploadandsubmit("Udyam Certificate (MSME)", uploadFiles, submitButtons);
+			Thread.sleep(1000);
 			
 			
 			// IEC certificate
@@ -493,6 +501,7 @@ import org.testng.annotations.Test;
 			datepicker(iecdateno);
 			
 			kycdocuploadandsubmit("IEC Certificate", uploadFiles, submitButtons);
+			Thread.sleep(1000);
 			
 			// D & B 
 			
@@ -500,8 +509,23 @@ import org.testng.annotations.Test;
 			DnBnotextfield.sendKeys(DnBno);
 			
 			kycdocuploadandsubmit("D&B", uploadFiles, submitButtons);
+			Thread.sleep(1000);
 			
+			waitforElement(saveproceedbuton);
+			javascriptclick(saveproceedbuton);
 			
+			// Review page - Two check box
+			waitforElement(confirminfocorrectnesscheckbox);
+			javascriptclick(confirminfocorrectnesscheckbox);
+			
+			waitforElement(accepttermscheckbox);
+			javascriptclick(accepttermscheckbox);
+			
+			// submit for verification 
+			waitforElement(submitforverification);
+			javascriptclick(submitforverification);
+			
+			*/
 	}
 		
 		public void kycdocuploadandsubmit(String labelnames, List<WebElement> uploadFiles, List<WebElement> submitButtons) 
@@ -511,6 +535,7 @@ import org.testng.annotations.Test;
 		        System.out.println("Found label: " + labelText);
 
 		        if (labelText.contains(labelnames)) {
+		        	
 		            WebElement uploadInput = uploadFiles.get(i);
 		            WebElement submitButton = submitButtons.get(i);
 
@@ -526,6 +551,18 @@ import org.testng.annotations.Test;
 		            js.executeScript("arguments[0].click();", submitButton);
 		            System.out.println("✅ Submit button clicked for label: " + labelnames);
 
+		            // ✅ Confirmation handling - Toast/Popup message
+		            try {
+		            	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		                WebElement confirmationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		                    By.xpath("//div[@class='ant-notification-notice-message']")
+		                ));
+		                System.out.println("✅ Confirmation: " + confirmationMsg.getText());
+		            } catch (org.openqa.selenium.TimeoutException e) {
+		                System.out.println("⚠ No confirmation message appeared — continuing...");
+		            }
+
+		       
 		            break;
 		        }
 		    }

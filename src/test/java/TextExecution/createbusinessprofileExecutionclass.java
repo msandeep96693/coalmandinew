@@ -16,7 +16,7 @@ public class createbusinessprofileExecutionclass  extends Baseclass {
 		businessprofile.createbbusinessprofile(prop.getProperty("mobilenumber"), prop.getProperty("createpwd"), prop.getProperty("confirmpwd"),
 				 prop.getProperty("gstnumber"), prop.getProperty("designation"), prop.getProperty("accountno"),
 				 prop.getProperty("confirmaccountno"),prop.getProperty("udyamno"), prop.getProperty("udyamdateno"),
-				prop.getProperty("iecdateno"), prop.getProperty("DnBno")
+				 prop.getProperty("iecdateno"), prop.getProperty("DnBno")
 				 
 				);		
 		  

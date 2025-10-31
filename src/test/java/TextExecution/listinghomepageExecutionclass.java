@@ -18,7 +18,7 @@ public class listinghomepageExecutionclass  extends Baseclass {
 	}
 
 	
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void mylistingallstatusdropdownfunctionality() throws InterruptedException
 	{
 		listhome = new listinghomepage(driver);
@@ -32,7 +32,7 @@ public class listinghomepageExecutionclass  extends Baseclass {
 		listhome.Participdatedsectionsearchfunctionality(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("searchbycoalname"));
 	}
 	
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 3, enabled = false)
 	public void participatedallstatusdropdownfunctionality() throws InterruptedException
 	{
 		listhome = new listinghomepage(driver);

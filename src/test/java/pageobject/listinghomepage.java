@@ -18,12 +18,12 @@ public class listinghomepage extends Basicpage {
 	@FindBy(xpath = "//input[@type='text']")
 	private WebElement searchtextfield;
 	
-	@FindBy(xpath = "//span[@title='All Status']" )
+	@FindBy(xpath = "//span[@title='All Status']")
 	private WebElement clickonstatusdropdown;
 	
 	@FindBy(xpath = "//div[@class='ant-select-item-option-content']") 
 	private List<WebElement> statusdropdownoptions;
-		
+	
 	@FindBy(xpath = "//div[@class='ant-card-extra']")
 	private List<WebElement> listofdatabasedonstatusselection;
  	

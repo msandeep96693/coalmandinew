@@ -160,7 +160,7 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//span[@class='font-medium text-base']")
 		private List<WebElement> labelList;
 		
-		@FindBy(xpath = "//button[.='Submit']")    // //span[.='Submit']/..
+		@FindBy(xpath = "//button[@type='submit']")    // //span[.='Submit']/..
 		private List<WebElement> submitButtons;
 		
 		@FindBy(xpath = "(//input[@type='text'])[3]")
@@ -169,7 +169,7 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='text'])[4]")
 		private WebElement LUTnumbertextfield;
 		
-		@FindBy(xpath = "(//input[@value='yes'])[1]")
+		@FindBy(xpath = "(//span[.='Yes']/..)[1]")
 		private WebElement LUTradioyesbutton;
 		
 		@FindBy(xpath = "(//input[@type='text'])[5]")
@@ -187,7 +187,7 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='text'])[7]")
 		private WebElement branchnametextfield;
 		
-		@FindBy(xpath = "(//input[@value='yes'])[2]")
+		@FindBy(xpath = "(//span[.='Yes']/..)[2]")
 		private WebElement udyamyesradiobutton;
 		
 		@FindBy(xpath = "(//input[@type='text'])[8]")
@@ -202,7 +202,7 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//div[@class='react-calendar__month-view__days']/button/abbr")
 		private List<WebElement> listofdates;
 		
-		@FindBy(xpath = "(//input[@value='yes'])[3]")
+		@FindBy(xpath = "(//span[.='Yes']/..)[3]")
 		private WebElement iecyesradiobutton;
 		
 		@FindBy(xpath = "(//input[@type='text'])[9]")
@@ -231,6 +231,14 @@ import org.testng.annotations.Test;
 		
 		
 		
+		// kyc page
+		
+		@FindBy(xpath = "(//input[@type='file'])[1]")
+		private WebElement authorizationuploadfile;
+		
+		@FindBy(xpath = "(//input[@type='file'])[2]")
+		private WebElement pancarduploadfile;
+		
 		public void createbbusinessprofile(
 				 String mobilenumber, String createpassword, 
 				 String confirmpassword, String gstnumber,  
@@ -253,12 +261,13 @@ import org.testng.annotations.Test;
 				Thread.sleep(5000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
-				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
+				uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 				} catch (ElementNotInteractableException e) {
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("arguments[0].style.display='block';", uploadProfile);
-					uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
+					uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 				}  // /home/active34/Downloads/photos /QA club photos/business logo.jpeg
+			// C:\Users\User\Desktop\Background images\Bg-1.jpg
 			
 			// remember me as textfield
 			waitforElement(rememberastextField);      
@@ -405,40 +414,35 @@ import org.testng.annotations.Test;
 			// authorization 
 			Thread.sleep(5000);
 			kycdocuploadandsubmit("Authorization Letter", uploadFiles, submitButtons);
-//			Thread.sleep(1000);
 			
-//			WebElement gsttext = driver.findElement(By.xpath("(//button[.='Submit'])[2]"));
-//			scrollUntilElementVisible(gsttext);
-			
-			// PAN Card
-//			Thread.sleep(3000);
+//			// PAN Card
 			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
 			Thread.sleep(1000);
 			
-//			WebElement TANtext = driver.findElement(By.xpath("//span[.='TAN Certificate']"));
-//			scrollUntilElementVisible(TANtext);
-//			
 //			// GST Certificate 
-//			Thread.sleep(3000);
-//			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-//			Thread.sleep(1000);
-		/*	
+			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
+			Thread.sleep(1000);
+			
 			// TAN certificate
 			waitforElement(TANnumbertextfield);
 			TANnumbertextfield.sendKeys(setRandomMobileNumber());
 			
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
 			Thread.sleep(1000);
-			
+					
 			// LUT Certificate
 			
-			WebElement LUTtext = driver.findElement(By.xpath("//span[.='LUT Certificate']"));
-			
-			scrollUntilElementVisible(LUTtext);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			By radioBtn = By.xpath("(//input[@type='radio'])[1]");
+
+			WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(radioBtn));
+
+			// Scroll to element
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 			
 			waitforElement(LUTradioyesbutton);
-			javascriptclick(LUTradioyesbutton);
+			LUTradioyesbutton.click();
 			
 			waitforElement(LUTnumbertextfield);
 			LUTnumbertextfield.sendKeys(setRandomMobileNumber());
@@ -489,7 +493,8 @@ import org.testng.annotations.Test;
 			// IEC certificate
 			
 			waitforElement(iecyesradiobutton);
-			javascriptclick(iecyesradiobutton);
+//			javascriptclick(iecyesradiobutton);
+			iecyesradiobutton.click();
 			
 			waitforElement(iecnotextfield);
 			iecnotextfield.sendKeys(setRandomMobileNumber());
@@ -509,10 +514,13 @@ import org.testng.annotations.Test;
 			DnBnotextfield.sendKeys(DnBno);
 			
 			kycdocuploadandsubmit("D&B", uploadFiles, submitButtons);
-			Thread.sleep(1000);
+			
+			scrollBottomofPage();
 			
 			waitforElement(saveproceedbuton);
 			javascriptclick(saveproceedbuton);
+			
+			scrollBottomofPage();
 			
 			// Review page - Two check box
 			waitforElement(confirminfocorrectnesscheckbox);
@@ -521,14 +529,16 @@ import org.testng.annotations.Test;
 			waitforElement(accepttermscheckbox);
 			javascriptclick(accepttermscheckbox);
 			
-			// submit for verification 
-			waitforElement(submitforverification);
-			javascriptclick(submitforverification);
+			Thread.sleep(2000);
+//			// submit for verification 
+//			waitforElement(submitforverification);
+//			javascriptclick(submitforverification);
 			
-			*/
-	}
 		
-		public void kycdocuploadandsubmit(String labelnames, List<WebElement> uploadFiles, List<WebElement> submitButtons) 
+	}
+
+		
+		public void kycdocuploadandsubmit(String labelnames, List<WebElement> uploadFiles, List<WebElement> submitButtons) throws InterruptedException 
 		{
 			 for (int i = 0; i < labelList.size(); i++) {
 		        String labelText = labelList.get(i).getText().trim();
@@ -544,11 +554,14 @@ import org.testng.annotations.Test;
 		            js.executeScript("arguments[0].style.display='block';", uploadInput);
 
 		            // Upload the file
-		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 8.png");
+		            uploadInput.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Screenshot (8).png");
 		            System.out.println("✅ File uploaded for label: " + labelnames);
 
+//		            js.executeScript("arguments[0].scrollIntoView(true);", uploadInput);
 		            // Click the corresponding submit button
 		            js.executeScript("arguments[0].click();", submitButton);
+		            
+		            Thread.sleep(3000);
 		            System.out.println("✅ Submit button clicked for label: " + labelnames);
 
 		            // ✅ Confirmation handling - Toast/Popup message

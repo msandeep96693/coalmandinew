@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import Basepackage.Baseclass;
 import pageobject.Businesscreationpage;
 
-public class createbusinessprofileExecutionclass  extends Baseclass {
+public class createbusinessprofileExecutionclass extends Baseclass {
 
 	@Test
 	public void createbusinessprofileExecutionclass() throws InterruptedException, AWTException

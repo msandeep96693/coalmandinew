@@ -19,7 +19,6 @@ public class createbusinessprofileExecutionclass extends Baseclass {
 				 prop.getProperty("iecdateno"), prop.getProperty("DnBno")
 				 
 				);		
-		  
-		
+		  	
 	}
 }

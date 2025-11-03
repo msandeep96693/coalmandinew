@@ -261,11 +261,11 @@ import org.testng.annotations.Test;
 				Thread.sleep(5000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
-				uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
 				} catch (ElementNotInteractableException e) {
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("arguments[0].style.display='block';", uploadProfile);
-					uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+					uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
 				}  // /home/active34/Downloads/photos /QA club photos/business logo.jpeg
 			// C:\Users\User\Desktop\Background images\Bg-1.jpg
 			
@@ -547,21 +547,21 @@ import org.testng.annotations.Test;
 		        if (labelText.contains(labelnames)) {
 		        	
 		            WebElement uploadInput = uploadFiles.get(i);
-		            WebElement submitButton = submitButtons.get(i);
+		            WebElement submitButton = submitButtons.get(i);	
 
 		            // Make upload input visible (if hidden)
 		            JavascriptExecutor js = (JavascriptExecutor) driver;
 		            js.executeScript("arguments[0].style.display='block';", uploadInput);
 
 		            // Upload the file
-		            uploadInput.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Screenshot (8).png");
+		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 		            System.out.println("✅ File uploaded for label: " + labelnames);
-
+		    
 //		            js.executeScript("arguments[0].scrollIntoView(true);", uploadInput);
 		            // Click the corresponding submit button
 		            js.executeScript("arguments[0].click();", submitButton);
 		            
-		            Thread.sleep(3000);
+//		            Thread.sleep(3000);
 		            System.out.println("✅ Submit button clicked for label: " + labelnames);
 
 		            // ✅ Confirmation handling - Toast/Popup message
@@ -573,9 +573,7 @@ import org.testng.annotations.Test;
 		                System.out.println("✅ Confirmation: " + confirmationMsg.getText());
 		            } catch (org.openqa.selenium.TimeoutException e) {
 		                System.out.println("⚠ No confirmation message appeared — continuing...");
-		            }
-
-		       
+		            } 
 		            break;
 		        }
 		    }

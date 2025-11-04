@@ -261,11 +261,11 @@ import org.testng.annotations.Test;
 				Thread.sleep(5000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
-				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
+				uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 				} catch (ElementNotInteractableException e) {
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("arguments[0].style.display='block';", uploadProfile);
-					uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
+					uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 				}  // /home/active34/Downloads/photos /QA club photos/business logo.jpeg
 			// C:\Users\User\Desktop\Background images\Bg-1.jpg
 			
@@ -287,22 +287,22 @@ import org.testng.annotations.Test;
 	
 			Thread.sleep(3000);
 			
-			Actions act = new Actions(driver);
-		    act.doubleClick(statedropdown).perform();
-		    act.moveToElement(statedropdown).click().perform();
-			
-			
-			
-			for (WebElement option : listofstate) {
-			    String stateName = option.getText().trim();
-			    Thread.sleep(1000);
-			    System.out.println("State name :-" + stateName);
-			    if (stateName.equalsIgnoreCase("Haryana")) {
-//			        option.click();
-			    	javascriptclick(option);
-			        break; // stop after selecting
-			    }
-			}
+//			Actions act = new Actions(driver);
+//		    act.doubleClick(statedropdown).perform();
+//		    act.moveToElement(statedropdown).click().perform();
+//			
+//			
+//			
+//			for (WebElement option : listofstate) {
+//			    String stateName = option.getText().trim();
+//			    Thread.sleep(1000);
+//			    System.out.println("State name :-" + stateName);
+//			    if (stateName.equalsIgnoreCase("Kerala")) {
+////			        option.click();
+//			    	javascriptclick(option);
+//			        break; // stop after selecting
+//			    }
+//			}
 			
 			Thread.sleep(2000);
 			
@@ -314,7 +314,7 @@ import org.testng.annotations.Test;
 			    String districtName = districtoption.getText().trim();
 			    Thread.sleep(1000);
 			    System.out.println("District name :-" + districtName);
-			    if (districtName.equalsIgnoreCase("Bhiwani")) {
+			    if (districtName.equalsIgnoreCase("Ernakulam")) {
 //			    	districtoption.click();
 			    	javascriptclick(districtoption);
 			        break; // stop after selecting
@@ -540,6 +540,9 @@ import org.testng.annotations.Test;
 		
 		public void kycdocuploadandsubmit(String labelnames, List<WebElement> uploadFiles, List<WebElement> submitButtons) throws InterruptedException 
 		{
+			
+			 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			 
 			 for (int i = 0; i < labelList.size(); i++) {
 		        String labelText = labelList.get(i).getText().trim();
 		        System.out.println("Found label: " + labelText);
@@ -552,11 +555,14 @@ import org.testng.annotations.Test;
 		            // Make upload input visible (if hidden)
 		            JavascriptExecutor js = (JavascriptExecutor) driver;
 		            js.executeScript("arguments[0].style.display='block';", uploadInput);
-
+		            
+		            //Wait until input is clickable before upload
+//		            wait.until(ExpectedConditions.elementToBeClickable(uploadInput));
+// /home/active34/Downloads/photos /QA club photos/Club 7.png
 		            // Upload the file
-		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
+		            uploadInput.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 		            System.out.println("✅ File uploaded for label: " + labelnames);
-		    
+		            
 		            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
 		            
 		            // Click the corresponding submit button
@@ -567,7 +573,7 @@ import org.testng.annotations.Test;
 
 		            // ✅ Confirmation handling - Toast/Popup message
 		            try {
-		            	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//		            	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		                WebElement confirmationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
 		                    By.xpath("//div[@class='ant-notification-notice-message']")
 		                ));

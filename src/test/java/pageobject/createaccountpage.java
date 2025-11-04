@@ -116,7 +116,7 @@ public class createaccountpage extends Basicpage {
 		javascriptclick(sendotpbutton);
 		
 		// enter otp into textfields and click enter button on keyboard
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
 		wait.until(d -> whatsappotpinputfield.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
 		
 		// enter password

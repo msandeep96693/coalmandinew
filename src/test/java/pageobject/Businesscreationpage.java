@@ -557,7 +557,8 @@ import org.testng.annotations.Test;
 		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 		            System.out.println("✅ File uploaded for label: " + labelnames);
 		    
-//		            js.executeScript("arguments[0].scrollIntoView(true);", uploadInput);
+		            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
+		            
 		            // Click the corresponding submit button
 		            js.executeScript("arguments[0].click();", submitButton);
 		            

@@ -25,7 +25,7 @@ import org.testng.annotations.BeforeMethod;
 import pageobject.Businesscreationpage;
 import pageobject.Negotiationhomepage;
 import pageobject.createaccountpage;
-import pageobject.createlistingpage;
+import pageobject.createCILlistingpage;
 import pageobject.listinghomepage;
 import pageobject.orderhomepage;
 import pageobject.signinpage;
@@ -37,7 +37,7 @@ public class Baseclass {
 	public WebDriver driver;
 	public signinpage sign;
 	public createaccountpage account;
-	public createlistingpage createlist;
+	public createCILlistingpage createlist;
 	public Businesscreationpage businessprofile;
 	public listinghomepage listhome;
 	public Negotiationhomepage negotiation;

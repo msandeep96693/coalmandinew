@@ -143,9 +143,12 @@ public class createCILsplitlistingpage extends Basicpage {
 	private WebElement submitbutton;
 	
 	// Split qty 
-	@FindBy(xpath = "(//input[@type='radio'])[1]")
+	@FindBy(xpath = "//span[.='Yes']")  //span[@class='ant-radio-label']
 	private WebElement yesradiobutton;
 	
+	@FindBy(xpath = "//span[@class='ant-radio-label']" )
+	private List<WebElement> radiobuttons;
+ 	
 	@FindBy(xpath = "(//input[@type='number'])[1]")
 	private WebElement splittotalqtyfield;
 	
@@ -153,14 +156,54 @@ public class createCILsplitlistingpage extends Basicpage {
 	private WebElement numberofsplitfield;
 	
 	@FindBy(xpath = "(//input[@type='number'])[3]")
+	private WebElement splitqty1field;
+	
+	@FindBy(xpath = "(//input[@type='number'])[4]")
+	private WebElement splitrate1field;
+	
+	@FindBy(xpath = "(//input[@type='number'])[5]")
+	private WebElement splitqty2field;
+	
+	@FindBy(xpath = "(//input[@type='number'])[6]")
+	private WebElement splitrate2field;
+	
+	@FindBy(xpath = "(//input[@type='number'])[7]")
+	private WebElement splitqty3field;
+	
+	@FindBy(xpath = "(//input[@type='number'])[8]")
+	private WebElement splitrate3field;
+	
+	@FindBy(xpath = "(//input[@type='number'])[9]")
+	private WebElement splitqty4field;
+	
+	@FindBy(xpath = "(//input[@type='number'])[10]")
+	private WebElement splitrate4field;
+	
+	@FindBy(xpath = "(//input[@type='number'])[11]")
 	private WebElement splitemdfield;
+	
+	@FindBy(xpath = "(//span[.='Select split shipping address'])[2]")
+	private WebElement clickonsplitaddress1;
+	
+	@FindBy(xpath = "(//span[.='Select split shipping address'])[4]")
+	private WebElement clickonsplitaddress2;
+	
+	@FindBy(xpath = "(//span[.='Select split shipping address'])[6]")
+	private WebElement clickonsplitaddress3;
+	
+	@FindBy(xpath = "(//span[.='Select split shipping address'])[8]")
+	private WebElement clickonsplitaddress4;
+	
+	@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']")
+	private List<WebElement> selectthesplitaddresoptionlist;
+	
 	
 	
 	
 	//  //div[@class='ant-form-item-control-input-content']/input       ::-->Text field
 	//  //div[@class='ant-col ant-form-item-label css-1tbu3z4']/label   ::-->Labels
 	
-	public void createlistingbyprivatemines(
+	public void createlistingbysplitqty(
 			String email, String pwd, 
 			String businessprofile, String optionName,
 			String coaltype, String optionName1,
@@ -177,8 +220,11 @@ public class createCILsplitlistingpage extends Basicpage {
 			String moisturelabel, String inputdata4,
 			
 			// delivery railway siding code
-			String deliverymodeoption, String QuantityMTinputdata,
-			String rateperMTinputdata, String deliverytermoption,
+			String deliverymodeoption, String totalsplitqty,
+			String numberofsplits, 
+			
+			
+			String deliverytermoption,
 			String paymenttermoption, String emdinputdata,
 			String freepaymentinputfield, String freeliftingperiodoption,
 			String Startdate, String enddate, String addressbookdata, 
@@ -233,18 +279,70 @@ public class createCILsplitlistingpage extends Basicpage {
 		
 		// Deliery mode
 //		javascriptclick(clickondeliverydropdown2);
-		clickondeliverydropdown2.click();
 		
-		selectOptionFromDropdown(deliverymodeoption);
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
+		 js.executeScript("arguments[0].scrollIntoView({block: 'center'});", yesradiobutton);
 		
+		Thread.sleep(2000);
+		waitforElement(yesradiobutton);
+		yesradiobutton.click();
+		
+		Thread.sleep(3000);
 		
 		// qtyfield
-		waitforElement(qtyfield);
-		qtyfield.sendKeys(QuantityMTinputdata);
+		waitforElement(splittotalqtyfield);
+		splittotalqtyfield.sendKeys("4000");
 		
 		// rate per MT
-		waitforElement(ratefield);
-		ratefield.sendKeys(rateperMTinputdata);
+		waitforElement(numberofsplitfield);
+		numberofsplitfield.sendKeys("4");
+		
+		
+		Thread.sleep(4000);
+		// split qty fields
+		
+		waitforElement(splitqty1field);
+		splitqty1field.sendKeys("1000");
+		
+		waitforElement(splitrate1field);
+		splitrate1field.sendKeys("1250");
+		
+//		clickonsplitaddress1.click();
+		javascriptclick(clickonsplitaddress1);
+		selectOptionFromDropdown("BTM");
+		
+		waitforElement(splitqty2field);
+		splitqty2field.sendKeys("1000");
+		
+		waitforElement(splitrate2field);
+		splitrate2field.sendKeys("1260");
+		
+		javascriptclick(clickonsplitaddress2);
+		selectOptionFromDropdown("BTM");
+		
+		waitforElement(splitqty3field);
+		splitqty3field.sendKeys("1000");
+		
+		waitforElement(splitrate3field);
+		splitrate3field.sendKeys("1270");
+		
+		javascriptclick(clickonsplitaddress3);
+		selectOptionFromDropdown("BTM");
+		
+		waitforElement(splitqty4field);
+		splitqty4field.sendKeys("1000");
+		
+		waitforElement(splitrate4field);
+		splitrate4field.sendKeys("1280");
+		
+		javascriptclick(clickonsplitaddress4);
+		selectOptionFromDropdown("BTM");
+	
+		
+//		clickondeliverydropdown2.click();
+		javascriptclick(clickondeliverydropdown2);
+		selectOptionFromDropdown("Road");
+		
 		
 		// delivery terms
 		clickdeliverytermsdropdown.click();
@@ -257,8 +355,8 @@ public class createCILsplitlistingpage extends Basicpage {
 		selectOptionFromDropdown(paymenttermoption);
 		
 		// emd %
-		waitforElement(emdfield);
-		emdfield.sendKeys(emdinputdata);
+		waitforElement(splitemdfield);
+		splitemdfield.sendKeys(emdinputdata);
 		
 	    waitforElement(freepaymentfield);
 	    freepaymentfield.sendKeys(freepaymentinputfield);
@@ -273,9 +371,9 @@ public class createCILsplitlistingpage extends Basicpage {
 		// end date
 		EndDate(enddate);
 		
-		clickonshippingaddressfield.click();
-		
-		selectOptionFromDropdown(addressbookdata);
+//		clickonshippingaddressfield.click();
+//		
+//		selectOptionFromDropdown(addressbookdata);
 		
 		waitforElement(textareainputfield);
 		textareainputfield.sendKeys(otherremarkstextarea);

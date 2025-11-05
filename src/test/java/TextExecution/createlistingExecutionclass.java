@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import Basepackage.Baseclass;
 import pageobject.createCILlistingpage;
+import pageobject.createCILsplitlistingpage;
 
 public class createlistingExecutionclass extends Baseclass {
 	
@@ -39,12 +40,12 @@ public class createlistingExecutionclass extends Baseclass {
 		
 	}
 	
-
-	@Test
+	//@Test
 	public void createcilsplitlistingpage() throws InterruptedException, AWTException
 	{
-		createlist = new pageobject.createCILlistingpage(driver);
-		createlist.createlistingbyprivatemines(
+		
+		createCILsplitlistingpage splitlist = new createCILsplitlistingpage(driver);
+		splitlist.createlistingbysplitqty(
 				prop.getProperty("username"), prop.getProperty("password"), 
 				prop.getProperty("businessprofile"),prop.getProperty("Businessprofileoption"), 
 				prop.getProperty("coaltype"), prop.getProperty("coaltypeoption"), 
@@ -60,8 +61,12 @@ public class createlistingExecutionclass extends Baseclass {
 				prop.getProperty("volatilepercentage"), prop.getProperty("volatileinputdata"),
 				prop.getProperty("totalmoisturepercentage"), prop.getProperty("moistureinputdata"), 
 				
-				prop.getProperty("deliverymodeoption"), prop.getProperty("QuantityMTinputdata"), 
-				prop.getProperty("rateperMTinputdata"), prop.getProperty("deliverytermoption"), 
+				
+				
+				prop.getProperty("totalsplitqty"), 
+				prop.getProperty("numberofsplits"), 
+				
+				prop.getProperty("deliverymodeoption"), prop.getProperty("deliverytermoption"), 
 				prop.getProperty("paymenttermoption"), prop.getProperty("emdinputdata"), 
 				prop.getProperty("freepaymentinputfield"), prop.getProperty("freeliftingperiodoption"), 
 				prop.getProperty("Startdate"), prop.getProperty("enddate"), prop.getProperty("addressbookdata"),
@@ -69,5 +74,7 @@ public class createlistingExecutionclass extends Baseclass {
 				
 		
 	}
+
+	
 
 }

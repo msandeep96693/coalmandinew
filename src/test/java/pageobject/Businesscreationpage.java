@@ -264,11 +264,11 @@ import org.testng.annotations.Test;
 				Thread.sleep(5000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
-				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
+				uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 				} catch (ElementNotInteractableException e) {
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("arguments[0].style.display='block';", uploadProfile);
-					uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
+					uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 				}  // /home/active34/Downloads/photos /QA club photos/business logo.jpeg
 			// C:\Users\User\Desktop\Background images\Bg-1.jpg
 			
@@ -618,7 +618,7 @@ import org.testng.annotations.Test;
 // /home/active34/Downloads/photos /QA club photos/Club 7.png
 		          //  C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg
 		            // Upload the file
-		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
+		            uploadInput.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 		            System.out.println("✅ File uploaded for label: " + labelnames);
 		            
 		            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);

@@ -48,7 +48,29 @@ public class listingNegotiationactionpage extends Basicpage {
 	
 	@FindBy(xpath = "(//span[text()='Log in'])[1]/..") 
 	private WebElement siginbtn;
+	
+	
+	// negotiation
+	
+	@FindBy(xpath = "//button[.='Negotiate']")
+	private WebElement negotiationbtnlistingdetails;
 
+	@FindBy(xpath = "(//span[.='Select business profile'])[2]")
+	private WebElement clickbusinessprofile;
+	
+	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
+	private List<WebElement> businessprofiledropdownoption;
+	
+	@FindBy(xpath = "(//input[@type='text'])[1]")
+	private WebElement offerqtyfield;
+	
+	@FindBy(xpath = "(//input[@type='text'])[2]")
+	private WebElement offerratefield;
+	
+	@FindBy(xpath = "//button[.='Submit Offer (OTP Required)']")
+	private WebElement submitofferotpbtn;
+	
+	
 	
 	public void ExpressInterestOrdergenerate(String email, String pwd, String businessname ) throws InterruptedException
 	{
@@ -98,6 +120,21 @@ public class listingNegotiationactionpage extends Basicpage {
 		wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
 				
 		Thread.sleep(2000);
+		
+	}
+	
+	public void negotiationordergenerate()
+	{
+		scrollBottomofPage();
+		
+		waitforElement(negotiationbtnlistingdetails);
+		javascriptclick(negotiationbtnlistingdetails);
+		
+		
+		
+		selectDropdownOption(businessprofiledropdownoption, null);
+		
+		
 		
 	}
 }

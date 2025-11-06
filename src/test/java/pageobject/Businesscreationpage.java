@@ -157,6 +157,9 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//input[@type='file']")
 		private List<WebElement> uploadFiles;
 		
+		@FindBy(xpath = "//input[@type='file']")
+		private List<WebElement> uploadFiles1;
+		
 		@FindBy(xpath = "//span[@class='font-medium text-base']")
 		private List<WebElement> labelList;
 		
@@ -261,11 +264,11 @@ import org.testng.annotations.Test;
 				Thread.sleep(5000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
-				uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
 				} catch (ElementNotInteractableException e) {
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("arguments[0].style.display='block';", uploadProfile);
-					uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+					uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/business logo.jpeg");
 				}  // /home/active34/Downloads/photos /QA club photos/business logo.jpeg
 			// C:\Users\User\Desktop\Background images\Bg-1.jpg
 			
@@ -304,22 +307,22 @@ import org.testng.annotations.Test;
 //			    }
 //			}
 			
-			Thread.sleep(2000);
-			
-			Actions act1 = new Actions(driver);
-		    act1.doubleClick(districtdropdown).perform();
-		    act1.moveToElement(districtdropdown).click().perform();
-			
-			for (WebElement districtoption : listofdistrict) {
-			    String districtName = districtoption.getText().trim();
-			    Thread.sleep(1000);
-			    System.out.println("District name :-" + districtName);
-			    if (districtName.equalsIgnoreCase("Ernakulam")) {
-//			    	districtoption.click();
-			    	javascriptclick(districtoption);
-			        break; // stop after selecting
-			    }
-			}
+//			Thread.sleep(2000);
+//			
+//			Actions act1 = new Actions(driver);
+//		    act1.doubleClick(districtdropdown).perform();
+//		    act1.moveToElement(districtdropdown).click().perform();
+//			
+//			for (WebElement districtoption : listofdistrict) {
+//			    String districtName = districtoption.getText().trim();
+//			    Thread.sleep(1000);
+//			    System.out.println("District name :-" + districtName);
+//			    if (districtName.equalsIgnoreCase("Ernakulam")) {
+////			    	districtoption.click();
+//			    	javascriptclick(districtoption);
+//			        break; // stop after selecting
+//			    }
+//			}
 			
 			// ownership 
 			waitforElement(onwershipdropdown);
@@ -415,13 +418,31 @@ import org.testng.annotations.Test;
 			Thread.sleep(5000);
 			kycdocuploadandsubmit("Authorization Letter", uploadFiles, submitButtons);
 			
-//			// PAN Card
-			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
-			Thread.sleep(1000);
 			
-//			// GST Certificate 
+			
+//			// PAN Card
+			Thread.sleep(3000);
+			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
+			Thread.sleep(3000);
+			
+//			kycdocuploadandsubmit1("PAN Card", uploadFiles1);
+			
+//			WebElement pansubmit = driver.findElement(By.xpath("(//button[.='Submit'])[2]"));
+//			//JavascriptExecutor js1 = (JavascriptExecutor) driver;
+//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", pansubmit);
+//			
+//			pansubmit.click();
+			
+			// GST Certificate 
+			Thread.sleep(3000);
 			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
+			Thread.sleep(3000);
+			
+//			kycdocuploadandsubmit1("GST Certificate", uploadFiles1);
+//			Thread.sleep(2000);
+//			WebElement GSTsubmit = driver.findElement(By.xpath("(//button[.='Submit'])[3]"));
+//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", GSTsubmit);
+//			GSTsubmit.click();
 			
 			// TAN certificate
 			waitforElement(TANnumbertextfield);
@@ -429,7 +450,14 @@ import org.testng.annotations.Test;
 			
 			Thread.sleep(1000);
 			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
+			Thread.sleep(3000);
+			
+//			kycdocuploadandsubmit1("TAN Certificate", uploadFiles1); 
+//			
+//			Thread.sleep(1000);
+//			WebElement TANsubmit = driver.findElement(By.xpath("(//button[.='Submit'])[4]"));
+//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", TANsubmit);
+//			TANsubmit.click();
 					
 			// LUT Certificate
 			
@@ -444,75 +472,102 @@ import org.testng.annotations.Test;
 			waitforElement(LUTradioyesbutton);
 			LUTradioyesbutton.click();
 			
+			Thread.sleep(2000);
 			waitforElement(LUTnumbertextfield);
 			LUTnumbertextfield.sendKeys(setRandomMobileNumber());
 			
 			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
+			
+//			kycdocuploadandsubmit1("LUT Certificate", uploadFiles1); 
+//			
+//			Thread.sleep(2000);
+//			WebElement LUTsubmit = driver.findElement(By.xpath("(//button[.='Submit'])[5]"));
+//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", LUTsubmit);
+//			LUTsubmit.click();
+			
 			
 			// Bank Details
+			Thread.sleep(1000);
 			waitforElement(banknametextfield);
 			banknametextfield.clear();
 			banknametextfield.sendKeys(setRandomBusinessName());
 			
+			Thread.sleep(1000);
 			waitforElement(accountnotextfield);
 			accountnotextfield.clear();
 			accountnotextfield.sendKeys(accountno);
 			
+			Thread.sleep(1000);
 			waitforElement(confirmaccountnotextfield);
 			confirmaccountnotextfield.clear();
 			confirmaccountnotextfield.sendKeys(confirmaccountno);
 			
+			Thread.sleep(1000);
 			waitforElement(ifsccodetextfield);
 			ifsccodetextfield.sendKeys("ifsccode");
 			
+			Thread.sleep(1000);
 			waitforElement(branchnametextfield);
 			branchnametextfield.sendKeys(setRandomBusinessName());
 			
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("Bank Details", uploadFiles, submitButtons);
 			Thread.sleep(1000);
 			
 			// udyam certificate
 			
+			
 			waitforElement(udyamyesradiobutton);
 			javascriptclick(udyamyesradiobutton);
 			
+			Thread.sleep(1000);
 			waitforElement(udyamnotextfield);
 			udyamnotextfield.sendKeys(udyamno);
 			
+			Thread.sleep(1000);
 			// udyam date picker pending
 			waitforElement(clickonudyamdatefield);
 			javascriptclick(clickonudyamdatefield);
 			
+			Thread.sleep(1000);
 			datepicker(udyamdateno);
 			
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("Udyam Certificate (MSME)", uploadFiles, submitButtons);
 			Thread.sleep(1000);
 			
 			
 			// IEC certificate
 			
+			
 			waitforElement(iecyesradiobutton);
 //			javascriptclick(iecyesradiobutton);
 			iecyesradiobutton.click();
 			
+			Thread.sleep(1000);
 			waitforElement(iecnotextfield);
 			iecnotextfield.sendKeys(setRandomMobileNumber());
 			
+			Thread.sleep(1000);
 			// date picker iec 
 			waitforElement(clickoniecdatefield);
 			javascriptclick(clickoniecdatefield);
 			
+			Thread.sleep(1000);
 			datepicker(iecdateno);
 			
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("IEC Certificate", uploadFiles, submitButtons);
 			Thread.sleep(1000);
 			
 			// D & B 
 			
+			Thread.sleep(1000);
 			waitforElement(DnBnotextfield);
 			DnBnotextfield.sendKeys(DnBno);
 			
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("D&B", uploadFiles, submitButtons);
 			
 			scrollBottomofPage();
@@ -558,9 +613,12 @@ import org.testng.annotations.Test;
 		            
 		            //Wait until input is clickable before upload
 //		            wait.until(ExpectedConditions.elementToBeClickable(uploadInput));
+		            
+		            Thread.sleep(3000);
 // /home/active34/Downloads/photos /QA club photos/Club 7.png
+		          //  C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg
 		            // Upload the file
-		            uploadInput.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 		            System.out.println("✅ File uploaded for label: " + labelnames);
 		            
 		            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
@@ -585,6 +643,44 @@ import org.testng.annotations.Test;
 		        }
 		    }
 		}
+		
+		public void kycdocuploadandsubmit1(String labelnames, List<WebElement> uploadFiles) throws InterruptedException {
+
+		    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		    for (int i = 0; i < labelList.size(); i++) {
+
+		        String labelText = labelList.get(i).getText().trim();
+		        System.out.println("Found label: " + labelText);
+
+		        if (labelText.contains(labelnames)) {
+
+		            WebElement uploadInput = uploadFiles.get(i);
+
+		            // ✅ Wait until element is present in DOM instead of clickable
+		            wait.until(ExpectedConditions.presenceOfElementLocated(
+		                    By.xpath("//input[@type='file']")
+		            ));
+
+		            // ✅ Scroll into view
+		            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", uploadInput);
+
+		            // ✅ Make input visible if hidden (important!)
+		            js.executeScript("arguments[0].style.display='block'; arguments[0].style.opacity='1';", uploadInput);
+
+		            Thread.sleep(1500);
+
+		            // ✅ Upload file directly (no click needed)
+		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
+
+		            System.out.println("✅ File uploaded for: " + labelnames);
+		            break;
+		        }
+		    }
+		}
+
+
 		
 		public void datepicker(String dateno) throws InterruptedException
 		{

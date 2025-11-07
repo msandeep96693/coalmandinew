@@ -7,7 +7,7 @@ import pageobject.listingNegotiationactionpage;
 
 public class Expressinterestnegotiationexeclass extends Baseclass {
 
-	@Test
+	//@Test
 	public void Expressinterest() throws InterruptedException
 	{
 		listingNegotiationactionpage orderlisting = new listingNegotiationactionpage(driver);
@@ -15,4 +15,33 @@ public class Expressinterestnegotiationexeclass extends Baseclass {
 				prop.getProperty("businessname"));
 				
 	}
+	
+	//@Test
+	public void Negotiationwithoutsplit() throws InterruptedException
+	{
+		listingNegotiationactionpage orderlisting = new listingNegotiationactionpage(driver);
+		orderlisting.negotiationordergeneratewithoutsplit(prop.getProperty("username"), prop.getProperty("password"),
+				prop.getProperty("businessname"), prop.getProperty("offerQTY"), prop.getProperty("offerRATE"));
+				
+	}
+	
+	@Test
+	public void Negotiationwithsplit() throws InterruptedException
+	{
+		listingNegotiationactionpage orderlisting = new listingNegotiationactionpage(driver);
+		orderlisting.negotiationordergeneratewithsplit(prop.getProperty("username"), prop.getProperty("password"),
+				prop.getProperty("businessname"), prop.getProperty("offerQTY"), prop.getProperty("offerRATE"));
+				
+	}
+	
+	@Test
+	public void Negotiationotherparty() throws InterruptedException
+	{
+		listingNegotiationactionpage orderlisting = new listingNegotiationactionpage(driver);
+		orderlisting.otherpartynegotiation(prop.getProperty("username"), prop.getProperty("password"),
+				prop.getProperty("businessname"), prop.getProperty("offerQTY"), prop.getProperty("offerRATE"));
+				
+	}
+	
+	
 }

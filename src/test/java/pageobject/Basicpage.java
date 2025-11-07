@@ -105,7 +105,7 @@ public class Basicpage
 	    for (WebElement option : dropdownOptions) {
 	    	System.out.println("option name :- "+ option.getText());
 	    	
-	        if (option.getText().equalsIgnoreCase(optionName)) {
+	        if (option.getText().equalsIgnoreCase(optionName) || option.getText().contains(optionName)) {
 	            javascriptclick(option);
 	            found = true;
 	            break;

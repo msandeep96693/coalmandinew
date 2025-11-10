@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TextExecution.createbusinessprofileExecutionclass">
+      <class name="TextExecution.ImportercreatebusinessprofileExecutionclass">
         <methods>
           <include name="tear"/>
-          <include name="createbusinessprofileExecutionclass"/>
+          <include name="ImportercreatebusinessprofileExecutionclass"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- TextExecution.createbusinessprofileExecutionclass -->
+      </class> <!-- TextExecution.ImportercreatebusinessprofileExecutionclass -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

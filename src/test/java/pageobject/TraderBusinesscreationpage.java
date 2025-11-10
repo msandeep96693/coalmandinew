@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.beans.DesignMode;
 import java.time.Duration;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
@@ -22,9 +23,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-	public class Businesscreationpage extends Basicpage {
+	public class TraderBusinesscreationpage extends Basicpage {
 
-		public Businesscreationpage(WebDriver driver)
+		public TraderBusinesscreationpage(WebDriver driver)
 		{
 			super(driver);
 		}
@@ -116,6 +117,12 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[2]")
 		private WebElement originofcoaldropdown;
 		
+		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[3]")
+		private WebElement portsofoperationdropdown;
+		
+		@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
+		private List<WebElement> portsofoperationoption;
+		
 		@FindBy(xpath = "//div[.='Domestic']") 
 		private WebElement domesticoption;  
 		
@@ -176,20 +183,17 @@ import org.testng.annotations.Test;
 		private WebElement LUTradioyesbutton;
 		
 		@FindBy(xpath = "(//input[@type='text'])[5]")
-		private WebElement banknametextfield;
+		private WebElement Ifsccodetextfield;
+		
+		@FindBy(xpath = "//button[.='Verify IFSC']")
+		private WebElement verifyifscbtn;
 		
 		@FindBy(xpath = "//input[@type='password']")
 		private WebElement accountnotextfield;
 		
 		@FindBy(xpath = "(//input[@type='number'])[1]")
 		private WebElement confirmaccountnotextfield;
-		
-		@FindBy(xpath = "(//input[@type='text'])[6]")
-		private WebElement ifsccodetextfield;
-		
-		@FindBy(xpath = "(//input[@type='text'])[7]")
-		private WebElement branchnametextfield;
-		
+			
 		@FindBy(xpath = "(//span[.='Yes']/..)[2]")
 		private WebElement udyamyesradiobutton;
 		
@@ -242,33 +246,64 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='file'])[2]")
 		private WebElement pancarduploadfile;
 		
-		public void createbbusinessprofile(
+		@FindBy(xpath = "//span[@aria-label='user']") 
+		private WebElement profileicon;
+		
+		@FindBy(xpath = "//span[.='Settings']/..")
+		private WebElement settingbtn;
+		
+		@FindBy(xpath = "//div[@data-node-key='business_profiles']")
+		private WebElement businessprofiletab;
+		
+		@FindBy(xpath = "//button[.='Add Business Profile']")
+		private WebElement addbusinessprofilebtn;
+		
+		@FindBy(xpath = "//h4[.='Seller']")
+		private WebElement sellerbtn;
+		
+		@FindBy(xpath = "//button[.='Continue as Seller']")
+		private WebElement continueassellerbtn;
+		
+		public void importercreatebbusinessprofile(
 				 String mobilenumber, String createpassword, 
 				 String confirmpassword, String gstnumber,  
-				 String designation,String accountno, String confirmaccountno, String udyamno, String udyamdateno,
-				String iecdateno, String DnBno
+				 String designation,String ifsccode, String accountno, String confirmaccountno, String udyamno, String udyamdateno,
+				String iecdateno, String DnBno 
 				) throws InterruptedException, AWTException  
 		{ 
 			signinpage signin = new signinpage(driver);
-			signin.loginpage("sandeep+qagqu@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+			signin.loginpage("sandeep+importer0000@rokkun.io", "Sandeep@123");   // String email, String pwd, 
 			
 //			createaccountpage account = new createaccountpage(driver);
 //			account.createbusinessaccount(mobilenumber, createpassword, confirmpassword);
 			
 			// click on the create business profile button
-			waitforElement(btnCreateBusinessProfile);
-			btnCreateBusinessProfile.click();
+//			waitforElement(btnCreateBusinessProfile);
+//			btnCreateBusinessProfile.click();
+			
+			Thread.sleep(3000);
+			waitforElement(profileicon);
+			javascriptclick(profileicon);
+			
+			waitforElement(settingbtn);
+			javascriptclick(settingbtn);
+			
+			waitforElement(businessprofiletab);
+			javascriptclick(businessprofiletab);
+			
+			waitforElement(addbusinessprofilebtn);
+			javascriptclick(addbusinessprofilebtn);
 			
 			// upload a business profile image
 			try {
 				Thread.sleep(5000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
-				uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 				} catch (ElementNotInteractableException e) {
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("arguments[0].style.display='block';", uploadProfile);
-					uploadProfile.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+					uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 				}  // /home/active34/Downloads/photos /QA club photos/business logo.jpeg
 			// C:\Users\User\Desktop\Background images\Bg-1.jpg
 			
@@ -280,102 +315,70 @@ import org.testng.annotations.Test;
 			waitforElement(gstnumberfield);
 			gstnumberfield.sendKeys(gstnumber);
 			String GSTnumber = gstnumberfield.getText();
-//			System.out.println("GST number :-"+ GSTnumber);
 			
 			// enter gst verify button
 			waitforElement(verifygstbutton);
 			verifygstbutton.click();
-			
-//			scrollUntilElementVisible(statedropdown);
 	
 			Thread.sleep(3000);
-			
-//			Actions act = new Actions(driver);
-//		    act.doubleClick(statedropdown).perform();
-//		    act.moveToElement(statedropdown).click().perform();
-//			
-//			
-//			
-//			for (WebElement option : listofstate) {
-//			    String stateName = option.getText().trim();
-//			    Thread.sleep(1000);
-//			    System.out.println("State name :-" + stateName);
-//			    if (stateName.equalsIgnoreCase("Kerala")) {
-////			        option.click();
-//			    	javascriptclick(option);
-//			        break; // stop after selecting
-//			    }
-//			}
-			
-//			Thread.sleep(2000);
-//			
-//			Actions act1 = new Actions(driver);
-//		    act1.doubleClick(districtdropdown).perform();
-//		    act1.moveToElement(districtdropdown).click().perform();
-//			
-//			for (WebElement districtoption : listofdistrict) {
-//			    String districtName = districtoption.getText().trim();
-//			    Thread.sleep(1000);
-//			    System.out.println("District name :-" + districtName);
-//			    if (districtName.equalsIgnoreCase("Ernakulam")) {
-////			    	districtoption.click();
-//			    	javascriptclick(districtoption);
-//			        break; // stop after selecting
-//			    }
-//			}
 			
 			// ownership 
 			waitforElement(onwershipdropdown);
 			onwershipdropdown.click();
 			
-			waitforElement(llpoption);
-			llpoption.click();
+			Thread.sleep(1000);
+			selectDropdownOption(portsofoperationoption, "LLP");
 			
 			// industry
 			waitforElement(industrydropdown);
 			industrydropdown.click();
 			
-			waitforElement(brickkilnoption);
-			brickkilnoption.click();
+			Thread.sleep(1000);
+			selectDropdownOption(portsofoperationoption, "Brick Kilns");			
 			
 			// product to trade
 			waitforElement(producttotradedropdown);
 			producttotradedropdown.click();
 			
-			waitforElement(cokingcoaloption);
-			System.out.println(cokingcoaloption.getText());
-			cokingcoaloption.click();
-			
 			Thread.sleep(1000);
-			waitforElement(metallurgicalcoaloption);
-			System.out.println(metallurgicalcoaloption.getText());
-			metallurgicalcoaloption.click();
+			selectDropdownOption(portsofoperationoption, "Metallurgical");
+			Thread.sleep(1000);
+			selectDropdownOption(portsofoperationoption, "Thermal");
 			
 			Thread.sleep(1000);
 			Robot rob=new Robot();
 			rob.keyPress(KeyEvent.VK_ESCAPE);
 			rob.keyRelease(KeyEvent.VK_ESCAPE);
 			
-			//scrollUntilElementVisible(producttotradedropdown);
-			//Thread.sleep(1000);
-			
 			Hiddenelement(originofcoaldropdown);
 			
 			// origin of coal
-			
 			waitforElement(originofcoaldropdown);
-//			javascriptclick(originofcoaldropdown);
 			originofcoaldropdown.click();
 			
-			waitforElement(domesticoption);
-			javascriptclick(domesticoption);
-			
-			waitforElement(internationaloption);
-			javascriptclick(internationaloption);
+			Thread.sleep(1000);
+			selectDropdownOption(portsofoperationoption, "Domestic");
+			Thread.sleep(1000);
+			selectDropdownOption(portsofoperationoption, "International");
 			
 			Robot rob1=new Robot();
 			rob1.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
+			
+			waitforElement(portsofoperationdropdown);
+			portsofoperationdropdown.click();
+			
+			Thread.sleep(1000);
+			selectDropdownOption(portsofoperationoption, "Klang");
+			Thread.sleep(1500);
+			selectDropdownOption(portsofoperationoption, "Shanghai");
+		
+			rob.keyPress(KeyEvent.VK_ESCAPE);
+			rob1.keyRelease(KeyEvent.VK_ESCAPE);
+
+			
+			
+			
 			
 			// Is same as business owner
 			waitforElement(Issameasbusinessownercheckbox);
@@ -403,9 +406,13 @@ import org.testng.annotations.Test;
 			waitforElement(saveandproceedbutton);
 			saveandproceedbutton.click();
 			
+			scrollBottomofPage();
+			
 			// verify review page
 			String Reviewurl = driver.getCurrentUrl();
 			System.out.println(Reviewurl);
+			
+			Thread.sleep(2000);
 			
 			// click on proceed to kyc button
 			waitforElement(proceedtokycbutton);
@@ -489,11 +496,14 @@ import org.testng.annotations.Test;
 			
 			// Bank Details
 			Thread.sleep(1000);
-			waitforElement(banknametextfield);
-			banknametextfield.clear();
-			banknametextfield.sendKeys(setRandomBusinessName());
+			waitforElement(Ifsccodetextfield);
+			Ifsccodetextfield.clear();
+			Ifsccodetextfield.sendKeys(ifsccode);
 			
-			Thread.sleep(1000);
+			waitforElement(verifyifscbtn);
+			javascriptclick(verifyifscbtn);
+			
+			Thread.sleep(3000);
 			waitforElement(accountnotextfield);
 			accountnotextfield.clear();
 			accountnotextfield.sendKeys(accountno);
@@ -502,14 +512,7 @@ import org.testng.annotations.Test;
 			waitforElement(confirmaccountnotextfield);
 			confirmaccountnotextfield.clear();
 			confirmaccountnotextfield.sendKeys(confirmaccountno);
-			
-			Thread.sleep(1000);
-			waitforElement(ifsccodetextfield);
-			ifsccodetextfield.sendKeys("ifsccode");
-			
-			Thread.sleep(1000);
-			waitforElement(branchnametextfield);
-			branchnametextfield.sendKeys(setRandomBusinessName());
+		
 			
 			Thread.sleep(1000);
 			kycdocuploadandsubmit("Bank Details", uploadFiles, submitButtons);
@@ -572,6 +575,23 @@ import org.testng.annotations.Test;
 			
 			scrollBottomofPage();
 			
+			// upload again
+			
+			// js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
+			
+			Thread.sleep(2000);
+			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
+			Thread.sleep(2000);
+			
+			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
+			Thread.sleep(2000);
+			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
+			Thread.sleep(2000);
+			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
+			Thread.sleep(2000);
+			
+			scrollBottomofPage();
+			
 			waitforElement(saveproceedbuton);
 			javascriptclick(saveproceedbuton);
 			
@@ -618,7 +638,7 @@ import org.testng.annotations.Test;
 // /home/active34/Downloads/photos /QA club photos/Club 7.png
 		          //  C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg
 		            // Upload the file
-		            uploadInput.sendKeys("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 		            System.out.println("✅ File uploaded for label: " + labelnames);
 		            
 		            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
@@ -639,42 +659,6 @@ import org.testng.annotations.Test;
 		            } catch (org.openqa.selenium.TimeoutException e) {
 		                System.out.println("⚠ No confirmation message appeared — continuing...");
 		            } 
-		            break;
-		        }
-		    }
-		}
-		
-		public void kycdocuploadandsubmit1(String labelnames, List<WebElement> uploadFiles) throws InterruptedException {
-
-		    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		    JavascriptExecutor js = (JavascriptExecutor) driver;
-
-		    for (int i = 0; i < labelList.size(); i++) {
-
-		        String labelText = labelList.get(i).getText().trim();
-		        System.out.println("Found label: " + labelText);
-
-		        if (labelText.contains(labelnames)) {
-
-		            WebElement uploadInput = uploadFiles.get(i);
-
-		            // ✅ Wait until element is present in DOM instead of clickable
-		            wait.until(ExpectedConditions.presenceOfElementLocated(
-		                    By.xpath("//input[@type='file']")
-		            ));
-
-		            // ✅ Scroll into view
-		            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", uploadInput);
-
-		            // ✅ Make input visible if hidden (important!)
-		            js.executeScript("arguments[0].style.display='block'; arguments[0].style.opacity='1';", uploadInput);
-
-		            Thread.sleep(1500);
-
-		            // ✅ Upload file directly (no click needed)
-		            uploadInput.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
-
-		            System.out.println("✅ File uploaded for: " + labelnames);
 		            break;
 		        }
 		    }
@@ -700,4 +684,14 @@ import org.testng.annotations.Test;
 		    }
 		}
 	
+		public void selectTwoRandomPortOptions() throws InterruptedException {
+		    Random rand = new Random();
+
+		    for(int i = 0; i < 2; i++) {
+		        int index = rand.nextInt(portsofoperationoption.size());
+		        portsofoperationoption.get(index).click();
+		        Thread.sleep(1000); // small delay for UI update
+		    }
+		}
+
 }

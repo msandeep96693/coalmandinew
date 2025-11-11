@@ -16,6 +16,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
@@ -24,7 +25,9 @@ import org.testng.annotations.BeforeMethod;
 
 import pageobject.consumerBusinesscreationpage;
 import pageobject.ImporterBusinesscreationpage;
+import pageobject.InternationalBusinesscreationpage;
 import pageobject.Negotiationhomepage;
+import pageobject.TraderandDomesticBusinesscreationpage;
 import pageobject.createaccountpage;
 import pageobject.createCILlistingpage;
 import pageobject.listinghomepage;
@@ -41,6 +44,8 @@ public class Baseclass {
 	public createCILlistingpage createlist;
 	public consumerBusinesscreationpage consumerprofile;
 	public ImporterBusinesscreationpage Importerprofile;
+	public TraderandDomesticBusinesscreationpage traderprofile;
+	public InternationalBusinesscreationpage internationalprofile;
 	public listinghomepage listhome;
 	public Negotiationhomepage negotiation;
 	public orderhomepage order;
@@ -66,7 +71,9 @@ public class Baseclass {
 		
 		if(Browsername.equalsIgnoreCase("chrome"))
 		{
-			driver = new ChromeDriver();
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--start-maximized");
+			driver = new ChromeDriver(options);
 		} 
 		else if (Browsername.equalsIgnoreCase("firefox"))
 		{

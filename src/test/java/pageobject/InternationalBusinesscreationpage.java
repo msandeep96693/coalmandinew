@@ -7,9 +7,9 @@ import java.awt.event.KeyEvent;
 import java.beans.DesignMode;
 import java.time.Duration;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
+import org.checkerframework.checker.interning.qual.FindDistinct;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -23,16 +23,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-	public class TraderBusinesscreationpage extends Basicpage {
+	public class InternationalBusinesscreationpage extends Basicpage {
 
-		public TraderBusinesscreationpage(WebDriver driver)
+		public InternationalBusinesscreationpage(WebDriver driver)
 		{
 			super(driver);
 		}
 		
 		// xpath business profile 
-		
-//		@FindBy(xpath="/html/body/div/div/div/div[3]/div/div[2]/button/span")
+
 		@FindBy(xpath = "//span[text()='Create Business Profile']/..")
 		private WebElement btnCreateBusinessProfile;
 
@@ -43,9 +42,20 @@ import org.testng.annotations.Test;
 		private WebElement rememberastextField;
 		
 		@FindBy(xpath = "(//input[@type='text'])[2]")
-		private WebElement gstnumberfield;
+		private WebElement businessnamefield;
 		
-		@FindBy(xpath = "//span[.='Verify GST']") // /html/body/div[1]/div/div/div[2]/div/div/div[3]/div/form/div[3]/div/button/span
+		@FindBy(xpath = "//textarea")
+		private WebElement registeredaddresstextarea;
+		
+		@FindBy(xpath = "(//input[@type='text'])[3]")
+		private WebElement zipcodefield;
+		
+		@FindBy(xpath = "//input[@placeholder='Enter D&B number']")
+		private WebElement DBnumberfield;
+		
+		
+		
+		@FindBy(xpath = "//span[.='Verify GST']") 
 		private WebElement verifygstbutton;
 		
 		@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']")
@@ -54,53 +64,80 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']")
 		private List<WebElement> listofdistrict;
 		
-//	    @FindBy(xpath = "(//input[@type='search'])[2]")
-//		@FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/div/div[3]/div/form/div[6]/div[2]/div/div[2]/div/div/div/span[1]")
 		@FindBy(xpath = "(//span[@class='ant-select-selection-search'])[2]")
 		private WebElement districtdropdown;
 		
-		@FindBy(xpath = "//div[.='Anantapur']")  // //div[.='Anjaw']   state - Arunachal Pradesh
+		@FindBy(xpath = "//div[.='Anantapur']")  
 		private WebElement anantapuroption;
 		
-//		@FindBy(xpath = "(//input[@type='search'])[1]")
  		@FindBy(xpath = "(//span[@class='ant-select-selection-search'])[1]")
-//		@FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div/div/div/div/div/div/div[3]/div/form/div[6]/div[1]/div/div[2]/div/div/div/span[1]")
 		private WebElement statedropdown;   
 		
-		@FindBy(xpath = "//div[.='Andhra Pradesh']")  // //div[.='Arunachal Pradesh']
+		@FindBy(xpath = "//div[.='Andhra Pradesh']") 
 		private WebElement andhrapradeshoption;
 		
 		
 		
 		
-		@FindBy(xpath = "(//input[@type='text'])[5]")
+		@FindBy(xpath = "(//input[@type='text'])[4]")
 		private WebElement contactnamefield;
 		
-		@FindBy(xpath = "(//input[@type='text'])[6]")
+		@FindBy(xpath = "(//input[@type='email'])[1]")
+		private WebElement contactemailIDfield;
+		
+		@FindBy(xpath = "(//input[@type='text'])[5]")
 		private WebElement desginationfield;
+	
 		
-		@FindBy(xpath = "//input[@type='email']")
-		private WebElement emailfield;
-		
-		@FindBy(xpath = "(//input[@type='text'])[7]")
+		@FindBy(xpath = "(//input[@type='text'])[6]")
 		private WebElement mobilenumberfield;
 		
+		// Indian correspondence components  ( When Is business owner checkbox disabled )
+		
+		@FindBy(xpath = "(//input[@type='text'])[7]")
+		private WebElement indiancontactpersonname;
+		
+		@FindBy(xpath = "(//input[@type='text'])[8]")
+		private WebElement indianpersondesignation;
+		
+		@FindBy(xpath = "(//input[@type='email'])[2]")
+		private WebElement indianpersonemailID;
+		
+		@FindBy(xpath = "(//input[@type='text'])[9]")
+		private WebElement indianpersonmobilenumber;
+		
+		// Indian correspondence components  ( When Is business owner check box enabled )
+		@FindBy(xpath = "(//input[@type='text'])[4]")
+		private WebElement indiancontactpersonnamefield;
+		
+		@FindBy(xpath = "(//input[@type='text'])[5]")
+		private WebElement indianpersondesignationfield;
+		
+		@FindBy(xpath = "//input[@type='email']")
+		private WebElement indianpersonemailfield;
+		
+		@FindBy(xpath = "(//input[@type='text'])[6]")
+		private WebElement indianpersonmobilenumberfield;
 		
 		
-		@FindBy(xpath = "(//input[@type='search'])[3]")
+		
+		@FindBy(xpath = "(//input[@type='search'])[1]")
 		private WebElement onwershipdropdown;
 		
 		@FindBy(xpath = "//div[.='LLP']")  
 		private WebElement llpoption;
 		
-		@FindBy(xpath = "(//input[@type='search'])[4]")
+		@FindBy(xpath = "(//input[@type='search'])[2]")
 		private WebElement industrydropdown;
 		
 		@FindBy(xpath = "//div[.='Brick Kilns & Ceramics']")  
 		private WebElement brickkilnoption;
 		
-		@FindBy(xpath = "(//div[@class='ant-select-selector'])[5]")  // (//input[@type='search'])[5]
+		@FindBy(xpath = "(//div[@class='ant-select-selector'])[3]")  // (//input[@type='search'])[5]
 		private WebElement producttotradedropdown;
+		
+		@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
+		private List<WebElement> alldropdownoption;
 		
 		@FindBy(xpath = "//div[.='PET Coke']") 
 		private WebElement petcokeoption;
@@ -117,11 +154,11 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[2]")
 		private WebElement originofcoaldropdown;
 		
-		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[3]")
-		private WebElement portsofoperationdropdown;
+//		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[3]")
+//		private WebElement sourceofcoaldropdown;
 		
-		@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
-		private List<WebElement> portsofoperationoption;
+		@FindBy(xpath = "(//input[@type='search'])[5]")
+		private WebElement sourceofcoaldropdown;
 		
 		@FindBy(xpath = "//div[.='Domestic']") 
 		private WebElement domesticoption;  
@@ -246,8 +283,12 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='file'])[2]")
 		private WebElement pancarduploadfile;
 		
+		// setting xpath address
 		@FindBy(xpath = "//span[@aria-label='user']") 
 		private WebElement profileicon;
+		
+		@FindBy(xpath = "//button[.='Logout']")
+		private WebElement logoutbtn;
 		
 		@FindBy(xpath = "//span[.='Settings']/..")
 		private WebElement settingbtn;
@@ -258,21 +299,15 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//button[.='Add Business Profile']")
 		private WebElement addbusinessprofilebtn;
 		
-		@FindBy(xpath = "//h4[.='Seller']")
-		private WebElement sellerbtn;
 		
-		@FindBy(xpath = "//button[.='Continue as Seller']")
-		private WebElement continueassellerbtn;
-		
-		public void importercreatebbusinessprofile(
+		public void Internationalcreatebusinessprofile(
 				 String mobilenumber, String createpassword, 
-				 String confirmpassword, String gstnumber,  
-				 String designation,String ifsccode, String accountno, String confirmaccountno, String udyamno, String udyamdateno,
-				String iecdateno, String DnBno 
+				 String confirmpassword, String Registeredaddress,  String Zipcodenumber,
+				 String DnBnumber, String designation, String Indiandesignation
 				) throws InterruptedException, AWTException  
 		{ 
 			signinpage signin = new signinpage(driver);
-			signin.loginpage("sandeep+importer0000@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+			signin.loginpage("sandeep+international2@rokkun.io", "Sandeep@123");   // String email, String pwd, 
 			
 //			createaccountpage account = new createaccountpage(driver);
 //			account.createbusinessaccount(mobilenumber, createpassword, confirmpassword);
@@ -281,7 +316,6 @@ import org.testng.annotations.Test;
 //			waitforElement(btnCreateBusinessProfile);
 //			btnCreateBusinessProfile.click();
 			
-			Thread.sleep(3000);
 			waitforElement(profileicon);
 			javascriptclick(profileicon);
 			
@@ -311,96 +345,126 @@ import org.testng.annotations.Test;
 			waitforElement(rememberastextField);      
 			rememberastextField.sendKeys(setRandomBusinessName());
 			
-			// Enter GST number 
-			waitforElement(gstnumberfield);
-			gstnumberfield.sendKeys(gstnumber);
-			String GSTnumber = gstnumberfield.getText();
+			waitforElement(businessnamefield);
+			businessnamefield.sendKeys(setRandomBusinessNameInternational());
 			
-			// enter gst verify button
-			waitforElement(verifygstbutton);
-			verifygstbutton.click();
-	
-			Thread.sleep(3000);
+			waitforElement(registeredaddresstextarea);
+			registeredaddresstextarea.sendKeys(Registeredaddress);
+			
+			waitforElement(zipcodefield);
+			zipcodefield.sendKeys(Zipcodenumber);
+			
+			waitforElement(DBnumberfield);
+			DBnumberfield.sendKeys(DnBnumber);
+
 			
 			// ownership 
 			waitforElement(onwershipdropdown);
 			onwershipdropdown.click();
 			
 			Thread.sleep(1000);
-			selectDropdownOption(portsofoperationoption, "LLP");
+			selectDropdownOption(alldropdownoption, "LLP");
 			
 			// industry
 			waitforElement(industrydropdown);
 			industrydropdown.click();
 			
 			Thread.sleep(1000);
-			selectDropdownOption(portsofoperationoption, "Brick Kilns");			
+			selectDropdownOption(alldropdownoption, "Brick Kilns");	
 			
 			// product to trade
 			waitforElement(producttotradedropdown);
 			producttotradedropdown.click();
 			
 			Thread.sleep(1000);
-			selectDropdownOption(portsofoperationoption, "Metallurgical");
+			selectDropdownOption(alldropdownoption, "Metallurgical");
 			Thread.sleep(1000);
-			selectDropdownOption(portsofoperationoption, "Thermal");
+			selectDropdownOption(alldropdownoption, "Thermal");
 			
-			Thread.sleep(1000);
+		
 			Robot rob=new Robot();
 			rob.keyPress(KeyEvent.VK_ESCAPE);
 			rob.keyRelease(KeyEvent.VK_ESCAPE);
-			
+						
 			Hiddenelement(originofcoaldropdown);
 			
 			// origin of coal
+			
 			waitforElement(originofcoaldropdown);
 			originofcoaldropdown.click();
 			
+//			Thread.sleep(1000);
+//			selectDropdownOption(alldropdownoption, "Domestic");
 			Thread.sleep(1000);
-			selectDropdownOption(portsofoperationoption, "Domestic");
-			Thread.sleep(1000);
-			selectDropdownOption(portsofoperationoption, "International");
+			selectDropdownOption(alldropdownoption, "International");
 			
 			Robot rob1=new Robot();
 			rob1.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
 			
-			waitforElement(portsofoperationdropdown);
-			portsofoperationdropdown.click();
+			waitforElement(sourceofcoaldropdown);
+			javascriptclick(sourceofcoaldropdown);
 			
 			Thread.sleep(1000);
-			selectDropdownOption(portsofoperationoption, "Klang");
-			Thread.sleep(1500);
-			selectDropdownOption(portsofoperationoption, "Shanghai");
+			sourceofcoaldropdown.sendKeys("Russian");
+			Thread.sleep(2000);
+			
+			Actions actions = new Actions(driver);
+			actions.sendKeys(Keys.ENTER).perform();
+			
+			sourceofcoaldropdown.sendKeys("South");
+			Thread.sleep(2000);
 		
-			rob.keyPress(KeyEvent.VK_ESCAPE);
-			rob1.keyRelease(KeyEvent.VK_ESCAPE);
-
+			actions.sendKeys(Keys.ENTER).perform();
 			
+			// Is same as business owner 
+//			waitforElement(Issameasbusinessownercheckbox);
+//			javascriptclick(Issameasbusinessownercheckbox);
 			
-			
-			
-			// Is same as business owner
-			waitforElement(Issameasbusinessownercheckbox);
-			javascriptclick(Issameasbusinessownercheckbox);
-			
-			// contact info data
+			// contact info data 
 			// -----------------------------------
 			// enter contact name 
-//			waitforElement(contactnamefield);
-//			contactnamefield.sendKeys(setRandomName());
+			waitforElement(contactnamefield);
+			contactnamefield.sendKeys(setRandomName());
+			
+			// enter designation 
+			waitforElement(desginationfield);
+			desginationfield.sendKeys(designation);
+			
+			// enter email 
+			waitforElement(contactemailIDfield);
+			contactemailIDfield.sendKeys(setRandomEmail());
+			
+			// enter contact number
+			waitforElement(mobilenumberfield);
+			mobilenumberfield.sendKeys(setRandomMobileNumber());
+			
+			// These action will occur when business owner checkbox disabled
+			waitforElement(indiancontactpersonname);
+			indiancontactpersonname.sendKeys(setRandomName());
+			
+			waitforElement(indianpersondesignation);
+			indianpersondesignation.sendKeys(Indiandesignation);
+			
+			waitforElement(indianpersonemailID);
+			indianpersonemailID.sendKeys(setRandomEmail());
+			
+			waitforElement(indianpersonmobilenumber);
+			indianpersonmobilenumber.sendKeys(setRandomMobileNumber());
+			
+			
+			// These action will occur when business owner checkbox enabled
+//			waitforElement(indiancontactpersonnamefield);
+//			indiancontactpersonnamefield.sendKeys(setRandomName());
 //			
-//			// enter designation 
-//			waitforElement(desginationfield);
-//			desginationfield.sendKeys(designation);
+//			waitforElement(indianpersondesignationfield);
+//			indianpersondesignationfield.sendKeys(Indiandesignation);
 //			
-//			// enter email 
-//			waitforElement(emailfield);
-//			emailfield.sendKeys(setRandomEmail());
+//			waitforElement(indianpersonemailfield);
+//			indianpersonemailfield.sendKeys(setRandomEmail());
 //			
-//			// enter contact number
-//			waitforElement(mobilenumberfield);
-//			mobilenumberfield.sendKeys(setRandomMobileNumber());
+//			waitforElement(indianpersonmobilenumberfield);
+//			indianpersonmobilenumberfield.sendKeys(setRandomMobileNumber());
 			
 			// click on save & proceed button
 			waitforElement(saveandproceedbutton);
@@ -421,174 +485,10 @@ import org.testng.annotations.Test;
 			// -----------------------------------------------------
 			
 			// KYC document
-			// authorization 
-			Thread.sleep(5000);
-			kycdocuploadandsubmit("Authorization Letter", uploadFiles, submitButtons);
-			
-			
-			
-//			// PAN Card
-			Thread.sleep(3000);
-			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
-			Thread.sleep(3000);
-			
-//			kycdocuploadandsubmit1("PAN Card", uploadFiles1);
-			
-//			WebElement pansubmit = driver.findElement(By.xpath("(//button[.='Submit'])[2]"));
-//			//JavascriptExecutor js1 = (JavascriptExecutor) driver;
-//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", pansubmit);
-//			
-//			pansubmit.click();
-			
-			// GST Certificate 
-			Thread.sleep(3000);
-			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-			Thread.sleep(3000);
-			
-//			kycdocuploadandsubmit1("GST Certificate", uploadFiles1);
-//			Thread.sleep(2000);
-//			WebElement GSTsubmit = driver.findElement(By.xpath("(//button[.='Submit'])[3]"));
-//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", GSTsubmit);
-//			GSTsubmit.click();
-			
-			// TAN certificate
-			waitforElement(TANnumbertextfield);
-			TANnumbertextfield.sendKeys(setRandomMobileNumber());
-			
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
-			Thread.sleep(3000);
-			
-//			kycdocuploadandsubmit1("TAN Certificate", uploadFiles1); 
-//			
-//			Thread.sleep(1000);
-//			WebElement TANsubmit = driver.findElement(By.xpath("(//button[.='Submit'])[4]"));
-//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", TANsubmit);
-//			TANsubmit.click();
-					
-			// LUT Certificate
-			
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-			By radioBtn = By.xpath("(//input[@type='radio'])[1]");
-
-			WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(radioBtn));
-
-			// Scroll to element
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-			
-			waitforElement(LUTradioyesbutton);
-			LUTradioyesbutton.click();
-			
-			Thread.sleep(2000);
-			waitforElement(LUTnumbertextfield);
-			LUTnumbertextfield.sendKeys(setRandomMobileNumber());
-			
-			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);
-			
-//			kycdocuploadandsubmit1("LUT Certificate", uploadFiles1); 
-//			
-//			Thread.sleep(2000);
-//			WebElement LUTsubmit = driver.findElement(By.xpath("(//button[.='Submit'])[5]"));
-//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", LUTsubmit);
-//			LUTsubmit.click();
-			
-			
-			// Bank Details
-			Thread.sleep(1000);
-			waitforElement(Ifsccodetextfield);
-			Ifsccodetextfield.clear();
-			Ifsccodetextfield.sendKeys(ifsccode);
-			
-			waitforElement(verifyifscbtn);
-			javascriptclick(verifyifscbtn);
-			
-			Thread.sleep(3000);
-			waitforElement(accountnotextfield);
-			accountnotextfield.clear();
-			accountnotextfield.sendKeys(accountno);
-			
-			Thread.sleep(1000);
-			waitforElement(confirmaccountnotextfield);
-			confirmaccountnotextfield.clear();
-			confirmaccountnotextfield.sendKeys(confirmaccountno);
-		
-			
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("Bank Details", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			
-			// udyam certificate
-			
-			
-			waitforElement(udyamyesradiobutton);
-			javascriptclick(udyamyesradiobutton);
-			
-			Thread.sleep(1000);
-			waitforElement(udyamnotextfield);
-			udyamnotextfield.sendKeys(udyamno);
-			
-			Thread.sleep(1000);
-			// udyam date picker pending
-			waitforElement(clickonudyamdatefield);
-			javascriptclick(clickonudyamdatefield);
-			
-			Thread.sleep(1000);
-			datepicker(udyamdateno);
-			
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("Udyam Certificate (MSME)", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			
-			
-			// IEC certificate
-			
-			
-			waitforElement(iecyesradiobutton);
-//			javascriptclick(iecyesradiobutton);
-			iecyesradiobutton.click();
-			
-			Thread.sleep(1000);
-			waitforElement(iecnotextfield);
-			iecnotextfield.sendKeys(setRandomMobileNumber());
-			
-			Thread.sleep(1000);
-			// date picker iec 
-			waitforElement(clickoniecdatefield);
-			javascriptclick(clickoniecdatefield);
-			
-			Thread.sleep(1000);
-			datepicker(iecdateno);
-			
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("IEC Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			
-			// D & B 
-			
-			Thread.sleep(1000);
-			waitforElement(DnBnotextfield);
-			DnBnotextfield.sendKeys(DnBno);
+			// D & B
 			
 			Thread.sleep(1000);
 			kycdocuploadandsubmit("D&B", uploadFiles, submitButtons);
-			
-			scrollBottomofPage();
-			
-			// upload again
-			
-			// js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
-			
-			Thread.sleep(2000);
-			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
-			Thread.sleep(2000);
-			
-			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);
-			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);
-			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);
 			
 			scrollBottomofPage();
 			
@@ -606,8 +506,11 @@ import org.testng.annotations.Test;
 			
 			Thread.sleep(2000);
 //			// submit for verification 
-//			waitforElement(submitforverification);
-//			javascriptclick(submitforverification);
+			waitforElement(submitforverification);
+			javascriptclick(submitforverification);
+			
+			Thread.sleep(1000);
+			
 			
 		
 	}
@@ -684,14 +587,4 @@ import org.testng.annotations.Test;
 		    }
 		}
 	
-		public void selectTwoRandomPortOptions() throws InterruptedException {
-		    Random rand = new Random();
-
-		    for(int i = 0; i < 2; i++) {
-		        int index = rand.nextInt(portsofoperationoption.size());
-		        portsofoperationoption.get(index).click();
-		        Thread.sleep(1000); // small delay for UI update
-		    }
-		}
-
 }

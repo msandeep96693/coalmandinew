@@ -101,6 +101,9 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//div[@class='ant-select-selector'])[5]")  // (//input[@type='search'])[5]
 		private WebElement producttotradedropdown;
 		
+		@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
+		private List<WebElement> alldropdownoption;
+		
 		@FindBy(xpath = "//div[.='PET Coke']") 
 		private WebElement petcokeoption;
 		
@@ -239,22 +242,50 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='file'])[2]")
 		private WebElement pancarduploadfile;
 		
+		// setting 
+		@FindBy(xpath = "//span[@aria-label='user']") 
+		private WebElement profileicon;
+		
+		@FindBy(xpath = "//span[.='Settings']/..")
+		private WebElement settingbtn;
+		
+		@FindBy(xpath = "//div[@data-node-key='business_profiles']")
+		private WebElement businessprofiletab;
+		
+		@FindBy(xpath = "//button[.='Add Business Profile']")
+		private WebElement addbusinessprofilebtn;
+		
 		public void createbbusinessprofile(
-				 String mobilenumber, String createpassword, 
+				 String mobilenumber, String Rolename, String createpassword, 
 				 String confirmpassword, String gstnumber,  
 				 String designation,String ifsccode, String accountno, String confirmaccountno, String udyamno, String udyamdateno,
 				String iecdateno, String DnBno 
 				) throws InterruptedException, AWTException  
 		{ 
 			signinpage signin = new signinpage(driver);
-			signin.loginpage("sandeep+qagqu@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+			signin.loginpage("sandeep+consumer9090@rokkun.io", "Sandeep@123");   // String email, String pwd, 
 			
 //			createaccountpage account = new createaccountpage(driver);
-//			account.createbusinessaccount(mobilenumber, createpassword, confirmpassword);
+//			account.createbusinessaccount(mobilenumber,Rolename ,createpassword, confirmpassword);
 			
 			// click on the create business profile button
-			waitforElement(btnCreateBusinessProfile);
-			btnCreateBusinessProfile.click();
+//			waitforElement(btnCreateBusinessProfile);
+//			btnCreateBusinessProfile.click();
+			
+			
+			Thread.sleep(3000);
+			waitforElement(profileicon);
+			javascriptclick(profileicon);
+			
+			waitforElement(settingbtn);
+			javascriptclick(settingbtn);
+			
+			waitforElement(businessprofiletab);
+			javascriptclick(businessprofiletab);
+			
+			waitforElement(addbusinessprofilebtn);
+			javascriptclick(addbusinessprofilebtn);
+			
 			
 			// upload a business profile image
 			try {
@@ -276,125 +307,79 @@ import org.testng.annotations.Test;
 			// Enter GST number 
 			waitforElement(gstnumberfield);
 			gstnumberfield.sendKeys(gstnumber);
-			String GSTnumber = gstnumberfield.getText();
-//			System.out.println("GST number :-"+ GSTnumber);
+//			String GSTnumber = gstnumberfield.getText();
 			
 			// enter gst verify button
 			waitforElement(verifygstbutton);
 			verifygstbutton.click();
-			
-//			scrollUntilElementVisible(statedropdown);
 	
 			Thread.sleep(3000);
-			
-//			Actions act = new Actions(driver);
-//		    act.doubleClick(statedropdown).perform();
-//		    act.moveToElement(statedropdown).click().perform();
-//			
-//			
-//			
-//			for (WebElement option : listofstate) {
-//			    String stateName = option.getText().trim();
-//			    Thread.sleep(1000);
-//			    System.out.println("State name :-" + stateName);
-//			    if (stateName.equalsIgnoreCase("Kerala")) {
-////			        option.click();
-//			    	javascriptclick(option);
-//			        break; // stop after selecting
-//			    }
-//			}
-			
-//			Thread.sleep(2000);
-//			
-//			Actions act1 = new Actions(driver);
-//		    act1.doubleClick(districtdropdown).perform();
-//		    act1.moveToElement(districtdropdown).click().perform();
-//			
-//			for (WebElement districtoption : listofdistrict) {
-//			    String districtName = districtoption.getText().trim();
-//			    Thread.sleep(1000);
-//			    System.out.println("District name :-" + districtName);
-//			    if (districtName.equalsIgnoreCase("Ernakulam")) {
-////			    	districtoption.click();
-//			    	javascriptclick(districtoption);
-//			        break; // stop after selecting
-//			    }
-//			}
 			
 			// ownership 
 			waitforElement(onwershipdropdown);
 			onwershipdropdown.click();
 			
-			waitforElement(llpoption);
-			llpoption.click();
+			Thread.sleep(1000);
+			selectDropdownOption(alldropdownoption, "LLP");
 			
 			// industry
 			waitforElement(industrydropdown);
 			industrydropdown.click();
 			
-			waitforElement(brickkilnoption);
-			brickkilnoption.click();
+			Thread.sleep(1000);
+			selectDropdownOption(alldropdownoption, "Brick Kilns");	
 			
 			// product to trade
 			waitforElement(producttotradedropdown);
 			producttotradedropdown.click();
 			
-			waitforElement(cokingcoaloption);
-			System.out.println(cokingcoaloption.getText());
-			cokingcoaloption.click();
-			
 			Thread.sleep(1000);
-			waitforElement(metallurgicalcoaloption);
-			System.out.println(metallurgicalcoaloption.getText());
-			metallurgicalcoaloption.click();
+			selectDropdownOption(alldropdownoption, "Metallurgical");
+			Thread.sleep(1000);
+			selectDropdownOption(alldropdownoption, "Thermal");
 			
 			Thread.sleep(1000);
 			Robot rob=new Robot();
 			rob.keyPress(KeyEvent.VK_ESCAPE);
 			rob.keyRelease(KeyEvent.VK_ESCAPE);
-			
-			//scrollUntilElementVisible(producttotradedropdown);
-			//Thread.sleep(1000);
-			
+						
 			Hiddenelement(originofcoaldropdown);
 			
 			// origin of coal
 			
 			waitforElement(originofcoaldropdown);
-//			javascriptclick(originofcoaldropdown);
 			originofcoaldropdown.click();
 			
-			waitforElement(domesticoption);
-			javascriptclick(domesticoption);
-			
-			waitforElement(internationaloption);
-			javascriptclick(internationaloption);
+			Thread.sleep(1000);
+			selectDropdownOption(alldropdownoption, "Domestic");
+			Thread.sleep(1000);
+			selectDropdownOption(alldropdownoption, "International");
 			
 			Robot rob1=new Robot();
 			rob1.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
 			
 			// Is same as business owner
-			waitforElement(Issameasbusinessownercheckbox);
-			javascriptclick(Issameasbusinessownercheckbox);
+//			waitforElement(Issameasbusinessownercheckbox);
+//			javascriptclick(Issameasbusinessownercheckbox);
 			
 			// contact info data
 			// -----------------------------------
 			// enter contact name 
-//			waitforElement(contactnamefield);
-//			contactnamefield.sendKeys(setRandomName());
-//			
-//			// enter designation 
-//			waitforElement(desginationfield);
-//			desginationfield.sendKeys(designation);
-//			
-//			// enter email 
-//			waitforElement(emailfield);
-//			emailfield.sendKeys(setRandomEmail());
-//			
-//			// enter contact number
-//			waitforElement(mobilenumberfield);
-//			mobilenumberfield.sendKeys(setRandomMobileNumber());
+			waitforElement(contactnamefield);
+			contactnamefield.sendKeys(setRandomName());
+			
+			// enter designation 
+			waitforElement(desginationfield);
+			desginationfield.sendKeys(designation);
+			
+			// enter email 
+			waitforElement(emailfield);
+			emailfield.sendKeys(setRandomEmail());
+			
+			// enter contact number
+			waitforElement(mobilenumberfield);
+			mobilenumberfield.sendKeys(setRandomMobileNumber());
 			
 			// click on save & proceed button
 			waitforElement(saveandproceedbutton);
@@ -416,34 +401,18 @@ import org.testng.annotations.Test;
 			
 			// KYC document
 			// authorization 
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			kycdocuploadandsubmit("Authorization Letter", uploadFiles, submitButtons);
-			
-			
 			
 //			// PAN Card
 			Thread.sleep(3000);
 			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
 			Thread.sleep(3000);
 			
-//			kycdocuploadandsubmit1("PAN Card", uploadFiles1);
-			
-//			WebElement pansubmit = driver.findElement(By.xpath("(//button[.='Submit'])[2]"));
-//			//JavascriptExecutor js1 = (JavascriptExecutor) driver;
-//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", pansubmit);
-//			
-//			pansubmit.click();
-			
 			// GST Certificate 
 			Thread.sleep(3000);
 			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
 			Thread.sleep(3000);
-			
-//			kycdocuploadandsubmit1("GST Certificate", uploadFiles1);
-//			Thread.sleep(2000);
-//			WebElement GSTsubmit = driver.findElement(By.xpath("(//button[.='Submit'])[3]"));
-//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", GSTsubmit);
-//			GSTsubmit.click();
 			
 			// TAN certificate
 			waitforElement(TANnumbertextfield);
@@ -452,13 +421,6 @@ import org.testng.annotations.Test;
 			Thread.sleep(1000);
 			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
 			Thread.sleep(3000);
-			
-//			kycdocuploadandsubmit1("TAN Certificate", uploadFiles1); 
-//			
-//			Thread.sleep(1000);
-//			WebElement TANsubmit = driver.findElement(By.xpath("(//button[.='Submit'])[4]"));
-//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", TANsubmit);
-//			TANsubmit.click();
 					
 			// LUT Certificate
 			
@@ -470,26 +432,20 @@ import org.testng.annotations.Test;
 			// Scroll to element
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 			
-			waitforElement(LUTradioyesbutton);
-			LUTradioyesbutton.click();
+//			Thread.sleep(500);
+//			waitforElement(LUTradioyesbutton);
+//			LUTradioyesbutton.click();
 			
 			Thread.sleep(2000);
 			waitforElement(LUTnumbertextfield);
 			LUTnumbertextfield.sendKeys(setRandomMobileNumber());
 			
 			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);
 			
-//			kycdocuploadandsubmit1("LUT Certificate", uploadFiles1); 
-//			
-//			Thread.sleep(2000);
-//			WebElement LUTsubmit = driver.findElement(By.xpath("(//button[.='Submit'])[5]"));
-//			//js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", LUTsubmit);
-//			LUTsubmit.click();
 			
 			
 			// Bank Details
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			waitforElement(Ifsccodetextfield);
 			Ifsccodetextfield.clear();
 			Ifsccodetextfield.sendKeys(ifsccode);
@@ -539,7 +495,6 @@ import org.testng.annotations.Test;
 			
 			
 			waitforElement(iecyesradiobutton);
-//			javascriptclick(iecyesradiobutton);
 			iecyesradiobutton.click();
 			
 			Thread.sleep(1000);
@@ -560,29 +515,27 @@ import org.testng.annotations.Test;
 			
 			// D & B 
 			
-			Thread.sleep(1000);
-			waitforElement(DnBnotextfield);
-			DnBnotextfield.sendKeys(DnBno);
-			
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("D&B", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+//			waitforElement(DnBnotextfield);
+//			DnBnotextfield.sendKeys(DnBno);
+//			
+//			Thread.sleep(1000);
+//			kycdocuploadandsubmit("D&B", uploadFiles, submitButtons);
 			
 			scrollBottomofPage();
 			
 			// upload again
 			
-			// js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
-			
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			
 			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			
 			scrollBottomofPage();
 			
@@ -600,8 +553,8 @@ import org.testng.annotations.Test;
 			
 			Thread.sleep(2000);
 //			// submit for verification 
-//			waitforElement(submitforverification);
-//			javascriptclick(submitforverification);
+			waitforElement(submitforverification);
+			javascriptclick(submitforverification);
 			
 		
 	}

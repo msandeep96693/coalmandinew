@@ -10,11 +10,12 @@ import pageobject.createaccountpage;
 
 public class BusinessaccountExecutionclass extends Baseclass {
 	
-	//@Test
+	@Test(priority = 0, enabled = true)
 	public void createbusinessaccountpage() throws InterruptedException
 	{
 		createaccountpage account = new createaccountpage(driver);
-		account.createbusinessaccount(prop.getProperty("mobilenumber"), prop.getProperty("createpwd"), prop.getProperty("confirmpwd"));
+		account.createbusinessaccount(prop.getProperty("mobilenumber"),prop.getProperty("Rolename"), prop.getProperty("createpwd"), 
+				prop.getProperty("confirmpwd"));
 				
 	}
 	

@@ -142,6 +142,12 @@ public class Basicpage
 		 return "Remember me"+randomstring;
 	   }
 	
+	public String setRandomBusinessNameInternational()
+	   {
+		 String randomstring=RandomStringUtils.random(4,"abcdefghijklmnopqrstuvwxyz");
+		 return "COAL"+randomstring+"PVT ltd";
+	   }
+	
 	 public String setRandomName()
 	   {
 		 String randomstring=RandomStringUtils.random(3,"abcdefghijklmnopqrstuvwxyz");

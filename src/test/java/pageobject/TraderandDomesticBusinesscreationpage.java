@@ -23,9 +23,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-	public class ImporterBusinesscreationpage extends Basicpage {
+	public class TraderandDomesticBusinesscreationpage extends Basicpage {
 
-		public ImporterBusinesscreationpage(WebDriver driver)
+		public TraderandDomesticBusinesscreationpage(WebDriver driver)
 		{
 			super(driver);
 		}
@@ -117,11 +117,20 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[2]")
 		private WebElement originofcoaldropdown;
 		
+		@FindBy(xpath = "(//div[@class='ant-select-selector'])[7]")
+		private WebElement sourceofcoaldropdown;
+		
 		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[3]")
 		private WebElement portsofoperationdropdown;
 		
 		@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
 		private List<WebElement> alldropdownoption;
+		
+		@FindBy(xpath = "//input[@placeholder='Enter total production volume']")
+		private WebElement totalproductionvaluefield;
+		
+		@FindBy(xpath = "//input[@placeholder='Enter allowed selling volume']")
+		private WebElement allowedsellingvolumefield;
 		
 		@FindBy(xpath = "//div[.='Domestic']") 
 		private WebElement domesticoption;  
@@ -258,7 +267,16 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//button[.='Add Business Profile']")
 		private WebElement addbusinessprofilebtn;
 		
-		public void importercreatebbusinessprofile(
+		@FindBy(xpath = "//h4[.='Seller']")
+		private WebElement sellerbtn;
+		
+		@FindBy(xpath = "//button[.='Continue as Seller']")
+		private WebElement continueassellerbtn;
+		
+		@FindBy(xpath = "")
+		private WebElement continueasbuyerbtn;
+		
+		public void tradercreatebbusinessprofile(
 				 String mobilenumber, String createpassword, 
 				 String confirmpassword, String gstnumber,  
 				 String designation,String ifsccode, String accountno, String confirmaccountno, String udyamno, String udyamdateno,
@@ -266,7 +284,7 @@ import org.testng.annotations.Test;
 				) throws InterruptedException, AWTException  
 		{ 
 			signinpage signin = new signinpage(driver);
-			signin.loginpage("sandeep+importer0000@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+			signin.loginpage("sandeep+trader9090@rokkun.io", "Sandeep@123");   // String email, String pwd, 
 			
 //			createaccountpage account = new createaccountpage(driver);
 //			account.createbusinessaccount(mobilenumber, createpassword, confirmpassword);
@@ -274,6 +292,12 @@ import org.testng.annotations.Test;
 			// click on the create business profile button
 //			waitforElement(btnCreateBusinessProfile);
 //			btnCreateBusinessProfile.click();
+			
+			waitforElement(sellerbtn);
+			javascriptclick(sellerbtn);
+			
+			waitforElement(continueassellerbtn);
+			javascriptclick(continueassellerbtn);
 			
 			Thread.sleep(3000);
 			waitforElement(profileicon);
@@ -359,16 +383,24 @@ import org.testng.annotations.Test;
 			rob1.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
 			
-			waitforElement(portsofoperationdropdown);
-			portsofoperationdropdown.click();
+			// Source of coal
+			waitforElement(sourceofcoaldropdown);
+			sourceofcoaldropdown.click();
 			
 			Thread.sleep(1000);
-			selectDropdownOption(alldropdownoption, "Klang");
+			selectDropdownOption(alldropdownoption, "Private");
 			Thread.sleep(1500);
-			selectDropdownOption(alldropdownoption, "Shanghai");
+			selectDropdownOption(alldropdownoption, "CIL");
 		
 			rob.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
+			
+			// enter total production value
+			waitforElement(totalproductionvaluefield);
+			totalproductionvaluefield.sendKeys("12500");
+			
+			waitforElement(allowedsellingvolumefield);
+			allowedsellingvolumefield.sendKeys("1250");
 
 			
 			
@@ -457,7 +489,8 @@ import org.testng.annotations.Test;
 			LUTnumbertextfield.sendKeys(setRandomMobileNumber());
 			
 			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);			
+			Thread.sleep(2000);
+			
 			
 			// Bank Details
 			Thread.sleep(1000);
@@ -509,9 +542,8 @@ import org.testng.annotations.Test;
 			// IEC certificate
 			
 			
-//			waitforElement(iecyesradiobutton);
-////			javascriptclick(iecyesradiobutton);
-//			iecyesradiobutton.click();
+			waitforElement(iecyesradiobutton);
+			iecyesradiobutton.click();
 			
 			Thread.sleep(1000);
 			waitforElement(iecnotextfield);
@@ -646,4 +678,5 @@ import org.testng.annotations.Test;
 		        }
 		    }
 		}
+
 }

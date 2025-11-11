@@ -24,13 +24,13 @@ public class createaccountpage extends Basicpage {
 	@FindBy(xpath = "//p[.='Importer']")
 	private WebElement importerrole;
 	
-	@FindBy(xpath = "//p[.='Importer']")
+	@FindBy(xpath = "//p[.='Trader']")
 	private WebElement traderrole;
 	
-	@FindBy(xpath = "//p[.='Importer']")
+	@FindBy(xpath = "//p[.='Domestic coal Manufacturer']")
 	private WebElement domesticrole;
 	
-	@FindBy(xpath = "//p[.='Importer']")
+	@FindBy(xpath = "//p[.='International']")
 	private WebElement internationalrole;
 	
 //	@FindBy(xpath = "((//h2[.='Choose User Role'])[2]/../following-sibling::div)[2]/button/span")
@@ -84,16 +84,20 @@ public class createaccountpage extends Basicpage {
 	
 	
 	
-	public void createbusinessaccount(String mobilenumber, String createpassword, String confirmpassword) throws InterruptedException
+	public void createbusinessaccount(String mobilenumber, String Rolename, String createpassword, String confirmpassword) throws InterruptedException
 	{
 		// click on new to coalmandi button
 		waitforElement(createanaccountbutton);
 		createanaccountbutton.click();
 		
-		// select subrole :- consumer 
-		waitforElement(consumerrole);
-		System.out.println("Role name :-"+ consumerrole.getText());
-		consumerrole.click();
+//		// select subrole :- consumer 
+//		waitforElement(consumerrole);
+//		System.out.println("Role name :-"+ consumerrole.getText());
+//		consumerrole.click();
+		
+		
+		// Consumer, Importer, Trader, Domestic coal Manufacturer, International
+		selectRole(Rolename);
 		
 		// click on continue button
 		waitforElement(continuebutton);
@@ -116,7 +120,7 @@ public class createaccountpage extends Basicpage {
 		javascriptclick(sendotpbutton);
 		
 		// enter otp into textfields and click enter button on keyboard
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(35));
 		wait.until(d -> whatsappotpinputfield.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
 		
 		// enter password
@@ -133,12 +137,45 @@ public class createaccountpage extends Basicpage {
 		
 		
 //		// click on logout button
-//		Thread.sleep(3000);
-//		waitforElement(logoutbutton);
-//		javascriptclick(logoutbutton);
+		Thread.sleep(3000);
+		waitforElement(logoutbutton);
+		javascriptclick(logoutbutton);
 //		
 //		// check navigate to the loginpage
-//		System.out.println(driver.getCurrentUrl()); 
+		System.out.println(driver.getCurrentUrl()); 
 	}
+	
+	
+	public void selectRole(String roleName) {
+	    switch (roleName.toLowerCase().trim()) {
+	        case "consumer":
+	            consumerrole.click();
+	            break;
+
+	        case "importer":
+	            importerrole.click();
+	            break;
+
+	        case "trader":
+	            traderrole.click();
+	            break;
+
+	        case "domestic coal manufacturer":
+	            domesticrole.click();
+	            break;
+
+	        case "international":
+	            internationalrole.click();
+	            break;
+
+	        default:
+	            throw new IllegalArgumentException(
+	                    "❌ Invalid role name: " + roleName + " | Valid roles: Consumer, Importer, Trader, Domestic coal Manufacturer, International"
+	            );
+	    }
+	    
+	    System.out.println("✅ Selected role: " + roleName);
+	}
+
 
 }

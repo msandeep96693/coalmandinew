@@ -13,7 +13,7 @@ public class consumercreatebusinessprofileExecutionclass extends Baseclass {
 	public void createbusinessprofileExecutionclass() throws InterruptedException, AWTException
 	{
 		consumerprofile = new consumerBusinesscreationpage(driver);
-		consumerprofile.createbbusinessprofile(prop.getProperty("mobilenumber"), prop.getProperty("createpwd"), prop.getProperty("confirmpwd"),
+		consumerprofile.createbbusinessprofile(prop.getProperty("mobilenumber"),prop.getProperty("Rolename"), prop.getProperty("createpwd"), prop.getProperty("confirmpwd"),
 				 prop.getProperty("gstnumber"), prop.getProperty("designation"), prop.getProperty("IFSCcode"), prop.getProperty("accountno"),
 				 prop.getProperty("confirmaccountno"),prop.getProperty("udyamno"), prop.getProperty("udyamdateno"),
 				 prop.getProperty("iecdateno"), prop.getProperty("DnBno")

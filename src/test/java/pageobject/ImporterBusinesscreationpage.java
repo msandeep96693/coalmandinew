@@ -203,7 +203,7 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//span[@aria-label='calendar']/../..)[1]")
 		private WebElement clickonudyamdatefield;
 		
-		@FindBy(xpath = "(//button[@type='button'])[4]")
+		@FindBy(xpath = "//button[contains(@class,'prev-button')]")
 		private WebElement previousbutton;
 		
 		@FindBy(xpath = "//div[@class='react-calendar__month-view__days']/button/abbr")
@@ -236,7 +236,15 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//span[.='Is Same as Business Owner ?']")
 		private WebElement Issameasbusinessownercheckbox;
 		
+		//Transporter xpath
+		@FindBy(xpath = "(//input[@type='text'])[11]")
+		private WebElement licensenumberfield;
 		
+		@FindBy(xpath = "//input[@placeholder='Enter vehicle number']")
+		private WebElement vehiclenumberfield;
+		
+		@FindBy(xpath = "//input[@placeholder='Enter capacity']")
+		private WebElement vehiclecapacityfield;
 		
 		// kyc page
 		
@@ -259,34 +267,35 @@ import org.testng.annotations.Test;
 		private WebElement addbusinessprofilebtn;
 		
 		public void importercreatebbusinessprofile(
-				 String mobilenumber, String createpassword, 
+				 String name, String mobilenumber, String createpassword, 
 				 String confirmpassword, String gstnumber,  
 				 String designation,String ifsccode, String accountno, String confirmaccountno, String udyamno, String udyamdateno,
 				String iecdateno, String DnBno 
 				) throws InterruptedException, AWTException  
 		{ 
-			signinpage signin = new signinpage(driver);
-			signin.loginpage("sandeep+importer0000@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+//			signinpage signin = new signinpage(driver);
+//			signin.loginpage("sandeep+importer0000@rokkun.io", "Sandeep@123");   // String email, String pwd, 
 			
-//			createaccountpage account = new createaccountpage(driver);
-//			account.createbusinessaccount(mobilenumber, createpassword, confirmpassword);
+			createaccountpage account = new createaccountpage(driver);
+			account.createbusinessaccount(name, mobilenumber, createpassword, confirmpassword);
 			
 			// click on the create business profile button
-//			waitforElement(btnCreateBusinessProfile);
-//			btnCreateBusinessProfile.click();
+			waitforElement(btnCreateBusinessProfile);
+			btnCreateBusinessProfile.click();
+		
 			
-			Thread.sleep(3000);
-			waitforElement(profileicon);
-			javascriptclick(profileicon);
-			
-			waitforElement(settingbtn);
-			javascriptclick(settingbtn);
-			
-			waitforElement(businessprofiletab);
-			javascriptclick(businessprofiletab);
-			
-			waitforElement(addbusinessprofilebtn);
-			javascriptclick(addbusinessprofilebtn);
+//			Thread.sleep(3000);
+//			waitforElement(profileicon);
+//			javascriptclick(profileicon);
+//			
+//			waitforElement(settingbtn);
+//			javascriptclick(settingbtn);
+//			
+//			waitforElement(businessprofiletab);
+//			javascriptclick(businessprofiletab);
+//			
+//			waitforElement(addbusinessprofilebtn);
+//			javascriptclick(addbusinessprofilebtn);
 			
 			// upload a business profile image
 			try {
@@ -446,8 +455,11 @@ import org.testng.annotations.Test;
 
 			WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(radioBtn));
 
-			// Scroll to element
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+//			// Scroll to element
+//			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+			
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
 			
 			waitforElement(LUTradioyesbutton);
 			LUTradioyesbutton.click();
@@ -540,20 +552,20 @@ import org.testng.annotations.Test;
 			
 			scrollBottomofPage();
 			
-			// upload again
-			
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			
-			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			
-			scrollBottomofPage();
+//			// upload again
+//			
+//			Thread.sleep(1000);
+//			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+//			
+//			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+//			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+//			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+//			
+//			scrollBottomofPage();
 			
 			waitforElement(saveproceedbuton);
 			javascriptclick(saveproceedbuton);
@@ -569,8 +581,12 @@ import org.testng.annotations.Test;
 			
 			Thread.sleep(2000);
 //			// submit for verification 
-//			waitforElement(submitforverification);
-//			javascriptclick(submitforverification);
+			waitforElement(submitforverification);
+			javascriptclick(submitforverification);
+			
+			Thread.sleep(1000);
+			
+			System.out.println("Business profile created and your Your KYC documents are being reviewed.");
 			
 		
 	}

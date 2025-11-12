@@ -84,7 +84,7 @@ public class createaccountpage extends Basicpage {
 	
 	
 	
-	public void createbusinessaccount(String mobilenumber, String Rolename, String createpassword, String confirmpassword) throws InterruptedException
+	public void createbusinessaccount(String Rolename,String mobilenumber,  String createpassword, String confirmpassword) throws InterruptedException
 	{
 		// click on new to coalmandi button
 		waitforElement(createanaccountbutton);
@@ -119,9 +119,11 @@ public class createaccountpage extends Basicpage {
 		Thread.sleep(2000);
 		javascriptclick(sendotpbutton);
 		
-		// enter otp into textfields and click enter button on keyboard
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(35));
-		wait.until(d -> whatsappotpinputfield.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
+//		// enter otp into textfields and click enter button on keyboard
+//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(35));
+//		wait.until(d -> whatsappotpinputfield.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
+		
+		Thread.sleep(25000);
 		
 		// enter password
 		waitforElement(enterpassword);
@@ -137,12 +139,12 @@ public class createaccountpage extends Basicpage {
 		
 		
 //		// click on logout button
-		Thread.sleep(3000);
-		waitforElement(logoutbutton);
-		javascriptclick(logoutbutton);
+//		Thread.sleep(3000);
+//		waitforElement(logoutbutton);
+//		javascriptclick(logoutbutton);
 //		
 //		// check navigate to the loginpage
-		System.out.println(driver.getCurrentUrl()); 
+//		System.out.println(driver.getCurrentUrl()); 
 	}
 	
 	

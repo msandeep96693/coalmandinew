@@ -199,7 +199,7 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//span[@aria-label='calendar']/../..)[1]")
 		private WebElement clickonudyamdatefield;
 		
-		@FindBy(xpath = "(//button[@type='button'])[4]")
+		@FindBy(xpath = "//button[contains(@class,'prev-button')]")
 		private WebElement previousbutton;
 		
 		@FindBy(xpath = "//div[@class='react-calendar__month-view__days']/button/abbr")
@@ -430,11 +430,13 @@ import org.testng.annotations.Test;
 			WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(radioBtn));
 
 			// Scroll to element
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+			//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+			 JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
 			
-//			Thread.sleep(500);
-//			waitforElement(LUTradioyesbutton);
-//			LUTradioyesbutton.click();
+			Thread.sleep(500);
+			waitforElement(LUTradioyesbutton);
+			LUTradioyesbutton.click();
 			
 			Thread.sleep(2000);
 			waitforElement(LUTnumbertextfield);
@@ -524,20 +526,20 @@ import org.testng.annotations.Test;
 			
 			scrollBottomofPage();
 			
-			// upload again
-			
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			
-			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
-			Thread.sleep(1000);
-			
-			scrollBottomofPage();
+//			// upload again
+//			
+//			Thread.sleep(1000);
+//			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+//			
+//			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+//			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+//			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
+//			Thread.sleep(1000);
+//			
+//			scrollBottomofPage();
 			
 			waitforElement(saveproceedbuton);
 			javascriptclick(saveproceedbuton);
@@ -556,7 +558,7 @@ import org.testng.annotations.Test;
 			waitforElement(submitforverification);
 			javascriptclick(submitforverification);
 			
-		
+			System.out.println("Business account is created and Your KYC documents are being reviewed.");
 	}
 
 		

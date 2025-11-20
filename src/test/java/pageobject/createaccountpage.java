@@ -82,9 +82,12 @@ public class createaccountpage extends Basicpage {
 	@FindBy(xpath = "//div[.='Account created successfully']")
 	private WebElement accountcreateconfirmationmessage;
 	
+	@FindBy(xpath = "(//input[@type='text'])[2]")
+	private WebElement aadharnumberfield;
 	
 	
-	public void createbusinessaccount(String Rolename,String mobilenumber,  String createpassword, String confirmpassword) throws InterruptedException
+	public void createbusinessaccount(String Rolename,String aadharnumber, String mobilenumber,  
+			String createpassword, String confirmpassword) throws InterruptedException
 	{
 		// click on new to coalmandi button
 		waitforElement(createanaccountbutton);
@@ -107,6 +110,9 @@ public class createaccountpage extends Basicpage {
 		waitforElement(fullnametextfield);
 		fullnametextfield.sendKeys(setRandomName());
 		
+		waitforElement(aadharnumberfield);
+		aadharnumberfield.sendKeys(aadharnumber);
+		
 		// enter a whatsapp number 
 		waitforElement(whatsappnumbertextfield);
 		whatsappnumbertextfield.sendKeys(mobilenumber);
@@ -115,9 +121,9 @@ public class createaccountpage extends Basicpage {
 		waitforElement(emailIDtextfield);
 		emailIDtextfield.sendKeys(setRandomEmail());
 		
-		// click on send otp button
-		Thread.sleep(2000);
-		javascriptclick(sendotpbutton);
+//		// click on send otp button
+//		Thread.sleep(2000);
+//		javascriptclick(sendotpbutton);
 		
 //		// enter otp into textfields and click enter button on keyboard
 //		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(35));

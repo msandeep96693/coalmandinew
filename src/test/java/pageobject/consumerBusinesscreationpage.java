@@ -78,10 +78,13 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='text'])[6]")
 		private WebElement desginationfield;
 		
+		@FindBy(xpath = "(//input[@type='text'])[7]")
+		private WebElement aadharnumberfield;
+		
 		@FindBy(xpath = "//input[@type='email']")
 		private WebElement emailfield;
 		
-		@FindBy(xpath = "(//input[@type='text'])[7]")
+		@FindBy(xpath = "(//input[@type='text'])[8]")
 		private WebElement mobilenumberfield;
 		
 		
@@ -255,15 +258,26 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "//button[.='Add Business Profile']")
 		private WebElement addbusinessprofilebtn;
 		
+		
+		
+		@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[2]")
+		private WebElement districtfield;
+		
+		@FindBy(xpath = "(//input[@type='search'])[2]")
+		private WebElement districtsearchfield;
+		
+		
+		
 		public void createbbusinessprofile(
 				 String mobilenumber, String Rolename, String createpassword, 
 				 String confirmpassword, String gstnumber,  
-				 String designation,String ifsccode, String accountno, String confirmaccountno, String udyamno, String udyamdateno,
+				 String designation,String aadharnumber, String ifsccode, String accountno, 
+				 String confirmaccountno, String udyamno, String udyamdateno,
 				String iecdateno, String DnBno 
 				) throws InterruptedException, AWTException  
 		{ 
 			signinpage signin = new signinpage(driver);
-			signin.loginpage("sandeep+consumer9090@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+			signin.loginpage("sandeep+consumer@rokkun.io", "Coal@123");   // String email, String pwd, 
 			
 //			createaccountpage account = new createaccountpage(driver);
 //			account.createbusinessaccount(mobilenumber,Rolename ,createpassword, confirmpassword);
@@ -289,7 +303,7 @@ import org.testng.annotations.Test;
 			
 			// upload a business profile image
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
 				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
@@ -315,6 +329,22 @@ import org.testng.annotations.Test;
 	
 			Thread.sleep(3000);
 			
+			 JavascriptExecutor js1 = (JavascriptExecutor) driver;
+//	            js.executeScript("arguments[0].style.display='block';", uploadInput);
+			 js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", districtsearchfield);
+			Thread.sleep(1000);
+			 
+			waitforElement(districtsearchfield);
+			districtfield.click();
+			
+			waitforElement(districtsearchfield);
+			districtsearchfield.sendKeys("Anantapur");
+			
+			Thread.sleep(500);
+			Actions action = new Actions(driver);
+			action.sendKeys(Keys.ENTER).perform();
+			
+			Thread.sleep(1000);
 			// ownership 
 			waitforElement(onwershipdropdown);
 			onwershipdropdown.click();
@@ -372,6 +402,9 @@ import org.testng.annotations.Test;
 			// enter designation 
 			waitforElement(desginationfield);
 			desginationfield.sendKeys(designation);
+			
+			waitforElement(aadharnumberfield);
+			aadharnumberfield.sendKeys(aadharnumber);
 			
 			// enter email 
 			waitforElement(emailfield);
@@ -562,6 +595,8 @@ import org.testng.annotations.Test;
 	}
 
 		
+
+
 		public void kycdocuploadandsubmit(String labelnames, List<WebElement> uploadFiles, List<WebElement> submitButtons) throws InterruptedException 
 		{
 			

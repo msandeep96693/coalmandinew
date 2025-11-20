@@ -267,7 +267,7 @@ import org.testng.annotations.Test;
 		private WebElement addbusinessprofilebtn;
 		
 		public void importercreatebbusinessprofile(
-				 String name, String mobilenumber, String createpassword, 
+				 String name, String aadharnumber, String mobilenumber, String createpassword, 
 				 String confirmpassword, String gstnumber,  
 				 String designation,String ifsccode, String accountno, String confirmaccountno, String udyamno, String udyamdateno,
 				String iecdateno, String DnBno 
@@ -277,7 +277,7 @@ import org.testng.annotations.Test;
 //			signin.loginpage("sandeep+importer0000@rokkun.io", "Sandeep@123");   // String email, String pwd, 
 			
 			createaccountpage account = new createaccountpage(driver);
-			account.createbusinessaccount(name, mobilenumber, createpassword, confirmpassword);
+			account.createbusinessaccount(name,aadharnumber, mobilenumber, createpassword, confirmpassword);
 			
 			// click on the create business profile button
 			waitforElement(btnCreateBusinessProfile);

@@ -124,7 +124,7 @@ public class createCILlistingpage extends Basicpage {
 	@FindBy(xpath = "//input[@type='number']")
 	private WebElement emdfield;
 	
-	@FindBy(xpath = "//span[.='Select shipping address']")
+	@FindBy(xpath = "//span[.='Select loading point address']")
 	private WebElement clickonshippingaddressfield;
 	
 	@FindBy(xpath = "//div[@class='ant-card-body']")
@@ -283,23 +283,24 @@ public class createCILlistingpage extends Basicpage {
 		scrollBottomofPage();
 		
 //		// upload a business profile image
-		uploadFilesMultipleTimes("/home/active34/Downloads/photos /QA club photos/Club 4.png");
+		uploadFilesMultipleTimes("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 		Thread.sleep(1000);
-		uploadFilesMultipleTimes("/home/active34/Downloads/photos /QA club photos/Club 3.png");
+		uploadFilesMultipleTimes("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 		Thread.sleep(1000);
-		uploadFilesMultipleTimes("/home/active34/Downloads/photos /QA club photos/Club 2.jpeg");
+		uploadFilesMultipleTimes("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 		
 		Thread.sleep(1000);
-		waitforElement(createlistingbutton);
-		javascriptclick(createlistingbutton);
+//		waitforElement(createlistingbutton);
+//		javascriptclick(createlistingbutton);
 		
-		// wait for OTP
-		// enter otp into textfields and click enter button on keyboard
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-		wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
 		
 		waitforElement(submitbutton);
 		javascriptclick(submitbutton);
+		
+		// wait for OTP
+				// enter otp into textfields and click enter button on keyboard
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+				wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
 		
 		Thread.sleep(1000);
 		
@@ -425,7 +426,7 @@ public class createCILlistingpage extends Basicpage {
 	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
 
 	        // Convert to aria-label format e.g. "4 November 2025"
-	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("MMMM d, yyyy");
 	        String ariaLabelDate = selectedDate.format(ariaFormat);
 
 	        System.out.println("Selecting date: " + ariaLabelDate);
@@ -455,7 +456,7 @@ public class createCILlistingpage extends Basicpage {
 	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
 
 	        // Convert to aria-label format e.g. "4 November 2025"
-	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("MMMM d, yyyy");
 	        String ariaLabelDate = selectedDate.format(ariaFormat);
 
 	        System.out.println("Selecting date: " + ariaLabelDate);

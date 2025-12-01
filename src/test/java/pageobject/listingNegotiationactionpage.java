@@ -3,6 +3,7 @@ package pageobject;
 import java.time.Duration;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,33 @@ public class listingNegotiationactionpage extends Basicpage {
 	
 	@FindBy(xpath = "//button[@class='pag-btn active']")
 	private WebElement pagination2;
+	
+	@FindBy(xpath = "//div[.='Profile Access Rules']")
+	private WebElement profileaccessrulesbutton;
+	
+	@FindBy(xpath = "//input[contains(@placeholder,'Search Business Name')]")
+	private WebElement searchtrustblocklist;
+	
+	@FindBy(xpath = "//button[.='Mark as Trust']")
+	private List<WebElement> markastrustlistbutton;
+	
+	@FindBy(xpath = "//button[.='Block']")
+	private List<WebElement> blocklistbutton;
+	
+	@FindBy(xpath = "//tbody[@class='ant-table-tbody']/tr/td/span")
+	private  List<WebElement> trustblockbusinessnamelist;
+	
+	@FindBy(xpath = "//div[.='Participated']")   // //div[.='Participated']  // //div[.='Trusted']
+	private WebElement trustedtab;
+	
+	@FindBy(xpath = "//button[.='View Details']")
+	private List<WebElement> viewdetailsbutton;
+	
+	@FindBy(xpath = "//span[@aria-label='user']") 
+	private WebElement profileicon;
+	
+	@FindBy(xpath = "//span[.='Settings']/..")
+	private WebElement settingbtn;
 	
 	@FindBy(xpath = "//button[.='Express Interest']")
 	private WebElement expressinterestbtn;
@@ -104,39 +132,44 @@ public class listingNegotiationactionpage extends Basicpage {
 	
 	
 	
-	public void ExpressInterestOrdergenerate(String email, String pwd, String businessname ) throws InterruptedException
+	public void ExpressInterestOrdergenerate(String email, String pwd, String businessname,
+			String trustedbusinessname ) throws InterruptedException
 	{		
 		
-		
-//		waitforElement(pagination2);
-//		javascriptclick(pagination2);
-		
-//		for(int i = 0; i<viewdetailsbtn.size(); i++)
-//		{
-//			Thread.sleep(1000);
-//		    javascriptclick(viewdetailsbtn.get(2));	
-//			break;
-//		}
-		
+		signinpage signin = new signinpage(driver);
+		signin.loginpage(email, pwd);
 		Thread.sleep(5000);
 
-		switchtoanothertab();
-
+		//switchtoanothertab();
 		
+//		Thread.sleep(3000);
+//		waitforElement(profileicon);
+//		javascriptclick(profileicon);
+//		
+//		waitforElement(settingbtn);
+//		javascriptclick(settingbtn);
+//		
+//		waitforElement(profileaccessrulesbutton);
+//		javascriptclick(profileaccessrulesbutton);
+//
+//		waitforElement(searchtrustblocklist);
+//		searchtrustblocklist.sendKeys(trustedbusinessname);
+//		
+//		clickbuttonsContains("Mark as Trust");
+//		
+//		Thread.sleep(1000);
+//		for(int i = 0; i<= trustblockbusinessnamelist.size(); i++)
+//		{
+//			 String listdetailsdata = trustblockbusinessnamelist.get(1).getText();
+//			 System.out.println("List data :- "+ listdetailsdata);
+//		}
 		
+		driver.findElement(By.xpath("//button[.='Listing']")).click();
 		
-		// enter a email 
-					waitforElement(emailfield);
-					emailfield.sendKeys(email);
-					// enter a password
-					waitforElement(passwordfield);
-					passwordfield.sendKeys(pwd);
-							// click on signin button
-							waitforElement(siginbtn);
-							JavascriptExecutor js = (JavascriptExecutor)driver;
-							js.executeScript("arguments[0].click();", siginbtn );
-							
-							Thread.sleep(2000);
+		waitforElement(trustedtab);
+		javascriptclick(trustedtab);
+		
+		clickviewdetailsbuttonsContains("View");
 
 		
 		scrollBottomofPage();
@@ -173,166 +206,47 @@ public class listingNegotiationactionpage extends Basicpage {
 	}
 	
 	public void negotiationordergeneratewithoutsplit(String email, String pwd, String businessname, 
-			String offerQTY, String offerRATE ) throws InterruptedException
+			String offerQTY, String offerRATE, String trustedbusinessname ) throws InterruptedException
 	{
-		
-		Thread.sleep(5000);
-
-		switchtoanothertab();
-		// enter a email 
-					waitforElement(emailfield);
-					emailfield.sendKeys(email);
-					// enter a password
-					waitforElement(passwordfield);
-					passwordfield.sendKeys(pwd);
-							// click on signin button
-							waitforElement(siginbtn);
-							JavascriptExecutor js = (JavascriptExecutor)driver;
-							js.executeScript("arguments[0].click();", siginbtn );
-							
-							Thread.sleep(2000);
-		
-		scrollBottomofPage();
-		
-		waitforElement(listingdetailsnegotiationbtn);
-		javascriptclick(listingdetailsnegotiationbtn);
-		
-		waitforElement(clickonbusinessprofiledropdown);
-		javascriptclick(clickonbusinessprofiledropdown);
-//		clickonbusinessprofiledropdown.click();
-		
-		waitforElement(searchtextfield);
-		searchtextfield.sendKeys(businessname);
-		
-		searchtextfield.sendKeys(Keys.ENTER);
-		
-		waitforElement(offerqtyfield);
-		offerqtyfield.sendKeys(offerQTY);
-		
-		waitforElement(offerratefield);
-		offerratefield.sendKeys(offerRATE);
-		
-		scrollBottomofPage();
-		
-		waitforElement(submitofferotpbtn);
-		javascriptclick(submitofferotpbtn);
-		
-		Thread.sleep(4000);
-		
-		// enter otp into textfields and click enter button on keyboard
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-				wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
-				
-				Thread.sleep(1000);
-				waitforElement(clickonprofileicon);
-				javascriptclick(clickonprofileicon);
-				
-				waitforElement(logoutbtn);
-				javascriptclick(logoutbtn);
-			
-	}
-	
-	
-	public void negotiationordergeneratewithsplit(String email, String pwd, String businessname, 
-			String offerQTY, String offerRATE ) throws InterruptedException
-	{
-		
-		Thread.sleep(5000);
-
-		switchtoanothertab();
-		// enter a email 
-					waitforElement(emailfield);
-					emailfield.sendKeys(email);
-					// enter a password
-					waitforElement(passwordfield);
-					passwordfield.sendKeys(pwd);
-							// click on signin button
-							waitforElement(siginbtn);
-							JavascriptExecutor js = (JavascriptExecutor)driver;
-							js.executeScript("arguments[0].click();", siginbtn );
-							
-							Thread.sleep(2000);
-		
-		scrollBottomofPage();
-		
-		waitforElement(listingdetailsnegotiationbtn);
-		javascriptclick(listingdetailsnegotiationbtn);
-		
-		// select the split order based on index
-		for(int i = 0; i< splitordermodalcheckbox.size(); i++)
-		{
-			splitordermodalcheckbox.get(1).click();
-			break;
-		}
-		
-		waitforElement(splitorderbtn);
-		javascriptclick(splitorderbtn);
-		
-		waitforElement(clickonbusinessprofiledropdown);
-		javascriptclick(clickonbusinessprofiledropdown);
-//		clickonbusinessprofiledropdown.click();
-		
-		waitforElement(searchtextfield);
-		searchtextfield.sendKeys(businessname);
-		
-		searchtextfield.sendKeys(Keys.ENTER);
-		
-		waitforElement(offerqtyfield);
-		offerqtyfield.sendKeys(offerQTY);
-		
-		waitforElement(offerratefield);
-		offerratefield.sendKeys(offerRATE);
-		
-		scrollBottomofPage();
-		
-		waitforElement(submitofferotpbtn);
-		javascriptclick(submitofferotpbtn);
-		
-		Thread.sleep(4000);
-		
-		// enter otp into textfields and click enter button on keyboard
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-				wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
-				
-				Thread.sleep(1000);
-				waitforElement(clickonprofileicon);
-				javascriptclick(clickonprofileicon);
-				
-				waitforElement(logoutbtn);
-				javascriptclick(logoutbtn);
-			
-	}
-	
-	
-	public void otherpartynegotiation(String email, String pwd, String businessname, 
-			String offerQTY, String offerRATE ) throws InterruptedException
-	{
-		
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
+		Thread.sleep(5000);
+
+		//switchtoanothertab();
 		
-		waitforElement(leftnavnegotiationbtn);
-		javascriptclick(leftnavnegotiationbtn);
+//		Thread.sleep(3000);
+//		waitforElement(profileicon);
+//		javascriptclick(profileicon);
+//		
+//		waitforElement(settingbtn);
+//		javascriptclick(settingbtn);
+//		
+//		waitforElement(profileaccessrulesbutton);
+//		javascriptclick(profileaccessrulesbutton);
+//
+//		waitforElement(searchtrustblocklist);
+//		searchtrustblocklist.sendKeys(trustedbusinessname);
+//		
+//		clickbuttonsContains("Mark as Trust");
+//		
+//		Thread.sleep(1000);
+//		for(int i = 0; i<= trustblockbusinessnamelist.size(); i++)
+//		{
+//			 String listdetailsdata = trustblockbusinessnamelist.get(1).getText();
+//			 System.out.println("List data :- "+ listdetailsdata);
+//		}
 		
-		waitforElement(participatedtabbtn);
-		javascriptclick(participatedtabbtn);
+		driver.findElement(By.xpath("//button[.='Listing']")).click();
 		
-		clickViewButtonUsingContains("Ongoing");
+		waitforElement(trustedtab);
+		javascriptclick(trustedtab);
+		
+		clickviewdetailsbuttonsContains("View");
 		
 		scrollBottomofPage();
 		
 		waitforElement(listingdetailsnegotiationbtn);
 		javascriptclick(listingdetailsnegotiationbtn);
-		
-		// select the split order based on index
-		for(int i = 0; i< splitordermodalcheckbox.size(); i++)
-		{
-			splitordermodalcheckbox.get(1).click();
-			break;
-		}
-		
-		waitforElement(splitorderbtn);
-		javascriptclick(splitorderbtn);
 		
 		waitforElement(clickonbusinessprofiledropdown);
 		javascriptclick(clickonbusinessprofiledropdown);
@@ -368,7 +282,6 @@ public class listingNegotiationactionpage extends Basicpage {
 				javascriptclick(logoutbtn);
 			
 	}
-	
 	
 	public void switchtoanothertab()
 	{
@@ -392,7 +305,7 @@ public class listingNegotiationactionpage extends Basicpage {
 		System.out.println("Switched to new tab: " + driver.getTitle());
 	}
 	
-	public void clickViewButtonUsingContains(String statusTextToMatch) throws InterruptedException {
+	public void clickbuttonsContains(String statusTextToMatch) throws InterruptedException {
 
 	    boolean found = false;
 
@@ -420,4 +333,36 @@ public class listingNegotiationactionpage extends Basicpage {
 	        }
 	    }
 }
+	
+	
+	public void clickviewdetailsbuttonsContains(String statusTextToMatch) throws InterruptedException {
+
+	    boolean found = false;
+
+	    for (int i = 0; i < viewdetailsbutton.size(); i++) {
+	        
+	    	Thread.sleep(2000);
+	        String statusText = viewdetailsbutton.get(0).getText().trim();
+	        System.out.println("Row Status: " + statusText);
+
+	        if (statusText.toLowerCase().contains(statusTextToMatch.toLowerCase())) {
+	            
+	            WebElement viewButton = participatedviewdetailsbutton.get(i);
+
+	            // Scroll button into view
+	            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", viewButton);
+	            Thread.sleep(600);
+
+	            // Click using JS for reliability
+	            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", viewButton);
+	            
+	            System.out.println("✅ View button clicked for status containing: " + statusTextToMatch);
+	            
+	            found = true;
+	            break;
+	        }
+	    }
+}
+	
+	
 }

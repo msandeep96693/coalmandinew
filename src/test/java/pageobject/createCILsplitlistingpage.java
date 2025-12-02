@@ -46,18 +46,6 @@ public class createCILsplitlistingpage extends Basicpage {
 	@FindBy(xpath = "//div[@class='ant-form-item-control-input-content']/input")
 	private List<WebElement> Allinputfield;
 	
-	@FindBy(xpath = "(//input[@type='number'])[1]")
-	private WebElement fixedcarbonfield;
-	
-	@FindBy(xpath = "(//input[@type='number'])[2]")
-	private WebElement fixedashfield;
-	
-	@FindBy(xpath = "(//input[@type='number'])[3]")
-	private WebElement volatilematterpercentagefield;
-	
-	@FindBy(xpath = "(//input[@type='number'])[4]")
-	private WebElement moisturepercentagefield;
-	
 	// fixed carbon, moisture and etc field address and EMD%, credit days
 	@FindBy(xpath = "//input[@type='number']") 
 	private List<WebElement> coalspecificationinputfield;
@@ -74,7 +62,7 @@ public class createCILsplitlistingpage extends Basicpage {
 	@FindBy(xpath = "//input[@type='file']")
 	private WebElement uploadfiles;
 	
-	@FindBy(xpath = "//button[.//span[text()='Create Listing']]")  //  //button[@type='submit']
+	@FindBy(xpath = "//button[.='Create Listing']]")  
 	private WebElement createlistingbutton;
 	
 	@FindBy(xpath = "//div[.='My Listings']") 
@@ -94,7 +82,7 @@ public class createCILsplitlistingpage extends Basicpage {
 	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[12]")
 	private WebElement clickondeliverydropdown1;
 	// For CIL 
-	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[8]")
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[16]")
 	private WebElement clickondeliverydropdown2;
 	
 	
@@ -103,29 +91,29 @@ public class createCILsplitlistingpage extends Basicpage {
 	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
 	private List<WebElement> deliveryoptions;
 	
-	@FindBy(xpath = "(//input[@type='text'])[1]")
+	@FindBy(xpath = "(//input[@type='text'])[2]")
 	private WebElement qtyfield;
 	
-	@FindBy(xpath = "(//input[@type='text'])[2]")
+	@FindBy(xpath = "(//input[@type='text'])[3]")
 	private WebElement ratefield;
 	
-	@FindBy(xpath = "(//input[@type='text'])[3]")
+	@FindBy(xpath = "(//input[@type='text'])[4]")
 	private WebElement freepaymentfield;
 	
-	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[9]")
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[17]")
 	private WebElement clickdeliverytermsdropdown;
 	
-	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[10]")
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[18]")
 	private WebElement clickpaymenttermsdropdown;
 	
-	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[11]")
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[19]")
 	private WebElement clickfreeliftingperiodtermsdropdown;
 	
 	@FindBy(xpath = "//input[@type='number']")
 	private WebElement emdfield;
 	
-	@FindBy(xpath = "//span[.='Select shipping address']")
-	private WebElement clickonshippingaddressfield;
+	@FindBy(xpath = "//span[.='Select loading point address']")
+	private WebElement clickonloadingpointaddressfield;
 	
 	@FindBy(xpath = "//div[@class='ant-card-body']")
 	private List<WebElement> listingcreateddata;
@@ -197,13 +185,34 @@ public class createCILsplitlistingpage extends Basicpage {
 	@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']")
 	private List<WebElement> selectthesplitaddresoptionlist;
 	
+	// coal specification
+	@FindBy(xpath = "(//input[@type='number'])[1]")
+	private WebElement carbonpercentagefield;
+	
+	@FindBy(xpath = "(//input[@type='number'])[2]")
+	private WebElement ashpercentagefield;
+	
+	@FindBy(xpath = "(//input[@type='number'])[3]")
+	private WebElement volatilepercentagefield;
+	
+	@FindBy(xpath = "(//input[@type='number'])[4]")
+	private WebElement moisturepercentagefield;
+	
+	@FindBy(xpath = "(//input[@type='number'])[5]")
+	private WebElement EMDfield;
+	
+	@FindBy(xpath = "(//input[@type='text'])[1]")
+	private WebElement railwaysidingfield;
+	
+	@FindBy(xpath = "(//input[@type='search'])[16]")
+	private WebElement searchdeliverymode;
 	
 	
 	
 	//  //div[@class='ant-form-item-control-input-content']/input       ::-->Text field
 	//  //div[@class='ant-col ant-form-item-label css-1tbu3z4']/label   ::-->Labels
 	
-	public void createlistingbysplitqty(
+	public void createlistingbyprivatemines(
 			String email, String pwd, 
 			String businessprofile, String optionName,
 			String coaltype, String optionName1,
@@ -265,83 +274,44 @@ public class createCILsplitlistingpage extends Basicpage {
 		// mine
 		selectDropdownOption(mine, optionName6);
 		
-//		// enter a fixed carbon percentage
-//		enterdataintoinputfield(carbonpercentagelabel, inputdata1);
-//		Thread.sleep(1000);
-//		// enter a ash content
-//		enterdataintoinputfield(ashcontentlabel, inputdata2);
-//		// enter a volatile 
-//		enterdataintoinputfield(volatilelabel, inputdata3);
-//		// enter a moisture 
-//		
-//		Thread.sleep(1000);
-//		enterdataintoinputfield(moisturelabel, inputdata4);
+		// enter a fixed carbon percentage
+		waitforElement(carbonpercentagefield);
+		carbonpercentagefield.sendKeys("24.666");
+		
+		// enter a ash content percentage
+		waitforElement(ashpercentagefield);
+		ashpercentagefield.sendKeys("24.888");
+		
+		// enter a volatile matter percentage
+		waitforElement(volatilepercentagefield);
+		volatilepercentagefield.sendKeys("75.343");
+		
+		// Enter a total moisture percentage
+		waitforElement(moisturepercentagefield);
+		moisturepercentagefield.sendKeys("55.444");
 		
 		// Deliery mode
 //		javascriptclick(clickondeliverydropdown2);
+//		selectOptionFromDropdown("Rail");
 		
-		 JavascriptExecutor js = (JavascriptExecutor) driver;
-		 js.executeScript("arguments[0].scrollIntoView({block: 'center'});", yesradiobutton);
+		waitforElement(searchdeliverymode);
+		searchdeliverymode.sendKeys("Rail");
 		
-		Thread.sleep(2000);
-		waitforElement(yesradiobutton);
-		yesradiobutton.click();
+		Actions action = new Actions(driver);
+		action.sendKeys(Keys.ENTER).perform();
+		action.sendKeys(Keys.ESCAPE).perform();
 		
-		Thread.sleep(3000);
+		// Railway siding code
+		waitforElement(railwaysidingfield);
+		railwaysidingfield.sendKeys("RAIL6567");
 		
 		// qtyfield
-		waitforElement(splittotalqtyfield);
-		splittotalqtyfield.sendKeys("4000");
+		waitforElement(qtyfield);
+		qtyfield.sendKeys("4000");
 		
 		// rate per MT
-		waitforElement(numberofsplitfield);
-		numberofsplitfield.sendKeys("4");
-		
-		
-		Thread.sleep(4000);
-		// split qty fields
-		
-		waitforElement(splitqty1field);
-		splitqty1field.sendKeys("1000");
-		
-		waitforElement(splitrate1field);
-		splitrate1field.sendKeys("1250");
-		
-//		clickonsplitaddress1.click();
-		javascriptclick(clickonsplitaddress1);
-		selectOptionFromDropdown("BTM");
-		
-		waitforElement(splitqty2field);
-		splitqty2field.sendKeys("1000");
-		
-		waitforElement(splitrate2field);
-		splitrate2field.sendKeys("1260");
-		
-		javascriptclick(clickonsplitaddress2);
-		selectOptionFromDropdown("BTM");
-		
-		waitforElement(splitqty3field);
-		splitqty3field.sendKeys("1000");
-		
-		waitforElement(splitrate3field);
-		splitrate3field.sendKeys("1270");
-		
-		javascriptclick(clickonsplitaddress3);
-		selectOptionFromDropdown("BTM");
-		
-		waitforElement(splitqty4field);
-		splitqty4field.sendKeys("1000");
-		
-		waitforElement(splitrate4field);
-		splitrate4field.sendKeys("1280");
-		
-		javascriptclick(clickonsplitaddress4);
-		selectOptionFromDropdown("BTM");
-	
-		
-//		clickondeliverydropdown2.click();
-		javascriptclick(clickondeliverydropdown2);
-		selectOptionFromDropdown("Road");
+		waitforElement(ratefield);
+		ratefield.sendKeys("4");
 		
 		
 		// delivery terms
@@ -355,14 +325,15 @@ public class createCILsplitlistingpage extends Basicpage {
 		selectOptionFromDropdown(paymenttermoption);
 		
 		// emd %
-		waitforElement(splitemdfield);
-		splitemdfield.sendKeys(emdinputdata);
+		waitforElement(emdfield);
+		emdfield.sendKeys(emdinputdata);
 		
+		// free payment period
 	    waitforElement(freepaymentfield);
 	    freepaymentfield.sendKeys(freepaymentinputfield);
 		
+	    // Free lifting period
 		clickfreeliftingperiodtermsdropdown.click();
-		
 		selectOptionFromDropdown("3");
 		
 		// start date		
@@ -371,9 +342,8 @@ public class createCILsplitlistingpage extends Basicpage {
 		// end date
 		EndDate(enddate);
 		
-//		clickonshippingaddressfield.click();
-//		
-//		selectOptionFromDropdown(addressbookdata);
+		clickonloadingpointaddressfield.click();		
+		selectOptionFromDropdown(addressbookdata);
 		
 		waitforElement(textareainputfield);
 		textareainputfield.sendKeys(otherremarkstextarea);
@@ -381,25 +351,26 @@ public class createCILsplitlistingpage extends Basicpage {
 		scrollBottomofPage();
 		
 //		// upload a business profile image
-		uploadFilesMultipleTimes("/home/active34/Downloads/photos /QA club photos/Club 4.png");
+		uploadFilesMultipleTimes("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 		Thread.sleep(1000);
-		uploadFilesMultipleTimes("/home/active34/Downloads/photos /QA club photos/Club 3.png");
+		uploadFilesMultipleTimes("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 		Thread.sleep(1000);
-		uploadFilesMultipleTimes("/home/active34/Downloads/photos /QA club photos/Club 2.jpeg");
+		uploadFilesMultipleTimes("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
 		
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		waitforElement(createlistingbutton);
 		javascriptclick(createlistingbutton);
+		
+		Thread.sleep(2000);
+		waitforElement(submitbutton);
+		javascriptclick(submitbutton);
+
+		Thread.sleep(1000);
 		
 		// wait for OTP
 		// enter otp into textfields and click enter button on keyboard
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
 		wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
-		
-		waitforElement(submitbutton);
-		javascriptclick(submitbutton);
-		
-		Thread.sleep(1000);
 		
 		for(int i = 0; i < listingcreateddata.size(); i++)
 		{
@@ -523,7 +494,7 @@ public class createCILsplitlistingpage extends Basicpage {
 	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
 
 	        // Convert to aria-label format e.g. "4 November 2025"
-	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("MMMM d, yyyy");
 	        String ariaLabelDate = selectedDate.format(ariaFormat);
 
 	        System.out.println("Selecting date: " + ariaLabelDate);
@@ -553,7 +524,7 @@ public class createCILsplitlistingpage extends Basicpage {
 	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
 
 	        // Convert to aria-label format e.g. "4 November 2025"
-	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("MMMM d, yyyy");
 	        String ariaLabelDate = selectedDate.format(ariaFormat);
 
 	        System.out.println("Selecting date: " + ariaLabelDate);
@@ -575,6 +546,8 @@ public class createCILsplitlistingpage extends Basicpage {
 	        e.printStackTrace();
 	    }
 	}
+	
+	
 	
 	public void uploadFilesMultipleTimes(String filePath) {
 

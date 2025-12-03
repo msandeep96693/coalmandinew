@@ -10,7 +10,7 @@ import pageobject.createCILsplitlistingpage;
 
 public class createlistingExecutionclass extends Baseclass {
 	
-	@Test
+	//@Test
 	public void createlistingpage() throws InterruptedException, AWTException
 	{
 		createlist = new pageobject.createCILlistingpage(driver);
@@ -40,12 +40,12 @@ public class createlistingExecutionclass extends Baseclass {
 		
 	}
 	
-	//@Test
-	public void createcilsplitlistingpage() throws InterruptedException, AWTException
+	@Test
+	public void createprivatemineslistingpage() throws InterruptedException, AWTException
 	{
 		
 		createCILsplitlistingpage splitlist = new createCILsplitlistingpage(driver);
-		splitlist.createlistingbysplitqty(
+		splitlist.createlistingbyprivatemines(
 				prop.getProperty("username"), prop.getProperty("password"), 
 				prop.getProperty("businessprofile"),prop.getProperty("Businessprofileoption"), 
 				prop.getProperty("coaltype"), prop.getProperty("coaltypeoption"), 

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -27,6 +28,9 @@ public class createCILlistingpage extends Basicpage {
 	{
 		super(driver);
 	}
+	
+	@FindBy(xpath="//img[@alt='Coal Mandi']/../following-sibling::nav//button") 
+	private List<WebElement> btnsSideBar;
 
 	@FindBy(xpath = "//button[.='Listing']")
 	private WebElement navlistingbutton;
@@ -481,7 +485,7 @@ public class createCILlistingpage extends Basicpage {
 	
 	public void uploadFilesMultipleTimes(String filePath) {
 
-	    JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 	    js.executeScript("arguments[0].style.display='block';", uploadfiles);
 	    
 	        try {
@@ -494,6 +498,17 @@ public class createCILlistingpage extends Basicpage {
 	            System.out.println("Retry Uploaded: " + filePath);
 	        }
 	    }
+	
+	public void ClickAction(String btn) {
+	    switch(btn.toLowerCase()) {
+	        case "dashboard": javascriptclick(btnsSideBar.get(0)); break;
+	        case "user management": javascriptclick(btnsSideBar.get(1)); break;
+	        case "master data": javascriptclick(btnsSideBar.get(2)); break;
+	        case "configuration": javascriptclick(btnsSideBar.get(3)); break;
+	     
+	        default: throw new NoSuchElementException("Button not found: " + btn);
+	    }
+	}
 	}
 
 

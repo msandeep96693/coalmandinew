@@ -17,6 +17,5 @@ public class consumercreatebusinessprofileExecutionclass extends Baseclass {
 				 prop.getProperty("gstnumber"), prop.getProperty("designation"),prop.getProperty("aadharnumber") ,prop.getProperty("IFSCcode"), prop.getProperty("accountno"),
 				 prop.getProperty("confirmaccountno"),prop.getProperty("udyamno"), prop.getProperty("udyamdateno"),
 				 prop.getProperty("iecdateno"), prop.getProperty("DnBno"));		
-		  	
 	}
 }

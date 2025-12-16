@@ -44,7 +44,7 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='text'])[2]")
 		private WebElement gstnumberfield;
 		
-		@FindBy(xpath = "//span[.='Verify GST']") // /html/body/div[1]/div/div/div[2]/div/div/div[3]/div/form/div[3]/div/button/span
+		@FindBy(xpath = "//span[.='Verify GST']")
 		private WebElement verifygstbutton;
 		
 		@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']")
@@ -87,8 +87,6 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='text'])[8]")
 		private WebElement mobilenumberfield;
 		
-		
-		
 		@FindBy(xpath = "(//input[@type='search'])[3]")
 		private WebElement onwershipdropdown;
 		
@@ -121,6 +119,11 @@ import org.testng.annotations.Test;
 		
 		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[2]")
 		private WebElement originofcoaldropdown;
+		
+		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[3]")
+		private WebElement sourceofcoaldropdown;
+		
+		
 		
 		@FindBy(xpath = "//div[.='Domestic']") 
 		private WebElement domesticoption;  
@@ -276,29 +279,30 @@ import org.testng.annotations.Test;
 				String iecdateno, String DnBno 
 				) throws InterruptedException, AWTException  
 		{ 
-			signinpage signin = new signinpage(driver);
-			signin.loginpage("sandeep+consumer@rokkun.io", "Coal@123");   // String email, String pwd, 
 			
-//			createaccountpage account = new createaccountpage(driver);
-//			account.createbusinessaccount(mobilenumber,Rolename ,createpassword, confirmpassword);
+//			signinpage signin = new signinpage(driver);
+//			signin.loginpage("jyoti+consumer@rokkun.io", "Coal@123");   // String email, String pwd, 
+			
+			createaccountpage account = new createaccountpage(driver);
+			account.createbusinessaccount(Rolename, aadharnumber, mobilenumber, createpassword, confirmpassword);
 			
 			// click on the create business profile button
-//			waitforElement(btnCreateBusinessProfile);
-//			btnCreateBusinessProfile.click();
+			waitforElement(btnCreateBusinessProfile);
+			btnCreateBusinessProfile.click();
 			
 			
-			Thread.sleep(3000);
-			waitforElement(profileicon);
-			javascriptclick(profileicon);
-			
-			waitforElement(settingbtn);
-			javascriptclick(settingbtn);
-			
-			waitforElement(businessprofiletab);
-			javascriptclick(businessprofiletab);
-			
-			waitforElement(addbusinessprofilebtn);
-			javascriptclick(addbusinessprofilebtn);
+//			Thread.sleep(3000);
+//			waitforElement(profileicon);
+//			javascriptclick(profileicon);
+//			
+//			waitforElement(settingbtn);
+//			javascriptclick(settingbtn);
+//			
+//			waitforElement(businessprofiletab);
+//			javascriptclick(businessprofiletab);
+//			
+//			waitforElement(addbusinessprofilebtn);
+//			javascriptclick(addbusinessprofilebtn);
 			
 			
 			// upload a business profile image
@@ -334,15 +338,15 @@ import org.testng.annotations.Test;
 			 js1.executeScript("arguments[0].scrollIntoView({block: 'center'});", districtsearchfield);
 			Thread.sleep(1000);
 			 
-			waitforElement(districtsearchfield);
-			districtfield.click();
-			
-			waitforElement(districtsearchfield);
-			districtsearchfield.sendKeys("Anantapur");
-			
-			Thread.sleep(500);
-			Actions action = new Actions(driver);
-			action.sendKeys(Keys.ENTER).perform();
+//			waitforElement(districtsearchfield);
+//			districtfield.click(); 
+//			
+//			waitforElement(districtsearchfield);
+//			districtsearchfield.sendKeys("Anantapur");
+//			
+//			Thread.sleep(500);
+//			Actions action = new Actions(driver);
+//			action.sendKeys(Keys.ENTER).perform();
 			
 			Thread.sleep(1000);
 			// ownership 
@@ -389,6 +393,18 @@ import org.testng.annotations.Test;
 			rob1.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
 			
+			// source of coal
+			waitforElement(sourceofcoaldropdown);
+			sourceofcoaldropdown.click();
+			
+			Thread.sleep(1000);
+			selectDropdownOption(alldropdownoption, "Russian");
+			Thread.sleep(1000);
+			selectDropdownOption(alldropdownoption, "CIL");
+			
+			rob1.keyPress(KeyEvent.VK_ESCAPE);
+			rob1.keyRelease(KeyEvent.VK_ESCAPE);
+			
 			// Is same as business owner
 //			waitforElement(Issameasbusinessownercheckbox);
 //			javascriptclick(Issameasbusinessownercheckbox);
@@ -407,8 +423,8 @@ import org.testng.annotations.Test;
 			aadharnumberfield.sendKeys(aadharnumber);
 			
 			// enter email 
-			waitforElement(emailfield);
-			emailfield.sendKeys(setRandomEmail());
+			waitforElement(emailfield); 
+			emailfield.sendKeys(setRandomEmail()); 
 			
 			// enter contact number
 			waitforElement(mobilenumberfield);

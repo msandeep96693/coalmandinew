@@ -301,36 +301,36 @@ import org.testng.annotations.Test;
 		
 		
 		public void Internationalcreatebusinessprofile(
-				 String mobilenumber, String createpassword, 
+				String Rolename, String mobilenumber, String createpassword, 
 				 String confirmpassword, String Registeredaddress,  String Zipcodenumber,
 				 String DnBnumber, String designation, String Indiandesignation
 				) throws InterruptedException, AWTException  
 		{ 
-			signinpage signin = new signinpage(driver);
-			signin.loginpage("sandeep+international2@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+//			signinpage signin = new signinpage(driver);
+//			signin.loginpage("sandeep+international2@rokkun.io", "Sandeep@123");   // String email, String pwd, 
 			
-//			createaccountpage account = new createaccountpage(driver);
-//			account.createbusinessaccount(mobilenumber, createpassword, confirmpassword);
+			createinternationalaccountpage account = new createinternationalaccountpage(driver);
+			account.createbusinessaccount(Rolename, mobilenumber, createpassword, confirmpassword);
 			
 			// click on the create business profile button
-//			waitforElement(btnCreateBusinessProfile);
-//			btnCreateBusinessProfile.click();
-			
-			waitforElement(profileicon);
-			javascriptclick(profileicon);
-			
-			waitforElement(settingbtn);
-			javascriptclick(settingbtn);
-			
-			waitforElement(businessprofiletab);
-			javascriptclick(businessprofiletab);
-			
-			waitforElement(addbusinessprofilebtn);
-			javascriptclick(addbusinessprofilebtn);
-			
+			waitforElement(btnCreateBusinessProfile);
+			btnCreateBusinessProfile.click();
+//			
+//			waitforElement(profileicon);
+//			javascriptclick(profileicon);
+//			
+//			waitforElement(settingbtn);
+//			javascriptclick(settingbtn);
+//			
+//			waitforElement(businessprofiletab);
+//			javascriptclick(businessprofiletab);
+//			
+//			waitforElement(addbusinessprofilebtn);
+//			javascriptclick(addbusinessprofilebtn);
+//			
 			// upload a business profile image
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
 				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");

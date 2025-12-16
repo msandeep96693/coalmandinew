@@ -79,13 +79,14 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='text'])[6]")
 		private WebElement desginationfield;
 		
+		@FindBy(xpath = "(//input[@type='text'])[7]")
+		private WebElement aadharnumberfield;
+		
 		@FindBy(xpath = "//input[@type='email']")
 		private WebElement emailfield;
 		
-		@FindBy(xpath = "(//input[@type='text'])[7]")
+		@FindBy(xpath = "(//input[@type='text'])[8]")
 		private WebElement mobilenumberfield;
-		
-		
 		
 		@FindBy(xpath = "(//input[@type='search'])[3]")
 		private WebElement onwershipdropdown;
@@ -117,7 +118,10 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[2]")
 		private WebElement originofcoaldropdown;
 		
-		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[3]")
+		@FindBy(xpath = "(//div[@class='ant-select-selector'])[7]")  // (//div[@class='ant-select-selector'])[7]
+		private WebElement sourceofcoaldropdown;  // (//div[@class='ant-select-selection-overflow'])[3]
+		
+		@FindBy(xpath = "(//div[@class='ant-select-selector'])[8]")
 		private WebElement portsofoperationdropdown;
 		
 		@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
@@ -267,24 +271,24 @@ import org.testng.annotations.Test;
 		private WebElement addbusinessprofilebtn;
 		
 		public void importercreatebbusinessprofile(
-				 String name, String aadharnumber, String mobilenumber, String createpassword, 
+				 String Rolename, String aadharnumber, String mobilenumber, String createpassword, 
 				 String confirmpassword, String gstnumber,  
 				 String designation,String ifsccode, String accountno, String confirmaccountno, String udyamno, String udyamdateno,
 				String iecdateno, String DnBno 
 				) throws InterruptedException, AWTException  
 		{ 
 //			signinpage signin = new signinpage(driver);
-//			signin.loginpage("sandeep+importer0000@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+//			signin.loginpage("jyoti+importer@rokkun.io", "Coal@123");   // String email, String pwd, 
 			
 			createaccountpage account = new createaccountpage(driver);
-			account.createbusinessaccount(name,aadharnumber, mobilenumber, createpassword, confirmpassword);
+			account.createbusinessaccount(Rolename,aadharnumber, mobilenumber, createpassword, confirmpassword);
 			
-			// click on the create business profile button
-			waitforElement(btnCreateBusinessProfile);
-			btnCreateBusinessProfile.click();
+//			// click on the create business profile button
+//			waitforElement(btnCreateBusinessProfile);
+//			btnCreateBusinessProfile.click();
 		
 			
-//			Thread.sleep(3000);
+//			Thread.sleep(1000);
 //			waitforElement(profileicon);
 //			javascriptclick(profileicon);
 //			
@@ -368,42 +372,60 @@ import org.testng.annotations.Test;
 			rob1.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
 			
+			Thread.sleep(2000);
+			
+			// source of coal
+		    waitforElement(sourceofcoaldropdown);
+		    sourceofcoaldropdown.click();
+//		    javascriptclick(sourceofcoaldropdown);
+						
+			Thread.sleep(1000);
+			selectDropdownOption(alldropdownoption, "South African");
+			Thread.sleep(1000);
+			selectDropdownOption(alldropdownoption, "Indonesian");
+						
+			rob1.keyPress(KeyEvent.VK_ESCAPE);
+			rob1.keyRelease(KeyEvent.VK_ESCAPE);
+			
+			// ports of operation 
 			waitforElement(portsofoperationdropdown);
 			portsofoperationdropdown.click();
 			
-			Thread.sleep(1000);
-			selectDropdownOption(alldropdownoption, "Klang");
-			Thread.sleep(1500);
-			selectDropdownOption(alldropdownoption, "Shanghai");
+			driver.findElement(By.xpath("//div[.='Port Klang']")).click();
+			driver.findElement(By.xpath("//div[.='Port of Shanghai']")).click();
+			
+//			Thread.sleep(1000);
+//			selectDropdownOption(alldropdownoption, "Klang");
+//			Thread.sleep(1500);
+//			selectDropdownOption(alldropdownoption, "Shanghai");
 		
-			rob.keyPress(KeyEvent.VK_ESCAPE);
+			rob1.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
-
-			
-			
-			
 			
 			// Is same as business owner
-			waitforElement(Issameasbusinessownercheckbox);
-			javascriptclick(Issameasbusinessownercheckbox);
+//			waitforElement(Issameasbusinessownercheckbox);
+//			javascriptclick(Issameasbusinessownercheckbox);
 			
 			// contact info data
 			// -----------------------------------
 			// enter contact name 
-//			waitforElement(contactnamefield);
-//			contactnamefield.sendKeys(setRandomName());
-//			
-//			// enter designation 
-//			waitforElement(desginationfield);
-//			desginationfield.sendKeys(designation);
-//			
-//			// enter email 
-//			waitforElement(emailfield);
-//			emailfield.sendKeys(setRandomEmail());
-//			
-//			// enter contact number
-//			waitforElement(mobilenumberfield);
-//			mobilenumberfield.sendKeys(setRandomMobileNumber());
+			waitforElement(contactnamefield);
+			contactnamefield.sendKeys(setRandomName());
+			
+			// enter designation 
+			waitforElement(desginationfield);
+			desginationfield.sendKeys(designation);
+			
+			waitforElement(aadharnumberfield);
+			aadharnumberfield.sendKeys(aadharnumber);
+			
+			// enter email 
+			waitforElement(emailfield);
+			emailfield.sendKeys(setRandomEmail());
+			
+			// enter contact number
+			waitforElement(mobilenumberfield);
+			mobilenumberfield.sendKeys(setRandomMobileNumber());
 			
 			// click on save & proceed button
 			waitforElement(saveandproceedbutton);
@@ -425,28 +447,26 @@ import org.testng.annotations.Test;
 			
 			// KYC document
 			// authorization 
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("Authorization Letter", uploadFiles, submitButtons);
 			
-			
-			
 //			// PAN Card
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
-			Thread.sleep(3000);
 			
-			// GST Certificate 
-			Thread.sleep(3000);
+			// GST Certificate
+			Thread.sleep(1000);
 			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-			Thread.sleep(3000);
+			
 			
 			// TAN certificate
+			Thread.sleep(1000);
 			waitforElement(TANnumbertextfield);
 			TANnumbertextfield.sendKeys(setRandomMobileNumber());
 			
 			Thread.sleep(1000);
 			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
-			Thread.sleep(3000);
+			
 					
 			// LUT Certificate
 			
@@ -464,12 +484,12 @@ import org.testng.annotations.Test;
 			waitforElement(LUTradioyesbutton);
 			LUTradioyesbutton.click();
 			
-			Thread.sleep(2000);
+			Thread.sleep(1500);
 			waitforElement(LUTnumbertextfield);
 			LUTnumbertextfield.sendKeys(setRandomMobileNumber());
 			
 			kycdocuploadandsubmit("LUT Certificate", uploadFiles, submitButtons);
-			Thread.sleep(2000);			
+			Thread.sleep(2000);		
 			
 			// Bank Details
 			Thread.sleep(1000);
@@ -480,7 +500,7 @@ import org.testng.annotations.Test;
 			waitforElement(verifyifscbtn);
 			javascriptclick(verifyifscbtn);
 			
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			waitforElement(accountnotextfield);
 			accountnotextfield.clear();
 			accountnotextfield.sendKeys(accountno);
@@ -490,13 +510,11 @@ import org.testng.annotations.Test;
 			confirmaccountnotextfield.clear();
 			confirmaccountnotextfield.sendKeys(confirmaccountno);
 		
-			
 			Thread.sleep(1000);
 			kycdocuploadandsubmit("Bank Details", uploadFiles, submitButtons);
 			Thread.sleep(1000);
 			
 			// udyam certificate
-			
 			
 			waitforElement(udyamyesradiobutton);
 			javascriptclick(udyamyesradiobutton);
@@ -522,7 +540,7 @@ import org.testng.annotations.Test;
 			
 			
 //			waitforElement(iecyesradiobutton);
-////			javascriptclick(iecyesradiobutton);
+////		javascriptclick(iecyesradiobutton);
 //			iecyesradiobutton.click();
 			
 			Thread.sleep(1000);

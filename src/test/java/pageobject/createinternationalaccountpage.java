@@ -8,9 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class createaccountpage extends Basicpage {
+public class createinternationalaccountpage extends Basicpage {
 	
-	public createaccountpage(WebDriver driver)
+	public createinternationalaccountpage(WebDriver driver)
 	{
 		super(driver);
 	}
@@ -42,7 +42,7 @@ public class createaccountpage extends Basicpage {
 	private WebElement fullnametextfield;
 	//input[@type='text'])[2]
 //	@FindBy(xpath = "(((//label[@title='WhatsApp Number (Primary)'])[2]/../following-sibling::div/div)[1]/div/span/span//input)[2]") 
-	@FindBy(xpath = "(//input[@type='text'])[3]")
+	@FindBy(xpath = "(//input[@type='text'])[2]")
 	private WebElement whatsappnumbertextfield;
 	
 	@FindBy(xpath = "(((//label[@title='WhatsApp Number (Primary)'])[2]/../following-sibling::div/div)[1]/div/span/span/span/div/div/span/span)[1]/input") 
@@ -86,18 +86,12 @@ public class createaccountpage extends Basicpage {
 	private WebElement aadharnumberfield;
 	
 	
-	public void createbusinessaccount(String Rolename,String aadharnumber, String mobilenumber,  
+	public void createbusinessaccount(String Rolename, String mobilenumber,  
 			String createpassword, String confirmpassword) throws InterruptedException
 	{
 		// click on new to coalmandi button
 		waitforElement(createanaccountbutton);
 		createanaccountbutton.click();
-		
-//		// select subrole :- consumer 
-//		waitforElement(consumerrole);
-//		System.out.println("Role name :-"+ consumerrole.getText());
-//		consumerrole.click();
-		
 		
 		// Consumer, Importer, Trader, Domestic coal Manufacturer, International
 		selectRole(Rolename);
@@ -109,10 +103,7 @@ public class createaccountpage extends Basicpage {
 		// enter a fullname into field
 		waitforElement(fullnametextfield);
 		fullnametextfield.sendKeys(setRandomName());
-		
-		waitforElement(aadharnumberfield);
-		aadharnumberfield.sendKeys(aadharnumber);
-		
+	
 		// enter a whatsapp number 
 		waitforElement(whatsappnumbertextfield);
 		whatsappnumbertextfield.sendKeys(mobilenumber);

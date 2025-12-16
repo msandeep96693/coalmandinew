@@ -10,11 +10,11 @@ import pageobject.createCILsplitlistingpage;
 
 public class createlistingExecutionclass extends Baseclass {
 	
-	//@Test
+	@Test(priority = 1, enabled = true)
 	public void createlistingpage() throws InterruptedException, AWTException
 	{
 		createlist = new pageobject.createCILlistingpage(driver);
-		createlist.createlistingbyprivatemines(
+		createlist.createlistingbyCIL(
 				prop.getProperty("username"), prop.getProperty("password"), 
 				prop.getProperty("businessprofile"),prop.getProperty("Businessprofileoption"), 
 				prop.getProperty("coaltype"), prop.getProperty("coaltypeoption"), 
@@ -40,7 +40,7 @@ public class createlistingExecutionclass extends Baseclass {
 		
 	}
 	
-	@Test
+	@Test(priority = 2, enabled = false)
 	public void createprivatemineslistingpage() throws InterruptedException, AWTException
 	{
 		

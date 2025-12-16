@@ -15,7 +15,8 @@ public class traderandDomesticcreatebusinessprofileExecutionclass extends Basecl
 	public void TradercreatebusinessprofileExecutionclass() throws InterruptedException, AWTException
 	{
 		traderprofile = new TraderandDomesticBusinesscreationpage(driver);
-		traderprofile.tradercreatebbusinessprofile(prop.getProperty("mobilenumber"), prop.getProperty("createpwd"), prop.getProperty("confirmpwd"),
+		traderprofile.tradercreatebbusinessprofile(prop.getProperty("Rolename"), prop.getProperty("mobilenumber"),prop.getProperty("aadharnumber"), 
+				prop.getProperty("createpwd"), prop.getProperty("confirmpwd"),
 				 prop.getProperty("gstnumber"), prop.getProperty("designation"), prop.getProperty("IFSCcode"), prop.getProperty("accountno"),
 				 prop.getProperty("confirmaccountno"),prop.getProperty("udyamno"), prop.getProperty("udyamdateno"),
 				 prop.getProperty("iecdateno"), prop.getProperty("DnBno")

@@ -159,12 +159,17 @@ public class createCILlistingpage extends Basicpage {
 	@FindBy(xpath = "(//input[@type='number'])[3]")
 	private WebElement splitemdfield;
 	
+	@FindBy(xpath = "//h4[.='Seller']")
+	private WebElement sellerbtn;
+	
+	@FindBy(xpath = "//button[.='Continue as Seller']")
+	private WebElement continueassellerbtn;
 	
 	
 	//  //div[@class='ant-form-item-control-input-content']/input       ::-->Text field
 	//  //div[@class='ant-col ant-form-item-label css-1tbu3z4']/label   ::-->Labels
 	
-	public void createlistingbyprivatemines(
+	public void createlistingbyCIL(
 			String email, String pwd, 
 			String businessprofile, String optionName,
 			String coaltype, String optionName1,
@@ -193,6 +198,13 @@ public class createCILlistingpage extends Basicpage {
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
+		
+		// trader  
+		waitforElement(sellerbtn);
+		javascriptclick(sellerbtn);
+		
+		waitforElement(continueassellerbtn);
+		javascriptclick(continueassellerbtn); 
 		
 		// click on listing in left nav bar
 		waitforElement(navlistingbutton);
@@ -277,8 +289,8 @@ public class createCILlistingpage extends Basicpage {
 		// end date
 		EndDate(enddate);
 		
+		// address book 
 		clickonshippingaddressfield.click();
-		
 		selectOptionFromDropdown(addressbookdata);
 		
 		waitforElement(textareainputfield);
@@ -287,34 +299,35 @@ public class createCILlistingpage extends Basicpage {
 		scrollBottomofPage();
 		
 //		// upload a business profile image
-		uploadFilesMultipleTimes("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+		uploadFilesMultipleTimes("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 		Thread.sleep(1000);
-		uploadFilesMultipleTimes("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+		uploadFilesMultipleTimes("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 		Thread.sleep(1000);
-		uploadFilesMultipleTimes("C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg");
+		uploadFilesMultipleTimes("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 		
+		// /home/active34/Downloads/photos /QA club photos/Club 7.png
+		// C:\\Users\\User\\Desktop\\Background images\\Bg-1.jpg
 		Thread.sleep(1000);
-//		waitforElement(createlistingbutton);
-//		javascriptclick(createlistingbutton);
-		
+		waitforElement(createlistingbutton);
+		javascriptclick(createlistingbutton);
 		
 		waitforElement(submitbutton);
 		javascriptclick(submitbutton);
 		
 		// wait for OTP
-				// enter otp into textfields and click enter button on keyboard
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-				wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
+		// enter otp into textfields and click enter button on keyboard
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+		wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
 		
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 		
-		for(int i = 0; i < listingcreateddata.size(); i++)
-		{
-			Thread.sleep(1500);
-			String listdata = listingcreateddata.get(0).getText();
-			System.out.println("Listing data :- "+ listdata);
-			break;
-		}
+//		for(int i = 0; i < listingcreateddata.size(); i++) 
+//		{
+//			Thread.sleep(1500);
+//			String listdata = listingcreateddata.get(0).getText();
+//			System.out.println("Listing data :- "+ listdata);
+//			break;
+//		}
 		
 		Thread.sleep(1000);
 		waitforElement(clickonprofileicon);
@@ -422,6 +435,7 @@ public class createCILlistingpage extends Basicpage {
 	    System.out.println("Dropdown not found for label: " + labelName);
 	}
 
+	// //div[@class='react-calendar__month-view__days']/button
 	
 	public void selectDate(String date) {
 	    try {
@@ -430,7 +444,7 @@ public class createCILlistingpage extends Basicpage {
 	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
 
 	        // Convert to aria-label format e.g. "4 November 2025"
-	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
 	        String ariaLabelDate = selectedDate.format(ariaFormat);
 
 	        System.out.println("Selecting date: " + ariaLabelDate);
@@ -460,7 +474,7 @@ public class createCILlistingpage extends Basicpage {
 	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
 
 	        // Convert to aria-label format e.g. "4 November 2025"
-	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
 	        String ariaLabelDate = selectedDate.format(ariaFormat);
 
 	        System.out.println("Selecting date: " + ariaLabelDate);

@@ -79,10 +79,13 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//input[@type='text'])[6]")
 		private WebElement desginationfield;
 		
+		@FindBy(xpath = "(//input[@type='text'])[7]")
+		private WebElement aadharnumberfield;
+		
 		@FindBy(xpath = "//input[@type='email']")
 		private WebElement emailfield;
 		
-		@FindBy(xpath = "(//input[@type='text'])[7]")
+		@FindBy(xpath = "(//input[@type='text'])[8]")
 		private WebElement mobilenumberfield;
 		
 		
@@ -117,7 +120,7 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[2]")
 		private WebElement originofcoaldropdown;
 		
-		@FindBy(xpath = "(//div[@class='ant-select-selector'])[7]")
+		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[3]")
 		private WebElement sourceofcoaldropdown;
 		
 		@FindBy(xpath = "(//div[@class='ant-select-selection-overflow'])[3]")
@@ -276,45 +279,56 @@ import org.testng.annotations.Test;
 		@FindBy(xpath = "")
 		private WebElement continueasbuyerbtn;
 		
+		// sub business profile form addess
+		
+		@FindBy(xpath = "//button[.='Add Sub-Business Unit']")
+		private WebElement addsubbusinessprofilebtn;
+		
+		@FindBy(xpath = "//textarea")
+		private WebElement subunitaddresstextarea;
+		
+		
+		
 		public void tradercreatebbusinessprofile(
-				 String mobilenumber, String createpassword, 
+				 String Rolename, String mobilenumber, String aadharnumber, String createpassword, 
 				 String confirmpassword, String gstnumber,  
 				 String designation,String ifsccode, String accountno, String confirmaccountno, String udyamno, String udyamdateno,
 				String iecdateno, String DnBno 
 				) throws InterruptedException, AWTException  
 		{ 
-			signinpage signin = new signinpage(driver);
-			//signin.loginpage("sandeep+trader9090@rokkun.io", "Sandeep@123");   // String email, String pwd, 
-			signin.loginpage("sandeep+demodomestic@rokkun.io", "Sandeep@123");
-//			createaccountpage account = new createaccountpage(driver);
-//			account.createbusinessaccount(mobilenumber, createpassword, confirmpassword);
+//			signinpage signin = new signinpage(driver);
+//			//signin.loginpage("sandeep+trader9090@rokkun.io", "Sandeep@123");   // String email, String pwd, 
+//			signin.loginpage("jyoti+trader@rokkun.io", "Coal@123");
+			
+			
+			createaccountpage account = new createaccountpage(driver);
+			account.createbusinessaccount(Rolename, aadharnumber, mobilenumber, createpassword, confirmpassword);
 			
 			// click on the create business profile button
-//			waitforElement(btnCreateBusinessProfile);
-//			btnCreateBusinessProfile.click();
+			waitforElement(btnCreateBusinessProfile);
+			btnCreateBusinessProfile.click();
 			
 //			waitforElement(sellerbtn);
 //			javascriptclick(sellerbtn);
 //			
 //			waitforElement(continueassellerbtn);
 //			javascriptclick(continueassellerbtn);
-			
-			Thread.sleep(3000);
-			waitforElement(profileicon);
-			javascriptclick(profileicon);
-			
-			waitforElement(settingbtn);
-			javascriptclick(settingbtn);
-			
-			waitforElement(businessprofiletab);
-			javascriptclick(businessprofiletab);
-			
-			waitforElement(addbusinessprofilebtn);
-			javascriptclick(addbusinessprofilebtn);
+//			
+//			waitforElement(profileicon);
+//			javascriptclick(profileicon);
+//			
+//			waitforElement(settingbtn);
+//			javascriptclick(settingbtn);
+//			
+//			waitforElement(businessprofiletab);
+//			javascriptclick(businessprofiletab);
+//			
+//			waitforElement(addbusinessprofilebtn);
+//			javascriptclick(addbusinessprofilebtn);
 			
 			// upload a business profile image
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
 				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
@@ -337,8 +351,12 @@ import org.testng.annotations.Test;
 			// enter gst verify button
 			waitforElement(verifygstbutton);
 			verifygstbutton.click();
-	
-			Thread.sleep(3000);
+			
+			Thread.sleep(2000);
+			
+			// remember me as textfield
+			waitforElement(rememberastextField);      
+			rememberastextField.sendKeys(setRandomBusinessName());
 			
 			// ownership 
 			waitforElement(onwershipdropdown);
@@ -386,13 +404,14 @@ import org.testng.annotations.Test;
 			// Source of coal
 			waitforElement(sourceofcoaldropdown);
 			sourceofcoaldropdown.click();
+//			javascriptclick(sourceofcoaldropdown);
 			
 			Thread.sleep(1000);
-			selectDropdownOption(alldropdownoption, "Private");
+			selectDropdownOption(alldropdownoption, "South African");
 			Thread.sleep(1500);
-			selectDropdownOption(alldropdownoption, "CIL");
+			selectDropdownOption(alldropdownoption, "Indonesian");
 		
-			rob.keyPress(KeyEvent.VK_ESCAPE);
+			rob1.keyPress(KeyEvent.VK_ESCAPE);
 			rob1.keyRelease(KeyEvent.VK_ESCAPE);
 			
 			// enter total production value
@@ -401,36 +420,138 @@ import org.testng.annotations.Test;
 			
 			waitforElement(allowedsellingvolumefield);
 			allowedsellingvolumefield.sendKeys("1250");
-
-			
-			
-			
 			
 			// Is same as business owner
-			waitforElement(Issameasbusinessownercheckbox);
-			javascriptclick(Issameasbusinessownercheckbox);
+//			waitforElement(Issameasbusinessownercheckbox);
+//			javascriptclick(Issameasbusinessownercheckbox);
 			
 			// contact info data
 			// -----------------------------------
 			// enter contact name 
-//			waitforElement(contactnamefield);
-//			contactnamefield.sendKeys(setRandomName());
-//			
-//			// enter designation 
-//			waitforElement(desginationfield);
-//			desginationfield.sendKeys(designation);
-//			
-//			// enter email 
-//			waitforElement(emailfield);
-//			emailfield.sendKeys(setRandomEmail());
-//			
-//			// enter contact number
-//			waitforElement(mobilenumberfield);
-//			mobilenumberfield.sendKeys(setRandomMobileNumber());
+			waitforElement(contactnamefield);
+			contactnamefield.sendKeys(setRandomName());
+			
+			// enter designation 
+			waitforElement(desginationfield);
+			desginationfield.sendKeys(designation);
+			
+			waitforElement(aadharnumberfield);
+			aadharnumberfield.sendKeys(aadharnumber);
+			
+			// enter email 
+			waitforElement(emailfield);
+			emailfield.sendKeys(setRandomEmail());
+			
+			// enter contact number
+			waitforElement(mobilenumberfield);
+			mobilenumberfield.sendKeys(setRandomMobileNumber());
 			
 			// click on save & proceed button
 			waitforElement(saveandproceedbutton);
 			saveandproceedbutton.click();
+
+			// sub business profile form  ------------------------------------------------
+			
+//			Thread.sleep(1000);
+//
+//			JavascriptExecutor js2 = (JavascriptExecutor) driver;
+//			js2.executeScript("arguments[0].scrollIntoView({block: 'center'});", addsubbusinessprofilebtn);
+//			
+//			Thread.sleep(1000);
+//			waitforElement(addsubbusinessprofilebtn);
+//			addsubbusinessprofilebtn.click();
+//			
+//			// remember me as textfield
+//			waitforElement(rememberastextField);      
+//			rememberastextField.sendKeys(setRandomBusinessName());
+//				
+//			waitforElement(subunitaddresstextarea);
+//			subunitaddresstextarea.sendKeys("BTM 1st stage, Bangalore ");
+//			
+//			// industry
+//			waitforElement(industrydropdown);
+//			industrydropdown.click();
+//						
+//			Thread.sleep(1000);
+//			selectDropdownOption(alldropdownoption, "Brick Kilns");			
+//						
+//			// product to trade
+//			waitforElement(producttotradedropdown);
+//			producttotradedropdown.click();
+//						
+//			Thread.sleep(1000);
+//			selectDropdownOption(alldropdownoption, "Metallurgical");
+//			Thread.sleep(1000);
+//			selectDropdownOption(alldropdownoption, "Thermal");
+//						
+//			Thread.sleep(1000);
+//			rob.keyPress(KeyEvent.VK_ESCAPE);
+//			rob.keyRelease(KeyEvent.VK_ESCAPE);
+//						
+//			Hiddenelement(originofcoaldropdown);
+//						
+//			// origin of coal
+//			waitforElement(originofcoaldropdown);
+//			originofcoaldropdown.click();
+//						
+//			Thread.sleep(1000);
+//			selectDropdownOption(alldropdownoption, "Domestic");
+//			Thread.sleep(1000);
+//			selectDropdownOption(alldropdownoption, "International");
+//					
+//			rob1.keyPress(KeyEvent.VK_ESCAPE);
+//			rob1.keyRelease(KeyEvent.VK_ESCAPE);
+//						
+//			// Source of coal
+//			waitforElement(sourceofcoaldropdown);
+//			sourceofcoaldropdown.click();
+////			javascriptclick(sourceofcoaldropdown);
+//						
+//			Thread.sleep(1000);
+//			selectDropdownOption(alldropdownoption, "South African");
+//			Thread.sleep(1500);
+//			selectDropdownOption(alldropdownoption, "Indonesian");
+//					
+//			rob1.keyPress(KeyEvent.VK_ESCAPE);
+//			rob1.keyRelease(KeyEvent.VK_ESCAPE);
+//						
+//			// enter total production value
+//			waitforElement(totalproductionvaluefield);
+//			totalproductionvaluefield.sendKeys("12500");
+//						
+//			waitforElement(allowedsellingvolumefield);
+//			allowedsellingvolumefield.sendKeys("1250");
+//						
+//				// Is same as business owner
+////				waitforElement(Issameasbusinessownercheckbox);
+////				javascriptclick(Issameasbusinessownercheckbox);
+//					
+//				// contact info data
+//				// -----------------------------------
+//			   // enter contact name 
+//				waitforElement(contactnamefield);
+//				contactnamefield.sendKeys(setRandomName());
+//						
+//				// enter designation 
+//				waitforElement(desginationfield);
+//				desginationfield.sendKeys(designation);
+//						
+//				waitforElement(aadharnumberfield);
+//				aadharnumberfield.sendKeys(aadharnumber);
+//						
+//				// enter email 
+//				waitforElement(emailfield);
+//				emailfield.sendKeys(setRandomEmail());
+//						
+//				// enter contact number
+//				waitforElement(mobilenumberfield);
+//				mobilenumberfield.sendKeys(setRandomMobileNumber());
+//						
+//				// click on save & proceed button
+//				waitforElement(saveandproceedbutton);
+//				saveandproceedbutton.click();			
+			
+			// ----------------------------------------------------------------------------------
 			
 			scrollBottomofPage();
 			
@@ -448,10 +569,13 @@ import org.testng.annotations.Test;
 			
 			// KYC document
 			// authorization 
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			kycdocuploadandsubmit("Authorization Letter", uploadFiles, submitButtons);
 			
-			
+			// need to implement
+//			WebElement uploadInput1 = driver.findElement(By.xpath("(//input[@type='file'])[2]"));
+//			JavascriptExecutor js = (JavascriptExecutor) driver;
+//            js.executeScript("arguments[0].style.display='block';", uploadInput1);
 			
 //			// PAN Card
 			Thread.sleep(3000);
@@ -481,8 +605,8 @@ import org.testng.annotations.Test;
 //			// Scroll to element
 //			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 			
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+			JavascriptExecutor js5 = (JavascriptExecutor) driver;
+			js5.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
 			
 			waitforElement(LUTradioyesbutton);
 			LUTradioyesbutton.click();

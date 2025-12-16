@@ -6,7 +6,7 @@
       <class name="TextExecution.createlistingExecutionclass">
         <methods>
           <include name="tear"/>
-          <include name="createlistingpage"/>
+          <include name="createprivatemineslistingpage"/>
           <include name="setup"/>
         </methods>
       </class> <!-- TextExecution.createlistingExecutionclass -->

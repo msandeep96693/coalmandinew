@@ -6,11 +6,11 @@ import org.testng.annotations.Test;
 
 import Basepackage.Baseclass;
 import pageobject.createCILlistingpage;
-import pageobject.createCILsplitlistingpage;
+import pageobject.createlistingbyprivatemines;
 
 public class createlistingExecutionclass extends Baseclass {
 	
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 1, enabled = false)
 	public void createlistingpage() throws InterruptedException, AWTException
 	{
 		createlist = new pageobject.createCILlistingpage(driver);
@@ -40,12 +40,12 @@ public class createlistingExecutionclass extends Baseclass {
 		
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void createprivatemineslistingpage() throws InterruptedException, AWTException
 	{
 		
-		createCILsplitlistingpage splitlist = new createCILsplitlistingpage(driver);
-		splitlist.createlistingbyprivatemines(
+		createlistingbyprivatemines mines = new createlistingbyprivatemines(driver);
+		mines.createlistingbyprivatemines(
 				prop.getProperty("username"), prop.getProperty("password"), 
 				prop.getProperty("businessprofile"),prop.getProperty("Businessprofileoption"), 
 				prop.getProperty("coaltype"), prop.getProperty("coaltypeoption"), 

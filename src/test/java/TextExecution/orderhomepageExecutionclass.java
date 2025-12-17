@@ -26,9 +26,11 @@ public class orderhomepageExecutionclass extends Baseclass {
 	public void orderlistselectvendor() throws InterruptedException
 	{
 		order = new orderhomepage(driver);
-		order.orderselectvendor(prop.getProperty("username"), prop.getProperty("password"),
+		order.Buyerordersplitandselectvendor(prop.getProperty("username"), prop.getProperty("password"),
 				prop.getProperty("actionstatusname"));
 	}
+	
+	
 	
 
 }

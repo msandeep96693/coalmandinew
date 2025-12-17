@@ -39,7 +39,7 @@ public class listingNegotiationactionpage extends Basicpage {
 	@FindBy(xpath = "//tbody[@class='ant-table-tbody']/tr/td/span")
 	private  List<WebElement> trustblockbusinessnamelist;
 	
-	@FindBy(xpath = "//div[.='Participated']")   // //div[.='Participated']  // //div[.='Trusted']
+	@FindBy(xpath = "//div[.='Trusted']")   // //div[.='Participated']  // //div[.='Trusted']
 	private WebElement trustedtab;
 	
 	@FindBy(xpath = "//button[.='View Details']")
@@ -131,6 +131,29 @@ public class listingNegotiationactionpage extends Basicpage {
 	
 	
 	
+	// Negotiation 
+	@FindBy(xpath = "//button[.='Negotiations']")
+	private WebElement Negotiationsidebtn;
+	
+	@FindBy(xpath = "//div[@data-node-key='negotiations']")
+	private WebElement negotiationsectiontab;
+	
+	@FindBy(xpath = "//button[.='Accept']")
+	private WebElement acceptbtn;
+	
+	@FindBy(xpath = "//button[.='Confirm']")
+	private WebElement confirmbtn;
+	
+	@FindBy(xpath = "//button[@aria-label='Close']")
+	private WebElement chatcloseicon;
+	
+	@FindBy(xpath = "//h4[.='Seller']")
+	private WebElement sellerbtn;
+	
+	@FindBy(xpath = "//button[.='Continue as Seller']")
+	private WebElement continueassellerbtn;
+	
+	
 	
 	public void ExpressInterestOrdergenerate(String email, String pwd, String businessname,
 			String trustedbusinessname ) throws InterruptedException
@@ -138,7 +161,7 @@ public class listingNegotiationactionpage extends Basicpage {
 		
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 
 		//switchtoanothertab();
 		
@@ -189,32 +212,27 @@ public class listingNegotiationactionpage extends Basicpage {
 		waitforElement(clickonsubmitbtn);
 		javascriptclick(clickonsubmitbtn);
 		
+		Thread.sleep(25000);
 		
-//		selectDropdownOption(selectthebusinessprofileoption, businessname);
-		
-		// enter otp into textfields and click enter button on keyboard
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-		wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
-		
-		Thread.sleep(1000);
 		waitforElement(clickonprofileicon);
 		javascriptclick(clickonprofileicon);
 		
+		Thread.sleep(1000);
 		waitforElement(logoutbtn);
 		javascriptclick(logoutbtn);
 		
 	}
 	
-	public void negotiationordergeneratewithoutsplit(String email, String pwd, String businessname, 
+	public void negotiationordergenerate(String email, String pwd, String businessname, 
 			String offerQTY, String offerRATE, String trustedbusinessname ) throws InterruptedException
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 
 		//switchtoanothertab();
 		
-//		Thread.sleep(3000);
+//		Thread.sleep(2000);
 //		waitforElement(profileicon);
 //		javascriptclick(profileicon);
 //		
@@ -227,7 +245,9 @@ public class listingNegotiationactionpage extends Basicpage {
 //		waitforElement(searchtrustblocklist);
 //		searchtrustblocklist.sendKeys(trustedbusinessname);
 //		
-//		clickbuttonsContains("Mark as Trust");
+//		driver.findElement(By.xpath("//button[.='Mark as Trust']")).click();
+//		
+////		clickbuttonsContains("Mark as Trust");
 //		
 //		Thread.sleep(1000);
 //		for(int i = 0; i<= trustblockbusinessnamelist.size(); i++)
@@ -236,6 +256,7 @@ public class listingNegotiationactionpage extends Basicpage {
 //			 System.out.println("List data :- "+ listdetailsdata);
 //		}
 		
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//button[.='Listing']")).click();
 		
 		waitforElement(trustedtab);
@@ -268,20 +289,68 @@ public class listingNegotiationactionpage extends Basicpage {
 		waitforElement(submitofferotpbtn);
 		javascriptclick(submitofferotpbtn);
 		
-		Thread.sleep(4000);
+		Thread.sleep(25000);
 		
-		// enter otp into textfields and click enter button on keyboard
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
-				wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
-				
-				Thread.sleep(1000);
 				waitforElement(clickonprofileicon);
 				javascriptclick(clickonprofileicon);
 				
+				Thread.sleep(1000);
 				waitforElement(logoutbtn);
 				javascriptclick(logoutbtn);
 			
 	}
+	
+	public void Onwernegotiationordergenerate(String email, String pwd ) throws InterruptedException
+	{
+		signinpage signin = new signinpage(driver);
+		signin.loginpage(email, pwd);
+		Thread.sleep(1000);
+		
+		waitforElement(sellerbtn);
+		javascriptclick(sellerbtn);
+		
+		waitforElement(continueassellerbtn);
+		javascriptclick(continueassellerbtn);
+		
+		waitforElement(Negotiationsidebtn);
+		javascriptclick(Negotiationsidebtn);
+		
+		Thread.sleep(2000);
+		
+		driver.findElement(By.xpath("//div[.='My Listings']")).click();
+		
+		clickviewdetailsbuttonsContains("View");
+		
+		waitforElement(negotiationsectiontab);
+//		javascriptclick(negotiationsectiontab);
+		negotiationsectiontab.click();
+		
+		clickviewdetailsbuttonsContains("View");
+		
+		
+		
+		waitforElement(acceptbtn);
+		javascriptclick(acceptbtn);
+		 
+		waitforElement(confirmbtn);
+		confirmbtn.click();
+		
+		Thread.sleep(25000);  // OTP wait 
+		
+		waitforElement(chatcloseicon);
+		chatcloseicon.click();
+		
+		
+		waitforElement(clickonprofileicon);
+		javascriptclick(clickonprofileicon);
+		
+		Thread.sleep(1000);
+		waitforElement(logoutbtn);
+		javascriptclick(logoutbtn);
+		
+	}
+	
+	
 	
 	public void switchtoanothertab()
 	{

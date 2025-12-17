@@ -98,7 +98,7 @@ public class createlistingbyprivatemines extends Basicpage {
 	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[12]")
 	private WebElement clickondeliverydropdown1;
 	// For CIL 
-	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[8]")
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[16]")
 	private WebElement clickondeliverydropdown2;
 	
 	
@@ -116,13 +116,13 @@ public class createlistingbyprivatemines extends Basicpage {
 	@FindBy(xpath = "(//input[@type='text'])[3]")
 	private WebElement freepaymentfield;
 	
-	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[9]")
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[17]")
 	private WebElement clickdeliverytermsdropdown;
 	
-	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[10]")
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[18]")
 	private WebElement clickpaymenttermsdropdown;
 	
-	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[11]")
+	@FindBy(xpath = "(//span[@class='ant-select-selection-item'])[19]")
 	private WebElement clickfreeliftingperiodtermsdropdown;
 	
 	@FindBy(xpath = "//input[@type='number']")
@@ -175,9 +175,10 @@ public class createlistingbyprivatemines extends Basicpage {
 			String coaltype, String optionName1,
 			String originalcoaltype, String optionName2, 
 			String sourceofcoal, String optionName3, 
+			String privatemines, String privateminesoption,
 			String gradeofcoal, String optionName4, 
 			String cilsubsidairy, String optionName5, 
-			String mine, String optionName6,
+			
 			
 			// coal specification 
 			String carbonpercentagelabel, String inputdata1,
@@ -226,41 +227,43 @@ public class createlistingbyprivatemines extends Basicpage {
 		// source of coal
 		selectDropdownOption(sourceofcoal, optionName3);
 		
+		// private mines dropdown
+		selectDropdownOption(privatemines, privateminesoption);
+		
 		// grade of coal
 		selectDropdownOption(gradeofcoal, optionName4);
 		
 		// cil subsidairy
 		selectDropdownOption(cilsubsidairy, optionName5);
 		
-		// mine
-		selectDropdownOption(mine, optionName6);
 		
 //		// enter a fixed carbon percentage
-//		enterdataintoinputfield(carbonpercentagelabel, inputdata1);
-//		Thread.sleep(1000);
-//		// enter a ash content
-//		enterdataintoinputfield(ashcontentlabel, inputdata2);
-//		// enter a volatile 
-//		enterdataintoinputfield(volatilelabel, inputdata3);
-//		// enter a moisture 
-//		
-//		Thread.sleep(1000);
-//		enterdataintoinputfield(moisturelabel, inputdata4);
+		enterdataintoinputfield(carbonpercentagelabel, inputdata1);
+		Thread.sleep(1000);
+		// enter a ash content
+		enterdataintoinputfield(ashcontentlabel, inputdata2);
+		// enter a volatile 
+		enterdataintoinputfield(volatilelabel, inputdata3);
+		// enter a moisture 
+		
+		Thread.sleep(1000);
+		enterdataintoinputfield(moisturelabel, inputdata4);
 		
 		// Deliery mode
 //		javascriptclick(clickondeliverydropdown2);
 		clickondeliverydropdown2.click();
-		
-		selectOptionFromDropdown(deliverymodeoption);
+//		
+//		Thread.sleep(2000);
+		selectOptionFromDropdown("Road"); // deliverymodeoption
 		
 		
 		// qtyfield
 		waitforElement(qtyfield);
-		qtyfield.sendKeys(QuantityMTinputdata);
+		qtyfield.sendKeys("1000");  // QuantityMTinputdata
 		
 		// rate per MT
 		waitforElement(ratefield);
-		ratefield.sendKeys(rateperMTinputdata);
+		ratefield.sendKeys("2500");  // rateperMTinputdata
 		
 		// delivery terms
 		clickdeliverytermsdropdown.click();
@@ -272,10 +275,15 @@ public class createlistingbyprivatemines extends Basicpage {
 		
 		selectOptionFromDropdown(paymenttermoption);
 		
-		// emd %
-		waitforElement(emdfield);
-		emdfield.sendKeys(emdinputdata);
+		Thread.sleep(2000);
+		WebElement input = driver.findElement(By.xpath("(//input[@type='number'])[5]"));
+		input.sendKeys("45");
+
 		
+//		// emd %
+//		waitforElement(emdfield);
+//		emdfield.sendKeys("45");  // emdinputdata
+		 
 	    waitforElement(freepaymentfield);
 	    freepaymentfield.sendKeys(freepaymentinputfield);
 		
@@ -318,18 +326,10 @@ public class createlistingbyprivatemines extends Basicpage {
 		// enter otp into textfields and click enter button on keyboard
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
 		wait.until(d -> verifyotppage.stream().allMatch(field -> !field.getAttribute("value").isEmpty()));
+				
+	
 		
-//		Thread.sleep(1000);
-		
-//		for(int i = 0; i < listingcreateddata.size(); i++) 
-//		{
-//			Thread.sleep(1500);
-//			String listdata = listingcreateddata.get(0).getText();
-//			System.out.println("Listing data :- "+ listdata);
-//			break;
-//		}
-		
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		waitforElement(clickonprofileicon);
 		javascriptclick(clickonprofileicon);
 		

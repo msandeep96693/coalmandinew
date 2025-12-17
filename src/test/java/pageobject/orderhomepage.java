@@ -29,7 +29,7 @@ public class orderhomepage extends Basicpage {
 	@FindBy(xpath = "//button[.='View Details']")
 	private List<WebElement> viewdetailsbutton;
 	
-	@FindBy(xpath = "//div[@class='ant-card-body']")
+	@FindBy(xpath = "//tbody[@class='ant-table-tbody']/tr")
 	private List<WebElement> orderlistdata;
 	
 	@FindBy(xpath = "//button[.='Select Vendors']")
@@ -40,6 +40,19 @@ public class orderhomepage extends Basicpage {
 	
 	@FindBy(xpath = "(//button[@type='button'])[6]")
 	private WebElement selectvendorsbtn;
+	
+	@FindBy(xpath = "//button[.='View Details']")
+	private List<WebElement> participatedviewdetailsbutton;
+	
+	@FindBy(xpath = "//button[.='Split Order']")
+	private WebElement splitorderbtn;
+	
+	@FindBy(xpath = "(//input[@type='number'])[2]")
+	private WebElement numberofsplitfield;
+	
+	
+	
+	
 	
 	@FindBy(xpath = "//span[@aria-label='user']")
 	private WebElement clickonprofileicon;
@@ -92,7 +105,7 @@ public class orderhomepage extends Basicpage {
 		Thread.sleep(1000);
 		for(int i = 0; i<orderlistdata.size(); i++)
 		{
-			String listdata = orderlistdata.get(0).getText();
+			String listdata = orderlistdata.get(1).getText();
 			System.out.println(" list data :- "+listdata);
 		}
 		
@@ -106,7 +119,7 @@ public class orderhomepage extends Basicpage {
 		
 	}
 	
-	public void orderselectvendor(String email, String pwd, String actionstatusname) throws InterruptedException
+	public void Buyerordersplitandselectvendor(String email, String pwd, String actionstatusname) throws InterruptedException
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
@@ -117,6 +130,15 @@ public class orderhomepage extends Basicpage {
 		
 		clickViewButtonUsingContains(actionstatusname);  // Vendor Selection Pending
 		Thread.sleep(2000);
+		
+		clickviewdetailsbuttonsContains("View");
+		
+		
+		
+		
+		
+		
+		
 		
 		scrollBottomofPage();
 		
@@ -187,6 +209,35 @@ public class orderhomepage extends Basicpage {
 	        }
 	    }
 	}
+	
+	public void clickviewdetailsbuttonsContains(String statusTextToMatch) throws InterruptedException {
+
+	    boolean found = false;
+
+	    for (int i = 0; i < viewdetailsbutton.size(); i++) {
+	        
+	    	Thread.sleep(2000);
+	        String statusText = viewdetailsbutton.get(0).getText().trim();
+	        System.out.println("Row Status: " + statusText);
+
+	        if (statusText.toLowerCase().contains(statusTextToMatch.toLowerCase())) {
+	            
+	            WebElement viewButton = participatedviewdetailsbutton.get(i);
+
+	            // Scroll button into view
+	            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", viewButton);
+	            Thread.sleep(600);
+
+	            // Click using JS for reliability
+	            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", viewButton);
+	            
+	            System.out.println("✅ View button clicked for status containing: " + statusTextToMatch);
+	            
+	            found = true;
+	            break;
+	        }
+	    }
+}
 
 
 	

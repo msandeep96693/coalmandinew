@@ -50,10 +50,11 @@ public class createlistingExecutionclass extends Baseclass {
 				prop.getProperty("businessprofile"),prop.getProperty("Businessprofileoption"), 
 				prop.getProperty("coaltype"), prop.getProperty("coaltypeoption"), 
 				prop.getProperty("origincoal"),prop.getProperty("origincoaloption"),
-				prop.getProperty("sourceofcoal"), prop.getProperty("sourceofcoaloption"),
+				prop.getProperty("sourceofcoal"), prop.getProperty("sourceofcoalmineoption"),
+				prop.getProperty("privatemines"), prop.getProperty("privateminesoption"),
 				prop.getProperty("gradeofcoal"),prop.getProperty("gradeofcoaloption"), 
 				prop.getProperty("cilsubsidiary"),prop.getProperty("cilsubsidairyoption"), 
-				prop.getProperty("mine"), prop.getProperty("mineoption"),
+
 				
 				// coal specification
 				prop.getProperty("carbonpercentage"), prop.getProperty("carbonpercentageinputdata"),

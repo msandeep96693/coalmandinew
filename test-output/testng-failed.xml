@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TextExecution.negotiationexecutionclass">
+      <class name="TextExecution.orderhomepageExecutionclass">
         <methods>
-          <include name="OwnerNegotiation"/>
           <include name="tear"/>
           <include name="setup"/>
+          <include name="ownerorderselectvendor"/>
         </methods>
-      </class> <!-- TextExecution.negotiationexecutionclass -->
+      </class> <!-- TextExecution.orderhomepageExecutionclass -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

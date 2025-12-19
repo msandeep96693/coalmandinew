@@ -153,7 +153,45 @@ public class listingNegotiationactionpage extends Basicpage {
 	@FindBy(xpath = "//button[.='Continue as Seller']")
 	private WebElement continueassellerbtn;
 	
-	
+	public void AddTrustedbusinessprofile(String email, String pwd,
+			String trustedbusinessname ) throws InterruptedException
+	{		
+		
+		signinpage signin = new signinpage(driver);
+		signin.loginpage(email, pwd);
+		Thread.sleep(1000);
+		
+		Thread.sleep(3000);
+		waitforElement(profileicon);
+		javascriptclick(profileicon);
+		
+		waitforElement(settingbtn);
+		javascriptclick(settingbtn);
+		
+		waitforElement(profileaccessrulesbutton);
+		javascriptclick(profileaccessrulesbutton);
+
+		waitforElement(searchtrustblocklist);
+		searchtrustblocklist.sendKeys(trustedbusinessname);
+		
+		clickbuttonsContains("Mark as Trust");
+		
+		Thread.sleep(1000);
+		for(int i = 0; i<= trustblockbusinessnamelist.size(); i++)
+		{
+			 String listdetailsdata = trustblockbusinessnamelist.get(1).getText();
+			 System.out.println("List data :- "+ listdetailsdata);
+		}
+		
+		waitforElement(clickonprofileicon);
+		javascriptclick(clickonprofileicon);
+		
+		Thread.sleep(1000);
+		waitforElement(logoutbtn);
+		javascriptclick(logoutbtn);
+		
+		
+	}
 	
 	public void ExpressInterestOrdergenerate(String email, String pwd, String businessname,
 			String trustedbusinessname ) throws InterruptedException
@@ -165,36 +203,13 @@ public class listingNegotiationactionpage extends Basicpage {
 
 		//switchtoanothertab();
 		
-//		Thread.sleep(3000);
-//		waitforElement(profileicon);
-//		javascriptclick(profileicon);
-//		
-//		waitforElement(settingbtn);
-//		javascriptclick(settingbtn);
-//		
-//		waitforElement(profileaccessrulesbutton);
-//		javascriptclick(profileaccessrulesbutton);
-//
-//		waitforElement(searchtrustblocklist);
-//		searchtrustblocklist.sendKeys(trustedbusinessname);
-//		
-//		clickbuttonsContains("Mark as Trust");
-//		
-//		Thread.sleep(1000);
-//		for(int i = 0; i<= trustblockbusinessnamelist.size(); i++)
-//		{
-//			 String listdetailsdata = trustblockbusinessnamelist.get(1).getText();
-//			 System.out.println("List data :- "+ listdetailsdata);
-//		}
-		
 		driver.findElement(By.xpath("//button[.='Listing']")).click();
 		
 		waitforElement(trustedtab);
 		javascriptclick(trustedtab);
 		
-		clickviewdetailsbuttonsContains("View");
+		clickviewdetailsbuttonsContains("View", 0);
 
-		
 		scrollBottomofPage();
 		
 		waitforElement(expressinterestbtn);
@@ -212,7 +227,7 @@ public class listingNegotiationactionpage extends Basicpage {
 		waitforElement(clickonsubmitbtn);
 		javascriptclick(clickonsubmitbtn);
 		
-		Thread.sleep(25000);
+		Thread.sleep(25000);  // OTP WAIT
 		
 		waitforElement(clickonprofileicon);
 		javascriptclick(clickonprofileicon);
@@ -232,37 +247,13 @@ public class listingNegotiationactionpage extends Basicpage {
 
 		//switchtoanothertab();
 		
-//		Thread.sleep(2000);
-//		waitforElement(profileicon);
-//		javascriptclick(profileicon);
-//		
-//		waitforElement(settingbtn);
-//		javascriptclick(settingbtn);
-//		
-//		waitforElement(profileaccessrulesbutton);
-//		javascriptclick(profileaccessrulesbutton);
-//
-//		waitforElement(searchtrustblocklist);
-//		searchtrustblocklist.sendKeys(trustedbusinessname);
-//		
-//		driver.findElement(By.xpath("//button[.='Mark as Trust']")).click();
-//		
-////		clickbuttonsContains("Mark as Trust");
-//		
-//		Thread.sleep(1000);
-//		for(int i = 0; i<= trustblockbusinessnamelist.size(); i++)
-//		{
-//			 String listdetailsdata = trustblockbusinessnamelist.get(1).getText();
-//			 System.out.println("List data :- "+ listdetailsdata);
-//		}
-		
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//button[.='Listing']")).click();
 		
 		waitforElement(trustedtab);
 		javascriptclick(trustedtab);
 		
-		clickviewdetailsbuttonsContains("View");
+		clickviewdetailsbuttonsContains("View", 0);
 		
 		scrollBottomofPage();
 		
@@ -319,15 +310,13 @@ public class listingNegotiationactionpage extends Basicpage {
 		
 		driver.findElement(By.xpath("//div[.='My Listings']")).click();
 		
-		clickviewdetailsbuttonsContains("View");
+		clickviewdetailsbuttonsContains("View",0);
 		
 		waitforElement(negotiationsectiontab);
 //		javascriptclick(negotiationsectiontab);
 		negotiationsectiontab.click();
 		
-		clickviewdetailsbuttonsContains("View");
-		
-		
+		clickviewdetailsbuttonsContains("View",0);
 		
 		waitforElement(acceptbtn);
 		javascriptclick(acceptbtn);
@@ -404,14 +393,14 @@ public class listingNegotiationactionpage extends Basicpage {
 }
 	
 	
-	public void clickviewdetailsbuttonsContains(String statusTextToMatch) throws InterruptedException {
+	public void clickviewdetailsbuttonsContains(String statusTextToMatch, int index) throws InterruptedException {
 
 	    boolean found = false;
 
 	    for (int i = 0; i < viewdetailsbutton.size(); i++) {
 	        
 	    	Thread.sleep(2000);
-	        String statusText = viewdetailsbutton.get(0).getText().trim();
+	        String statusText = viewdetailsbutton.get(index).getText().trim();
 	        System.out.println("Row Status: " + statusText);
 
 	        if (statusText.toLowerCase().contains(statusTextToMatch.toLowerCase())) {

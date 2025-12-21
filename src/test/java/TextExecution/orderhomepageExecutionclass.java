@@ -40,6 +40,12 @@ public class orderhomepageExecutionclass extends Baseclass {
 				prop.getProperty("actionstatusname"));
 	}
 	
+	@Test(priority =3, enabled = true)
+	public void customerselleradddispatch() throws InterruptedException
+	{
+		order = new orderhomepage(driver);
+		order.selleradddispatch(prop.getProperty("ownername"), prop.getProperty("password"));
+	}
 	
 	
 

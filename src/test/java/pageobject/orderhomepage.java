@@ -1,5 +1,7 @@
 package pageobject;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -88,7 +90,42 @@ public class orderhomepage extends Basicpage {
 	@FindBy(xpath = "//span[.='Pending Release']")
 	private List<WebElement> pendingreleasestatus;
 	
+	// dispatch
 	
+	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
+	private List<WebElement> statusdropdownoption; 
+	
+	@FindBy(xpath = "//tbody[@class='ant-table-tbody']/tr/td/div/span")  
+	private List<WebElement> allStatusnames;
+	
+	// kpo address
+	@FindBy(xpath = "//td[@class='ant-table-cell']/div/span")
+	private List<WebElement> subcontractstatusnames;
+	
+	// customer address
+	@FindBy(xpath = "//td[@class='ant-table-cell']/div/span")
+	private List<WebElement> subcontractstatusnames1;
+	
+	@FindBy(xpath = "//button[.='Dispatches']")
+	private WebElement dispatchsection;
+	
+	@FindBy(xpath = "//span[.='Add New Dispatch']")
+	private WebElement addnewdispatchbtn;
+	
+	@FindBy(xpath = "//input[@placeholder='Enter quantity']")
+	private WebElement enterqtyfield;
+	
+	@FindBy(xpath = "//span[.='Select the dispatch date']")
+	private WebElement clickonselectthedispatchdatefield;
+	
+	@FindBy(xpath = "//input[@placeholder='Enter truck/train number']")
+	private WebElement entertrucktrainnumberfield;
+	
+	@FindBy(xpath = "//input[@type='file']")
+	private WebElement uploadfile;
+	
+	@FindBy(xpath = "//button[.='Add Dispatch']")
+	private WebElement adddispatchbtn;
 	
 	
 	public void Orderlistsearchscenario(String email, String pwd, String searchbycoalname) throws InterruptedException
@@ -238,7 +275,82 @@ public class orderhomepage extends Basicpage {
 	
 	// pending dispatch
 	
+	public void selleradddispatch(String email, String pwd ) throws InterruptedException
+	{
+		signinpage signin = new signinpage(driver);
+		signin.loginpage(email, pwd);
+		
+		waitforElement(sellerbtn);
+		javascriptclick(sellerbtn);
+		
+		waitforElement(continueassellerbtn);
+		javascriptclick(continueassellerbtn);
+		
+		// click on nav listing  button
+		waitforElement(leftnavorderbutton);
+		javascriptclick(leftnavorderbutton);
+		
+		// inprogress status to add dispatch
+		// index  0 - all status
+		// index  1 - Pending Vendor Selection
+		// index  2 - Pending Release
+		// index  3 - Pending Signature
+		// index  4 - Completed
+		// index  5 - Cancelled
+		// index  6 - In Progress
+				
+				statusdropdownoption.get(3).click();
+
+				// click on pending release in a list 
+				Thread.sleep(2000);
+				WebElement status = allStatusnames.get(0);
+				javascriptclick(status);
+				 
+				scrollBottomofPage();
+				
+				// click on in-progress in a list
+				WebElement status2 = subcontractstatusnames.get(1);
+				javascriptclick(status2);
+				
+				scrollBottomofPage();
+				
+				waitforElement(dispatchsection);
+				dispatchsection.click();
+				
+				waitforElement(addnewdispatchbtn);
+				addnewdispatchbtn.click();
+				
+				waitforElement(enterqtyfield);
+				enterqtyfield.sendKeys("22");
+				
+				waitforElement(clickonselectthedispatchdatefield);
+				clickonselectthedispatchdatefield.click();
+				
+				selectDate("21-12-2025");
+				
+				waitforElement(entertrucktrainnumberfield);
+				entertrucktrainnumberfield.sendKeys("kafas34");
+				
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].style.display='block';", uploadfile);
+				uploadfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
+				
+				waitforElement(adddispatchbtn);
+				adddispatchbtn.click();
+				
+				Thread.sleep(3000);
+				waitforElement(clickonprofileicon);
+				javascriptclick(clickonprofileicon);
+				
+				waitforElement(logoutbtn);
+				javascriptclick(logoutbtn);
+			
+		
+	}
+	
+	
 	// pending payment
+	
 	
 	
 
@@ -353,6 +465,34 @@ public class orderhomepage extends Basicpage {
 	    }
 }
 
+	public void selectDate(String date) {
+	    try {
+	        // Convert dd-MM-yyyy to date object
+	        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
 
+	        // Convert to aria-label format e.g. "4 November 2025"
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
+	        String ariaLabelDate = selectedDate.format(ariaFormat);
+
+	        System.out.println("Selecting date: " + ariaLabelDate);
+
+	        // Click the calendar to open (update locator if needed)
+	        driver.findElement(By.xpath("(//div[@class='relative w-full'])[1]")).click();
+
+	        // ✅ Dynamic XPath based on aria-label
+	        WebElement dateElement = driver.findElement(By.xpath("//abbr[@aria-label='" + ariaLabelDate + "']/.."));
+
+	        // Scroll into view (safe clicking)
+	        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", dateElement);
+	        dateElement.click();
+
+	        System.out.println("✅ Date selected: " + date);
+
+	    } catch (Exception e) {
+	        System.out.println("❌ Failed to select date: " + date);
+	        e.printStackTrace();
+	    }
+	}
 	
 }

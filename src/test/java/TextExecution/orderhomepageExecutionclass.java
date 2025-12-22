@@ -13,7 +13,7 @@ public class orderhomepageExecutionclass extends Baseclass {
 		order = new orderhomepage(driver);
 		order.Orderlistsearchscenario(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("searchbycoalname"));
 	}
-
+ 
 	
 	@Test(priority = 1, enabled = false)
 	public void orderlistallstatusdropdownfunctionality() throws InterruptedException
@@ -32,7 +32,7 @@ public class orderhomepageExecutionclass extends Baseclass {
 	}
 	
 	// working
-	@Test(priority =3, enabled = true)
+	@Test(priority =3, enabled = false)
 	public void ownerorderselectvendor() throws InterruptedException
 	{
 		order = new orderhomepage(driver);
@@ -40,13 +40,28 @@ public class orderhomepageExecutionclass extends Baseclass {
 				prop.getProperty("actionstatusname"));
 	}
 	
-	@Test(priority =3, enabled = true)
+	// working
+	@Test(priority =4, enabled = false)
 	public void customerselleradddispatch() throws InterruptedException
 	{
 		order = new orderhomepage(driver);
 		order.selleradddispatch(prop.getProperty("ownername"), prop.getProperty("password"));
 	}
 	
-	
+	// working
+		@Test(priority =4, enabled = false)
+		public void customersellerupdatedispatchhistory() throws InterruptedException
+		{
+			order = new orderhomepage(driver);
+			order.sellerupdatedispatchhistory(prop.getProperty("ownername"), prop.getProperty("password"));
+		}
+		
+	// working
+		@Test(priority =4, enabled = true)
+		public void customerselleraddpayment() throws InterruptedException
+		{
+			order = new orderhomepage(driver);
+			order.selleraddpayment(prop.getProperty("ownername"), prop.getProperty("password"));
+		}
 
 }

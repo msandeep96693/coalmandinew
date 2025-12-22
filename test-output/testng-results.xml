@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-12-18T10:35:24 IST" name="Default suite" finished-at="2025-12-18T10:35:36 IST" duration-ms="12315">
+  <suite started-at="2025-12-22T17:52:31 IST" name="Default suite" finished-at="2025-12-22T17:52:45 IST" duration-ms="14603">
     <groups>
     </groups>
-    <test started-at="2025-12-18T10:35:24 IST" name="Default test" finished-at="2025-12-18T10:35:36 IST" duration-ms="12315">
+    <test started-at="2025-12-22T17:52:31 IST" name="Default test" finished-at="2025-12-22T17:52:45 IST" duration-ms="14603">
       <class name="TextExecution.orderhomepageExecutionclass">
-        <test-method is-config="true" signature="setup()[pri:0, instance:TextExecution.orderhomepageExecutionclass@5af3afd9]" started-at="2025-12-18T10:35:24 IST" name="setup" finished-at="2025-12-18T10:35:26 IST" duration-ms="2044" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:TextExecution.orderhomepageExecutionclass@694abbdc]" started-at="2025-12-22T17:52:31 IST" name="setup" finished-at="2025-12-22T17:52:34 IST" duration-ms="2990" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="ownerorderselectvendor()[pri:3, instance:TextExecution.orderhomepageExecutionclass@5af3afd9]" started-at="2025-12-18T10:35:26 IST" name="ownerorderselectvendor" finished-at="2025-12-18T10:35:36 IST" duration-ms="10084" status="PASS">
+        <test-method signature="customerselleraddpayment()[pri:4, instance:TextExecution.orderhomepageExecutionclass@694abbdc]" started-at="2025-12-22T17:52:34 IST" name="customerselleraddpayment" finished-at="2025-12-22T17:52:45 IST" duration-ms="11467" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- ownerorderselectvendor -->
-        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:TextExecution.orderhomepageExecutionclass@5af3afd9]" started-at="2025-12-18T10:35:36 IST" name="tear" finished-at="2025-12-18T10:35:36 IST" duration-ms="124" status="PASS">
+        </test-method> <!-- customerselleraddpayment -->
+        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:TextExecution.orderhomepageExecutionclass@694abbdc]" started-at="2025-12-22T17:52:45 IST" name="tear" finished-at="2025-12-22T17:52:45 IST" duration-ms="91" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=ownerorderselectvendor status=SUCCESS method=orderhomepageExecutionclass.ownerorderselectvendor()[pri:3, instance:TextExecution.orderhomepageExecutionclass@5af3afd9] output={null}]]]>
+                <![CDATA[[TestResult name=customerselleraddpayment status=SUCCESS method=orderhomepageExecutionclass.customerselleraddpayment()[pri:4, instance:TextExecution.orderhomepageExecutionclass@694abbdc] output={null}]]]>
               </value>
             </param>
           </params>

@@ -5,9 +5,9 @@
     <classes>
       <class name="TextExecution.orderhomepageExecutionclass">
         <methods>
+          <include name="customerselleraddpayment"/>
           <include name="tear"/>
           <include name="setup"/>
-          <include name="ownerorderselectvendor"/>
         </methods>
       </class> <!-- TextExecution.orderhomepageExecutionclass -->
     </classes>

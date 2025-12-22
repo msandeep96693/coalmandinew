@@ -1,5 +1,6 @@
 package pageobject;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
@@ -10,6 +11,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class orderhomepage extends Basicpage {
 
@@ -92,6 +95,9 @@ public class orderhomepage extends Basicpage {
 	
 	// dispatch
 	
+	@FindBy(xpath = "//span[.='All Status']")
+	private WebElement clickonallstatusdropdown;
+	
 	@FindBy(xpath = "//div[@class='ant-select-item-option-content']")
 	private List<WebElement> statusdropdownoption; 
 	
@@ -126,6 +132,42 @@ public class orderhomepage extends Basicpage {
 	
 	@FindBy(xpath = "//button[.='Add Dispatch']")
 	private WebElement adddispatchbtn;
+	
+	@FindBy(xpath = "//button[.='View Details']")
+	private List<WebElement> viewdetailsbtn;
+	
+	@FindBy(xpath = "//div[.='View Dispatch History']")
+	private WebElement clickviewdispatchhistory;
+	
+	@FindBy(xpath = "//button[.='In Transit']")
+	private List<WebElement> clickontransitdropdown;
+	
+	@FindBy(xpath = "//button[.='Delivered']")
+	private WebElement deliveredoptions;
+	
+	@FindBy(xpath = "//span[.='Close']")
+	private WebElement closebtn;
+	
+	// payments
+	
+	@FindBy(xpath = "(//button[.='Payments'])[2]")
+	private WebElement paymentsection;
+	
+	@FindBy(xpath = "//span[.='Add Payment']")
+	private WebElement addpaymentbtn;
+	
+	@FindBy(xpath = "//div[@class='relative w-full']")
+	private WebElement clickondateofpaymentcalender;
+	
+	@FindBy(xpath = "//input[@type='text']")
+	private WebElement UTRnofield;
+	
+	@FindBy(xpath = "//input[@type='number']")
+	private WebElement amountpaidfield;
+	
+	
+	
+	
 	
 	
 	public void Orderlistsearchscenario(String email, String pwd, String searchbycoalname) throws InterruptedException
@@ -273,7 +315,7 @@ public class orderhomepage extends Basicpage {
 		
 	}
 	
-	// pending dispatch
+	// dispatch
 	
 	public void selleradddispatch(String email, String pwd ) throws InterruptedException
 	{
@@ -298,43 +340,60 @@ public class orderhomepage extends Basicpage {
 		// index  4 - Completed
 		// index  5 - Cancelled
 		// index  6 - In Progress
+		
+		waitforElement(clickonallstatusdropdown);
+		clickonallstatusdropdown.click();
 				
-				statusdropdownoption.get(3).click();
+		javascriptclick(statusdropdownoption.get(3));
+				
 
-				// click on pending release in a list 
-				Thread.sleep(2000);
-				WebElement status = allStatusnames.get(0);
-				javascriptclick(status);
+				// click on pending release / signature in a list 
+//				Thread.sleep(2000);
+//				WebElement status = allStatusnames.get(0);
+//				javascriptclick(status);
+				
+				javascriptclick(viewdetailsbtn.get(0));  
 				 
+				Thread.sleep(1500);
 				scrollBottomofPage();
 				
-				// click on in-progress in a list
-				WebElement status2 = subcontractstatusnames.get(1);
-				javascriptclick(status2);
+//				// click on in-progress in a list
+//				WebElement status2 = subcontractstatusnames.get(0);
+//				javascriptclick(status2);
+				javascriptclick(viewdetailsbtn.get(0));
 				
-				scrollBottomofPage();
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", dispatchsection);
 				
 				waitforElement(dispatchsection);
-				dispatchsection.click();
+				javascriptclick(dispatchsection);
+//				dispatchsection.click();
 				
 				waitforElement(addnewdispatchbtn);
-				addnewdispatchbtn.click();
+				javascriptclick(addnewdispatchbtn);
+//				addnewdispatchbtn.click();
 				
 				waitforElement(enterqtyfield);
-				enterqtyfield.sendKeys("22");
+				enterqtyfield.sendKeys("10");
 				
 				waitforElement(clickonselectthedispatchdatefield);
 				clickonselectthedispatchdatefield.click();
 				
-				selectDate("21-12-2025");
+				// Click the calendar to open (update locator if needed)
+		       WebElement clickdate = driver.findElement(By.xpath("//span[.='Select the dispatch date']/.."));
+		       waitforElement(clickdate);
+		       javascriptclick(clickdate);
+				Thread.sleep(2000);
+				
+				selectDate("25-12-2025");
 				
 				waitforElement(entertrucktrainnumberfield);
-				entertrucktrainnumberfield.sendKeys("kafas34");
+				entertrucktrainnumberfield.sendKeys("kafas34,KD34643");
 				
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadfile);
 				uploadfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 				
+				Thread.sleep(3000);
 				waitforElement(adddispatchbtn);
 				adddispatchbtn.click();
 				
@@ -348,9 +407,142 @@ public class orderhomepage extends Basicpage {
 		
 	}
 	
+	public void sellerupdatedispatchhistory(String email, String pwd ) throws InterruptedException
+	{
+		signinpage signin = new signinpage(driver);
+		signin.loginpage(email, pwd);
+		
+		waitforElement(sellerbtn);
+		javascriptclick(sellerbtn);
+		
+		waitforElement(continueassellerbtn);
+		javascriptclick(continueassellerbtn);
+		
+		// click on nav listing  button
+		waitforElement(leftnavorderbutton);
+		javascriptclick(leftnavorderbutton);
+		
+		// inprogress status to add dispatch
+		// index  0 - all status
+		// index  1 - Pending Vendor Selection
+		// index  2 - Pending Release
+		// index  3 - Pending Signature
+		// index  4 - Completed
+		// index  5 - Cancelled
+		// index  6 - In Progress
+		
+		waitforElement(clickonallstatusdropdown);
+		clickonallstatusdropdown.click();
+				
+		javascriptclick(statusdropdownoption.get(3));
+				
+
+				// click on pending release / signature in a list 
+				
+				javascriptclick(viewdetailsbtn.get(0));  
+				 
+				Thread.sleep(1500);
+				scrollBottomofPage();
+				
+//				// click on in-progress in a list
+				javascriptclick(viewdetailsbtn.get(0));
+				
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", dispatchsection);
+				
+				waitforElement(dispatchsection);
+				javascriptclick(dispatchsection);
+
+				Thread.sleep(1500);
+				waitforElement(clickviewdispatchhistory);
+				javascriptclick(clickviewdispatchhistory);
+				Thread.sleep(1000);
+				
+				moveAllTransitToDelivered();
+				
+				waitforElement(closebtn);
+				javascriptclick(closebtn);
+				
+				Thread.sleep(3000);
+				waitforElement(clickonprofileicon);
+				javascriptclick(clickonprofileicon);
+				
+				waitforElement(logoutbtn);
+				javascriptclick(logoutbtn);
+			
+			}
+	
 	
 	// pending payment
-	
+	public void selleraddpayment(String email, String pwd ) throws InterruptedException
+	{
+		signinpage signin = new signinpage(driver);
+		signin.loginpage(email, pwd);
+		
+		waitforElement(sellerbtn);
+		javascriptclick(sellerbtn);
+		
+		waitforElement(continueassellerbtn);
+		javascriptclick(continueassellerbtn);
+		
+		// click on nav listing  button
+		waitforElement(leftnavorderbutton);
+		javascriptclick(leftnavorderbutton);
+		
+		// inprogress status to add dispatch
+		// index  0 - all status
+		// index  1 - Pending Vendor Selection
+		// index  2 - Pending Release
+		// index  3 - Pending Signature
+		// index  4 - Completed
+		// index  5 - Cancelled
+		// index  6 - In Progress
+		
+		waitforElement(clickonallstatusdropdown);
+		clickonallstatusdropdown.click();
+				
+		javascriptclick(statusdropdownoption.get(3));
+				
+
+				// click on pending release / signature in a list 
+				
+				javascriptclick(viewdetailsbtn.get(0));  
+				 
+				Thread.sleep(1500);
+				scrollBottomofPage();
+				
+//				// click on in-progress in a list
+				javascriptclick(viewdetailsbtn.get(0));
+				
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", paymentsection);
+				
+				waitforElement(paymentsection);
+				javascriptclick(paymentsection);
+				
+				waitforElement(addpaymentbtn);
+				javascriptclick(addpaymentbtn);
+								
+				 WebElement clickdate = driver.findElement(By.xpath("//div[@class='relative w-full']"));
+			     javascriptclick(clickdate);
+				
+				selectdateofpayment("15-12-2025");
+				
+				waitforElement(UTRnofield);
+				UTRnofield.sendKeys(setRandomMobileNumber());
+				
+				waitforElement(amountpaidfield);
+				amountpaidfield.sendKeys("1000");
+				
+				waitforElement(submitbtn);
+				javascriptclick(submitbtn);
+				
+				Thread.sleep(3000);
+				waitforElement(clickonprofileicon);
+				javascriptclick(clickonprofileicon);
+				
+				waitforElement(logoutbtn);
+				javascriptclick(logoutbtn);
+				
+	}
 	
 	
 
@@ -472,14 +664,15 @@ public class orderhomepage extends Basicpage {
 	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
 
 	        // Convert to aria-label format e.g. "4 November 2025"
-	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
 	        String ariaLabelDate = selectedDate.format(ariaFormat);
 
 	        System.out.println("Selecting date: " + ariaLabelDate);
 
 	        // Click the calendar to open (update locator if needed)
-	        driver.findElement(By.xpath("(//div[@class='relative w-full'])[1]")).click();
-
+	        driver.findElement(By.xpath("//span[.='Select the dispatch date']")).click();
+	     
+//	        Thread.sleep(3000);
 	        // ✅ Dynamic XPath based on aria-label
 	        WebElement dateElement = driver.findElement(By.xpath("//abbr[@aria-label='" + ariaLabelDate + "']/.."));
 
@@ -494,5 +687,91 @@ public class orderhomepage extends Basicpage {
 	        e.printStackTrace();
 	    }
 	}
+	
+	public void selectdateofpayment(String date) {
+	    try {
+	        // Convert dd-MM-yyyy to date object
+	        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	        LocalDate selectedDate = LocalDate.parse(date, inputFormat);
+
+	        // Convert to aria-label format e.g. "4 November 2025"
+	        DateTimeFormatter ariaFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+	        String ariaLabelDate = selectedDate.format(ariaFormat);
+
+	        System.out.println("Selecting date: " + ariaLabelDate);
+
+	        // Click the calendar to open (update locator if needed)
+	        driver.findElement(By.xpath("//div[@class='relative w-full']")).click();
+	     
+//	        Thread.sleep(3000);
+	        // ✅ Dynamic XPath based on aria-label
+	        WebElement dateElement = driver.findElement(By.xpath("//abbr[@aria-label='" + ariaLabelDate + "']/.."));
+
+	        // Scroll into view (safe clicking)
+	        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", dateElement);
+	        dateElement.click();
+
+	        System.out.println("✅ Date selected: " + date);
+
+	    } catch (Exception e) {
+	        System.out.println("❌ Failed to select date: " + date);
+	        e.printStackTrace();
+	    }
+	}
+
+
+		
+
+		public void moveAllTransitToDelivered() {
+
+		    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		    By transitBy = By.xpath("//button[normalize-space()='In Transit']");
+
+		    while (true) {
+
+		        List<WebElement> transitButtons = driver.findElements(transitBy);
+
+		        if (transitButtons.isEmpty()) {
+		            System.out.println("✅ All Transit updated to Delivered");
+		            break;
+		        }
+
+		        // 👉 Always take first Transit
+		        WebElement transitBtn = transitButtons.get(0);
+
+		        js.executeScript(
+		            "arguments[0].scrollIntoView({behavior:'smooth', block:'center'});",
+		            transitBtn
+		        );
+
+		        wait.until(ExpectedConditions.elementToBeClickable(transitBtn)).click();
+
+		        // 🔑 VERY IMPORTANT:
+		        // Find Delivered ONLY inside the same card
+		        WebElement parentCard = transitBtn.findElement(
+		                By.xpath("./parent::div/parent::div")
+		        );
+
+		        WebElement deliveredBtn = wait.until(
+		                ExpectedConditions.elementToBeClickable(
+		                        parentCard.findElement(
+		                                By.xpath(".//button[normalize-space()='Delivered']")
+		                        )
+		                )
+		        );
+
+		        deliveredBtn.click();
+
+		        // ✅ Wait until this button is no longer Transit
+		        wait.until(ExpectedConditions.not(
+		                ExpectedConditions.textToBePresentInElement(transitBtn, "In Transit")
+		        ));
+		    }
+		}
+
+	
+
 	
 }

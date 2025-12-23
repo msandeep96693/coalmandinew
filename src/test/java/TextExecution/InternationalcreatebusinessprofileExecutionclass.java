@@ -1,5 +1,6 @@
 package TextExecution;
 
+import org.testng.annotations.Test;
 import java.awt.AWTException;
 
 import org.testng.annotations.Test;
@@ -10,7 +11,8 @@ import pageobject.consumerBusinesscreationpage;
 
 public class InternationalcreatebusinessprofileExecutionclass extends Baseclass {
 
-	@Test
+	// working
+	@Test(priority = 0, enabled = true)
 	public void createbusinessprofileExecutionclass() throws InterruptedException, AWTException
 	{
 		internationalprofile = new InternationalBusinesscreationpage(driver);
@@ -21,8 +23,7 @@ public class InternationalcreatebusinessprofileExecutionclass extends Baseclass 
 				 prop.getProperty("DnBnumber"), prop.getProperty("designation"),
 				 prop.getProperty("Indiandesignation")
 				 
-				 
-				);		
+				 );		
 		  	
 	}
 }

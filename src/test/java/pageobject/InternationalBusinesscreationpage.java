@@ -306,6 +306,8 @@ import org.testng.annotations.Test;
 				 String DnBnumber, String designation, String Indiandesignation
 				) throws InterruptedException, AWTException  
 		{ 
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			
 //			signinpage signin = new signinpage(driver);
 //			signin.loginpage("sandeep+international2@rokkun.io", "Sandeep@123");   // String email, String pwd, 
 			
@@ -331,11 +333,11 @@ import org.testng.annotations.Test;
 			// upload a business profile image
 			try {
 				Thread.sleep(2000);
-				JavascriptExecutor js = (JavascriptExecutor) driver;
+//				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].style.display='block';", uploadProfile);
 				uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 				} catch (ElementNotInteractableException e) {
-					JavascriptExecutor js = (JavascriptExecutor) driver;
+//					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("arguments[0].style.display='block';", uploadProfile);
 					uploadProfile.sendKeys("/home/active34/Downloads/photos /QA club photos/Club 7.png");
 				}  // /home/active34/Downloads/photos /QA club photos/business logo.jpeg
@@ -355,7 +357,7 @@ import org.testng.annotations.Test;
 			zipcodefield.sendKeys(Zipcodenumber);
 			
 			waitforElement(DBnumberfield);
-			DBnumberfield.sendKeys(DnBnumber);
+			DBnumberfield.sendKeys(setRandomnineNumber());
 
 			
 			// ownership 
@@ -439,7 +441,7 @@ import org.testng.annotations.Test;
 			waitforElement(mobilenumberfield);
 			mobilenumberfield.sendKeys(setRandomMobileNumber());
 			
-			// These action will occur when business owner checkbox disabled
+			// Indian Correspondence Office Details
 			waitforElement(indiancontactpersonname);
 			indiancontactpersonname.sendKeys(setRandomName());
 			
@@ -451,20 +453,6 @@ import org.testng.annotations.Test;
 			
 			waitforElement(indianpersonmobilenumber);
 			indianpersonmobilenumber.sendKeys(setRandomMobileNumber());
-			
-			
-			// These action will occur when business owner checkbox enabled
-//			waitforElement(indiancontactpersonnamefield);
-//			indiancontactpersonnamefield.sendKeys(setRandomName());
-//			
-//			waitforElement(indianpersondesignationfield);
-//			indianpersondesignationfield.sendKeys(Indiandesignation);
-//			
-//			waitforElement(indianpersonemailfield);
-//			indianpersonemailfield.sendKeys(setRandomEmail());
-//			
-//			waitforElement(indianpersonmobilenumberfield);
-//			indianpersonmobilenumberfield.sendKeys(setRandomMobileNumber());
 			
 			// click on save & proceed button
 			waitforElement(saveandproceedbutton);
@@ -478,6 +466,7 @@ import org.testng.annotations.Test;
 			
 			Thread.sleep(2000);
 			
+			 js.executeScript("arguments[0].scrollIntoView({block: 'center'});", proceedtokycbutton);
 			// click on proceed to kyc button
 			waitforElement(proceedtokycbutton);
 			javascriptclick(proceedtokycbutton);
@@ -492,6 +481,7 @@ import org.testng.annotations.Test;
 			
 			scrollBottomofPage();
 			
+			js.executeScript("arguments[0].scrollIntoView({block: 'center'});", saveproceedbuton);
 			waitforElement(saveproceedbuton);
 			javascriptclick(saveproceedbuton);
 			

@@ -2,31 +2,31 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-12-22T17:52:31 IST" name="Default suite" finished-at="2025-12-22T17:52:45 IST" duration-ms="14603">
+  <suite started-at="2025-12-23T11:35:17 IST" name="Default suite" finished-at="2025-12-23T11:36:25 IST" duration-ms="67703">
     <groups>
     </groups>
-    <test started-at="2025-12-22T17:52:31 IST" name="Default test" finished-at="2025-12-22T17:52:45 IST" duration-ms="14603">
-      <class name="TextExecution.orderhomepageExecutionclass">
-        <test-method is-config="true" signature="setup()[pri:0, instance:TextExecution.orderhomepageExecutionclass@694abbdc]" started-at="2025-12-22T17:52:31 IST" name="setup" finished-at="2025-12-22T17:52:34 IST" duration-ms="2990" status="PASS">
+    <test started-at="2025-12-23T11:35:17 IST" name="Default test" finished-at="2025-12-23T11:36:25 IST" duration-ms="67703">
+      <class name="TextExecution.InternationalcreatebusinessprofileExecutionclass">
+        <test-method is-config="true" signature="setup()[pri:0, instance:TextExecution.InternationalcreatebusinessprofileExecutionclass@7c729a55]" started-at="2025-12-23T11:35:17 IST" name="setup" finished-at="2025-12-23T11:35:20 IST" duration-ms="2340" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="customerselleraddpayment()[pri:4, instance:TextExecution.orderhomepageExecutionclass@694abbdc]" started-at="2025-12-22T17:52:34 IST" name="customerselleraddpayment" finished-at="2025-12-22T17:52:45 IST" duration-ms="11467" status="PASS">
+        <test-method signature="createbusinessprofileExecutionclass()[pri:0, instance:TextExecution.InternationalcreatebusinessprofileExecutionclass@7c729a55]" started-at="2025-12-23T11:35:20 IST" name="createbusinessprofileExecutionclass" finished-at="2025-12-23T11:36:25 IST" duration-ms="65192" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- customerselleraddpayment -->
-        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:TextExecution.orderhomepageExecutionclass@694abbdc]" started-at="2025-12-22T17:52:45 IST" name="tear" finished-at="2025-12-22T17:52:45 IST" duration-ms="91" status="PASS">
+        </test-method> <!-- createbusinessprofileExecutionclass -->
+        <test-method is-config="true" signature="tear(org.testng.ITestResult)[pri:0, instance:TextExecution.InternationalcreatebusinessprofileExecutionclass@7c729a55]" started-at="2025-12-23T11:36:25 IST" name="tear" finished-at="2025-12-23T11:36:25 IST" duration-ms="122" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=customerselleraddpayment status=SUCCESS method=orderhomepageExecutionclass.customerselleraddpayment()[pri:4, instance:TextExecution.orderhomepageExecutionclass@694abbdc] output={null}]]]>
+                <![CDATA[[TestResult name=createbusinessprofileExecutionclass status=SUCCESS method=InternationalcreatebusinessprofileExecutionclass.createbusinessprofileExecutionclass()[pri:0, instance:TextExecution.InternationalcreatebusinessprofileExecutionclass@7c729a55] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tear -->
-      </class> <!-- TextExecution.orderhomepageExecutionclass -->
+      </class> <!-- TextExecution.InternationalcreatebusinessprofileExecutionclass -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

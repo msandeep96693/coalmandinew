@@ -165,6 +165,12 @@ public class Basicpage
 		  String randomnumeric=RandomStringUtils.randomNumeric(6);
 		  return "9620"+randomnumeric;
 	   }
+	 
+	 public String setRandomnineNumber()
+	   {
+		  String randomnumeric=RandomStringUtils.randomNumeric(5);
+		  return "9620"+randomnumeric;
+	   }
 	
 	
 }

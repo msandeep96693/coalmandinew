@@ -454,14 +454,14 @@ import org.testng.annotations.Test;
 			kycdocuploadandsubmit("Authorization Letter", uploadFiles, submitButtons);
 			
 //			// PAN Card
-			Thread.sleep(3000);
+			Thread.sleep(1500);
 			kycdocuploadandsubmit("PAN Card", uploadFiles, submitButtons);
-			Thread.sleep(3000);
+			Thread.sleep(1500);
 			
 			// GST Certificate 
-			Thread.sleep(3000);
+			Thread.sleep(1500);
 			kycdocuploadandsubmit("GST Certificate", uploadFiles, submitButtons);
-			Thread.sleep(3000);
+			Thread.sleep(1500);
 			
 			// TAN certificate
 			waitforElement(TANnumbertextfield);
@@ -469,7 +469,7 @@ import org.testng.annotations.Test;
 			
 			Thread.sleep(1000);
 			kycdocuploadandsubmit("TAN Certificate", uploadFiles, submitButtons);
-			Thread.sleep(3000);
+			Thread.sleep(1500);
 					
 			// LUT Certificate
 			

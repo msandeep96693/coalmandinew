@@ -72,6 +72,7 @@ public class Baseclass {
 		if(Browsername.equalsIgnoreCase("chrome"))
 		{
 			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--window-size=1296,602");
 			options.addArguments("--start-maximized");
 			driver = new ChromeDriver(options);
 		} 

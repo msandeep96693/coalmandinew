@@ -10,35 +10,23 @@ import pageobject.listinghomepage;
 
 public class listinghomepageExecutionclass  extends Baseclass {
 	
-	
+	// working
 	@Test(priority = 0, enabled = false)
-	public void mylistingsearchfunctionality() throws InterruptedException
-	{
+	public void mylistinglistfunctionality() throws InterruptedException
+	{	
 		listhome = new listinghomepage(driver);
-		listhome.Mylistingsearchscenario(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("searchbycoalname"));
+		listhome.Mylistingsearchstatusfilterscenario(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("searchbycoalname"));
 	}
 
-	
-	@Test(priority = 1, enabled = true)
-	public void mylistingallstatusdropdownfunctionality() throws InterruptedException
+	// working
+	@Test(priority = 2, enabled = true)
+	public void participatedlistfunctionality() throws InterruptedException
 	{
 		listhome = new listinghomepage(driver);
-		listhome.Mylistingfetchstatus(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("mylistingStatusoptionname"));
+		listhome.Participdatedsectionsearchfunctionality(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("participatedsearchbycoalname"));
 	}
 	
-	@Test(priority = 2, enabled = false)
-	public void participatedsearchfunctionality() throws InterruptedException
-	{
-		listhome = new listinghomepage(driver);
-		listhome.Participdatedsectionsearchfunctionality(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("searchbycoalname"));
-	}
 	
-	@Test(priority = 3, enabled = false)
-	public void participatedallstatusdropdownfunctionality() throws InterruptedException
-	{
-		listhome = new listinghomepage(driver);
-		listhome.Participatedsectionfetchstatus(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("participatedstatusoptionname"));
-	}
 	
 	
 }

@@ -8,21 +8,14 @@ import pageobject.orderhomepage;
 
 public class orderhomepageExecutionclass extends Baseclass {
 	
-	@Test(priority = 0, enabled = false)
+	//working
+	@Test(priority = 0, enabled = true)
 	public void orderlistsearchfunctionality() throws InterruptedException
 	{
 		order = new orderhomepage(driver);
-		order.Orderlistsearchscenario(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("searchbycoalname"));
+		order.Orderlistsearchandstatusfilterscenario(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("searchbycoalname"));
 	}
  
-	
-	@Test(priority = 1, enabled = false)
-	public void orderlistallstatusdropdownfunctionality() throws InterruptedException
-	{
-		order = new orderhomepage(driver);
-		order.orderlistfetchstatus(prop.getProperty("username"), prop.getProperty("password"), prop.getProperty("statusoptionname"));
-	}
-	
 	// working
 	@Test(priority = 2, enabled = false)
 	public void Buyerorderselectvendor() throws InterruptedException
@@ -58,7 +51,7 @@ public class orderhomepageExecutionclass extends Baseclass {
 		}
 		
 	// working
-		@Test(priority =4, enabled = true)
+		@Test(priority =4, enabled = false)
 		public void customerselleraddpayment() throws InterruptedException
 		{
 			order = new orderhomepage(driver);

@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -166,65 +167,42 @@ public class orderhomepage extends Basicpage {
 	private WebElement amountpaidfield;
 	
 	
-	
-	
-	
-	
-	public void Orderlistsearchscenario(String email, String pwd, String searchbycoalname) throws InterruptedException
+	public void Orderlistsearchandstatusfilterscenario(String email, String pwd, String searchbycoalname) throws InterruptedException
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
+		
+		waitforElement(sellerbtn);
+		javascriptclick(sellerbtn);
+		
+		waitforElement(continueassellerbtn);
+		javascriptclick(continueassellerbtn);
 		
 		// left navigation listing button
 		waitforElement(leftnavorderbutton);
 		javascriptclick(leftnavorderbutton);
 		
-		Thread.sleep(2000);
-		// search textfield
-		waitforElement(searchtextfield);
-		searchtextfield.sendKeys(searchbycoalname);
-		
 		Thread.sleep(1000);
-		waitforElement(clickonprofileicon);
-		javascriptclick(clickonprofileicon);
+		// search textfield
+		searchtextfield.sendKeys(searchbycoalname);
+
+		Thread.sleep(500);
+		searchtextfield.click();
+		searchtextfield.sendKeys(Keys.CONTROL, "A");
+		searchtextfield.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(500);
 		
-		waitforElement(logoutbtn);
-		javascriptclick(logoutbtn);
-		
-	}
-	
-	public void orderlistfetchstatus(String email, String pwd, String optionname ) throws InterruptedException
-	{
-		signinpage signin = new signinpage(driver);
-		signin.loginpage(email, pwd);
-		
-		// click on nav listing  button
-		waitforElement(leftnavorderbutton);
-		javascriptclick(leftnavorderbutton);
-		
-		Thread.sleep(6000);
-		
-		// click on all status dropdown
 		waitforElement(clickonstatusdropdown);
 		clickonstatusdropdown.click();
 		
-		// select the option based on a name
-		selectDropdownOption(statusdropdownoptions, optionname);
+		javascriptclick(statusdropdownoptions.get(2));
 		
 		Thread.sleep(1000);
-		for(int i = 0; i<orderlistdata.size(); i++)
-		{
-			String listdata = orderlistdata.get(1).getText();
-			System.out.println(" list data :- "+listdata);
-		}
-		
-		
 		waitforElement(clickonprofileicon);
 		javascriptclick(clickonprofileicon);
 		
 		waitforElement(logoutbtn);
 		javascriptclick(logoutbtn);
-
 		
 	}
 	

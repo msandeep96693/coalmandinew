@@ -2,6 +2,7 @@ package pageobject;
 
 import java.util.List;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,8 +22,8 @@ public class Negotiationhomepage extends Basicpage {
 	@FindBy(xpath = "//span[@title='All Status']" )
 	private WebElement clickonstatusdropdown;
 	
-	@FindBy(xpath = "//div[@class='ant-select-item-option-content']") 
-	private List<WebElement> statusdropdownoptions;
+	@FindBy(xpath = "//div[@class='ant-select-item ant-select-item-option']/div") 
+	private List<WebElement> statusdropdownoptions; 
 		
 	@FindBy(xpath = "//div[@class='flex justify-between items-start']")
 	private List<WebElement> listofdatabasedonstatusselection;
@@ -32,81 +33,79 @@ public class Negotiationhomepage extends Basicpage {
 	
 	@FindBy(xpath = "//button[@type='button']")  // View Details
 	private List<WebElement> allnegotiationviewbuttons;
+	
+	@FindBy(xpath = "//h4[.='Seller']")
+	private WebElement sellerbtn;
+	
+	@FindBy(xpath = "//button[.='Continue as Seller']")
+	private WebElement continueassellerbtn;
+	
+	@FindBy(xpath = "//span[@aria-label='user']")
+	private WebElement clickonprofileicon;
+	
+	@FindBy(xpath = "//span[.='Logout']")
+	private WebElement logoutbtn;
 
 	
-	public void Mylistingsearchscenario(String email, String pwd, String searchbycoalname, String statusname) throws InterruptedException
+	public void Mylistingsearchscenario(String email, String pwd, String searchbycoalname) throws InterruptedException
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
+		
+		waitforElement(sellerbtn);
+		javascriptclick(sellerbtn);
+		
+		waitforElement(continueassellerbtn);
+		javascriptclick(continueassellerbtn);
 		
 		// left navigation listing button
 		waitforElement(leftnavnegotiationbtn);
 		javascriptclick(leftnavnegotiationbtn);
 		
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		// search textfield
 		searchtextfield.sendKeys(searchbycoalname);
 		
-		// list the data based on a search name
-		for (int i = 0; i < listofdatabasedonstatusselection.size(); i++) 
-		{
-			String searchtext = listofdatabasedonstatusselection.get(i).getText().trim();
-			if(searchtext.contains(statusname))
-			{
-				 System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
-			     System.out.println("Search text : - "+searchtext);
-			     break;
-			}
-			
-	       
-		}
+//		// list the data based on a search name
+//		for (int i = 0; i < listofdatabasedonstatusselection.size(); i++)
+//		{
+//			String searchtext = listofdatabasedonstatusselection.get(i).getText().trim();
+//			System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
+//			System.out.println("Search text : - "+searchtext);
+//		}
+
+		Thread.sleep(500);
+		searchtextfield.click();
+		searchtextfield.sendKeys(Keys.CONTROL, "A");
+		searchtextfield.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(500);
 		
-		Thread.sleep(1000);
-	}
-	
-	
-	public void Mylistingfetchstatus(String email, String pwd, String optionname, String statusname ) throws InterruptedException
-	{
-		signinpage signin = new signinpage(driver);
-		signin.loginpage(email, pwd);
-		
-		// click on nav listing  button
-		waitforElement(leftnavnegotiationbtn);
-		javascriptclick(leftnavnegotiationbtn);
-		
-		Thread.sleep(6000);
-		
-		// click on all status dropdown
 		waitforElement(clickonstatusdropdown);
-//		javascriptclick(clickonstatusdropdown);
 		clickonstatusdropdown.click();
 		
-		// select the option based on a name
-		selectDropdownOption(statusdropdownoptions, optionname);
-
-		// Based on option selection, list of data are displayed
-		for (int i = 0; i < listofdatabasedonstatusselection.size(); i++) 
-		{
-			String searchtext = listofdatabasedonstatusselection.get(i).getText().trim();
-			if(searchtext.contains(statusname))
-			{
-				 System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
-			     System.out.println("Search text : - "+searchtext);
-			     break;
-			}
-		}
-			
+		javascriptclick(statusdropdownoptions.get(1));
 		
-		//Thread.sleep(1000);
+		Thread.sleep(1000);
+		waitforElement(clickonprofileicon);
+		javascriptclick(clickonprofileicon);
 		
+		waitforElement(logoutbtn);
+		javascriptclick(logoutbtn);
 	}
 	
-	public void Participdatedsectionsearchfunctionality(String email, String pwd, String searchbycoalname, String statusname) throws InterruptedException
+	
+	public void Participdatedsectionsearchfunctionality(String email, String pwd, String participatedsearchbycoalname) throws InterruptedException
 	{
 		signinpage signin = new signinpage(driver);
 		signin.loginpage(email, pwd);
 		
-		// click on nav listing  button
+		waitforElement(sellerbtn);
+		javascriptclick(sellerbtn);
+		
+		waitforElement(continueassellerbtn);
+		javascriptclick(continueassellerbtn);
+		
+		// left navigation listing button 
 		waitforElement(leftnavnegotiationbtn);
 		javascriptclick(leftnavnegotiationbtn);
 		
@@ -114,62 +113,25 @@ public class Negotiationhomepage extends Basicpage {
 		waitforElement(participatedtab);
 		javascriptclick(participatedtab);
 		
-		Thread.sleep(2000);
+		// search textfield 
+		searchtextfield.sendKeys(participatedsearchbycoalname);
 		
-		// search textfield
-		searchtextfield.sendKeys(searchbycoalname);
+		Thread.sleep(500);
+		searchtextfield.click();
+		searchtextfield.sendKeys(Keys.CONTROL, "A");
+		searchtextfield.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(500);
 		
-		// participated list the data based on a search name
-		for(int i = 0; i < listofdatabasedonstatusselection.size(); i++) 
-		{
-			String searchtext = listofdatabasedonstatusselection.get(i).getText().trim();
-			if(searchtext.contains(statusname))
-			{
-				 System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
-			     System.out.println("Search text : - "+searchtext);
-			     break;
-			}
-			 
-		}
-		
-		Thread.sleep(1000);
-	}
-	
-	
-	public void Participatedsectionfetchstatus(String email, String pwd, String optionname, String statusname ) throws InterruptedException
-	{
-		signinpage signin = new signinpage(driver);
-		signin.loginpage(email, pwd);
-		
-		// click on nav listing  button
-		waitforElement(leftnavnegotiationbtn);
-		javascriptclick(leftnavnegotiationbtn);
-		
-		// click on participated section
-		waitforElement(participatedtab);
-		javascriptclick(participatedtab);
-		
-		Thread.sleep(4000);
-		
-		// click on all status dropdown
 		waitforElement(clickonstatusdropdown);
 		clickonstatusdropdown.click();
 		
-		// select the option based on a name 
-		selectDropdownOption(statusdropdownoptions, optionname);
-
-		// Based on option selection, list of data are displayed
-		for (int i = 0; i < listofdatabasedonstatusselection.size(); i++) 
-		{
-			String searchtext = listofdatabasedonstatusselection.get(i).getText().trim();
-			if(searchtext.contains(statusname))
-			{
-				 System.out.println("list count data :- "+ listofdatabasedonstatusselection.size());
-			     System.out.println("Search text : - "+searchtext);
-			     break;
-			} 
-		}
+		javascriptclick(statusdropdownoptions.get(1));
+		
 		Thread.sleep(1000);
-
-}
+		waitforElement(clickonprofileicon);
+		javascriptclick(clickonprofileicon);
+		
+		waitforElement(logoutbtn);
+		javascriptclick(logoutbtn);
+	}	
 }

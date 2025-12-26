@@ -1,5 +1,6 @@
 package TextExecution;
 
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import java.awt.AWTException;
 
@@ -11,7 +12,8 @@ import pageobject.createlistingbyprivatemines;
 
 public class createlistingExecutionclass extends Baseclass {
 	
-	@Test(priority = 1, enabled = false)
+	@Parameters("portal")
+	@Test(priority = 0, enabled = true)
 	public void createlistingpage() throws InterruptedException, AWTException
 	{
 		createlist = new pageobject.createCILlistingpage(driver);
@@ -37,11 +39,9 @@ public class createlistingExecutionclass extends Baseclass {
 				prop.getProperty("freepaymentinputfield"), prop.getProperty("freeliftingperiodoption"), 
 				prop.getProperty("Startdate"), prop.getProperty("enddate"), prop.getProperty("addressbookdata"),
 				prop.getProperty("otherremarkstextarea"));
-				
-		
-	}
+			}
 	
-	@Test(priority = 2, enabled = true)
+	@Test(priority = 1, enabled = true)
 	public void createprivatemineslistingpage() throws InterruptedException, AWTException
 	{
 		

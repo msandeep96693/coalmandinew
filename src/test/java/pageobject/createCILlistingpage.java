@@ -196,8 +196,8 @@ public class createCILlistingpage extends Basicpage {
 			
 			) throws InterruptedException, AWTException
 	{
-		signinpage signin = new signinpage(driver);
-		signin.loginpage(email, pwd);
+//		signinpage signin = new signinpage(driver);
+//		signin.loginpage(email, pwd);
 		
 		// trader  
 		waitforElement(sellerbtn);
